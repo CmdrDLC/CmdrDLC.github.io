@@ -354,8 +354,8 @@
 <section id="product">
   <h2>&gt; <span>THE DLC</span>_</h2>
   <div class="product-card">
-<img src="20260303_214049.jpg" class="product-top">    
-   <div class="product-top">
+    <img src="20260303_214049.jpg" class="thumb">
+    <div class="product-top">
       <div class="badge">ROBLOX GAMEPASS</div>
       <h3>Cmdr System V1</h3>
       <p>The official command system DLC for the Event System.</p>
@@ -479,7 +479,6 @@
       <div class="discount-msg" id="msg_${id}" style="display:none;margin-top:0"></div>`;
     slots.appendChild(div);
 
-    // Move the msg div below the row
     const row = div;
     const msgDiv = document.createElement('div');
     msgDiv.className = 'discount-msg';
@@ -487,10 +486,8 @@
     msgDiv.style.marginBottom = '0.4rem';
     slots.appendChild(msgDiv);
 
-    // Remove inline msg from inner div since we made a separate one
     div.querySelector('.discount-msg').remove();
 
-    // Hide add button if max reached
     if (slots.children.length / 2 >= MAX_CODES) {
       document.getElementById('addCodeBtn').style.display = 'none';
     }
@@ -541,25 +538,21 @@
     }
   }
 
-  // Add first slot on load
   document.addEventListener('DOMContentLoaded', () => {
     addCodeSlot();
 
-    // Wave color animation using sine wave per word
     const words = document.querySelectorAll('.wave-word');
     const total = words.length;
     let t = 0;
 
     function animateWave() {
       words.forEach((w, i) => {
-        // Sine wave: each word offset by phase, value 0-1
         const val = (Math.sin(t + (i / total) * Math.PI * 2) + 1) / 2;
         const g = Math.round(val * 255);
         const r = Math.round(224 - val * 224);
         const b = Math.round(224 - val * 224);
         const glow = val * 25;
         w.style.color = `rgb(${r},${Math.max(g, 224 - Math.round(val*224))},${b})`;
-        // green glow at peak
         w.style.textShadow = val > 0.7 ? `0 0 ${glow}px rgba(0,255,136,${val})` : 'none';
         w.style.color = `rgb(${Math.round(224*(1-val) + 0*val)}, ${Math.round(224*(1-val) + 255*val)}, ${Math.round(224*(1-val) + 136*val)})`;
       });
@@ -646,7 +639,6 @@
   function draw() {
     ctx.clearRect(0, 0, W, H);
 
-    // Draw connecting lines
     for (let i = 0; i < dots.length; i++) {
       for (let j = i + 1; j < dots.length; j++) {
         const dx = dots[i].x - dots[j].x;
@@ -663,7 +655,6 @@
       }
     }
 
-    // Draw dots
     dots.forEach(d => {
       ctx.beginPath();
       ctx.arc(d.x, d.y, d.r, 0, Math.PI * 2);
@@ -743,7 +734,6 @@ window.addEventListener('load', () => {
 /* ── ADMIN PANEL ── */
 const ADMIN_PASSWORD = 'cmdr_admin_2026';
 let adminLoggedIn = false;
-
 
 function openAdmin() {
   document.getElementById('adminOverlay').style.display = 'flex';
@@ -833,14 +823,9 @@ function adminDeleteCode(code) {
 }
 
 /* ── MAINTENANCE MODE ── */
-// =============================================
-// 🔧 MAINTENANCE MODE — set to true to enable
 const MAINTENANCE_MODE = false;
-// =============================================
-
 let maintenanceActive = MAINTENANCE_MODE;
 
-// Apply on load
 if (MAINTENANCE_MODE) {
   document.getElementById('maintenanceScreen').style.display = 'flex';
 }
@@ -863,7 +848,6 @@ function toggleMaintenance() {
   }
 }
 
-// Close overlay on background click
 document.getElementById('adminOverlay').addEventListener('click', function(e) {
   if (e.target === this) closeAdmin();
 });
