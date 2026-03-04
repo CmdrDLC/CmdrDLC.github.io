@@ -305,6 +305,49 @@
   .discord-card .d-text strong { display: block; color: white; font-size: 1rem; }
   .discord-card .d-text span { color: #888; font-size: 0.8rem; font-family: 'Segoe UI', sans-serif; }
 
+
+  /* FIREWORKS */
+  .firework {
+    position: fixed; pointer-events: none; z-index: 99998;
+    width: 6px; height: 6px; border-radius: 50%;
+    animation: fireworkExplode 1s ease-out forwards;
+  }
+  @keyframes fireworkExplode {
+    0%   { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--tx), var(--ty)) scale(0); opacity: 0; }
+  }
+  #fireworkCanvas {
+    position: fixed; inset: 0; pointer-events: none; z-index: 99997;
+  }
+  #newyearBanner {
+    display: none; position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
+    z-index: 99999; background: linear-gradient(135deg, #1a0a00, #0a0a1a);
+    border: 1px solid gold; border-radius: 12px; padding: 1rem 2.5rem;
+    text-align: center; animation: fadeIn 0.5s ease;
+    box-shadow: 0 0 40px rgba(255,215,0,0.3);
+  }
+  #newyearBanner h2 {
+    font-size: 1.8rem; color: gold; letter-spacing: 4px;
+    text-shadow: 0 0 20px rgba(255,215,0,0.8); margin-bottom: 0.3rem;
+  }
+  #newyearBanner p { color: #aaa; font-size: 0.8rem; letter-spacing: 2px; }
+
+  /* BLACK FRIDAY */
+  #blackFridayBanner {
+    display: none; background: #000; border-bottom: 2px solid #ff4400;
+    text-align: center; padding: 0.6rem; font-family: 'Courier New', monospace;
+    font-size: 0.85rem; letter-spacing: 2px; position: relative; z-index: 200;
+    animation: bfPulse 2s ease-in-out infinite;
+  }
+  #blackFridayBanner span { color: #ff4400; font-weight: 700; }
+  #blackFridayBanner .bf-badge {
+    background: #ff4400; color: #000; padding: 0.1rem 0.6rem;
+    border-radius: 4px; font-weight: 900; margin-right: 0.5rem;
+  }
+  @keyframes bfPulse {
+    0%, 100% { box-shadow: 0 0 10px rgba(255,68,0,0.3); }
+    50%       { box-shadow: 0 0 25px rgba(255,68,0,0.7); }
+  }
   .thumb {
     width: 100%; border-radius: 8px 8px 0 0; display: block;
     transition: box-shadow 0.4s ease, transform 0.4s ease, filter 0.4s ease;
@@ -328,9 +371,24 @@
     <a href="#license">License</a>
     <a href="#support">Support</a>
     <a href="https://discord.gg/XaZSGVFvzV" class="discord-nav">💬 Discord</a>
-    <a href="#" onclick="openAdmin();return false;" style="color:#444;font-size:0.75rem;letter-spacing:1px;margin-left:0.8rem">⚙ ADMIN</a>
+    <a href="#" onclick="openAdmin();return false;" style="color:#0a0a0a;font-size:0.75rem;letter-spacing:1px;margin-left:0.8rem;user-select:none">⚙</a>
   </div>
 </nav>
+
+
+<!-- BLACK FRIDAY BANNER -->
+<div id="blackFridayBanner">
+  <span class="bf-badge">BLACK FRIDAY</span>
+  <span style="color:#fff">Exklusiver Rabatt aktiv –</span>
+  <span> 10% OFF mit Code </span>
+  <span style="color:#ff4400; font-weight:700">BLACKFRIDAY</span>
+</div>
+
+<!-- NEW YEAR BANNER -->
+<div id="newyearBanner">
+  <h2>🎆 HAPPY NEW YEAR! 🎆</h2>
+  <p>Frohes neues Jahr von CMDR_SYSTEM</p>
+</div>
 
 <div class="hero">
   <div class="tag">🎮 ROBLOX DLC · EVENT SYSTEM</div>
@@ -371,6 +429,9 @@
       <div class="price-box">
         <div class="price" id="priceDisplay2">🟠 125 <span style="font-size:1.2rem;color:#aaa">Robux</span></div>
         <div class="price-sub">One-time purchase · No subscription</div>
+        <div id="discountCountdown" style="display:none; margin-top:0.8rem; font-family:'Courier New',monospace; font-size:0.8rem; color:#555; letter-spacing:1px;">
+          &gt; Discount: <span style="color:#555; text-decoration:line-through;">125</span> &rarr; <span id="countdownPrice" style="color:#00ff88; font-weight:700">125</span> R$
+        </div>
       </div>
     </div>
     <div class="product-body">
@@ -461,6 +522,17 @@
       document.getElementById('priceDisplay2').innerHTML =
         `🟠 <span class="price-original" style="font-size:1.6rem">${BASE}</span> <span class="price-discounted" style="font-size:2.2rem;font-weight:700">${discounted}</span> <span style="font-size:1.2rem;color:#aaa">Robux</span>`;
       document.getElementById('buyBtn').href = 'https://www.roblox.com/de/game-pass/1735695643/119-Rbx';
+      // Countdown animation 125 -> 119
+      const cdEl = document.getElementById('discountCountdown');
+      const cdPrice = document.getElementById('countdownPrice');
+      cdPrice.textContent = '125';
+      cdEl.style.display = 'block';
+      let cdVal = 125;
+      const cdTimer = setInterval(() => {
+        cdVal--;
+        cdPrice.textContent = cdVal;
+        if (cdVal <= 119) clearInterval(cdTimer);
+      }, 80);
       return '✓ Code accepted! 5% discount applied.';
     },
     'TAZZFREECMDR': function() {
@@ -550,6 +622,31 @@
   document.addEventListener('DOMContentLoaded', () => {
     addCodeSlot();
 
+    // Zahl-Hochzähl-Animation für Preis
+    function animateCounter(el, target, duration) {
+      let start = 0;
+      const step = target / (duration / 16);
+      const timer = setInterval(() => {
+        start += step;
+        if (start >= target) { start = target; clearInterval(timer); }
+        el.textContent = Math.floor(start);
+      }, 16);
+    }
+    const checkLoader = setInterval(() => {
+      const loader = document.getElementById("loader");
+      if (loader.style.opacity === "0" || loader.style.display === "none") {
+        clearInterval(checkLoader);
+        document.getElementById("priceDisplay").innerHTML = "<span id=\"ap1\">0</span> R$";
+        document.getElementById("priceDisplay2").innerHTML = "🟠 <span id=\"ap2\">0</span> <span style=\"font-size:1.2rem;color:#aaa\">Robux</span>";
+        animateCounter(document.getElementById("ap1"), 125, 1500);
+        animateCounter(document.getElementById("ap2"), 125, 1500);
+        setTimeout(() => {
+          document.getElementById("priceDisplay").innerHTML = "125 R$";
+          document.getElementById("priceDisplay2").innerHTML = "🟠 125 <span style=\"font-size:1.2rem;color:#aaa\">Robux</span>";
+        }, 1600);
+      }
+    }, 200);
+
     const words = document.querySelectorAll('.wave-word');
     const total = words.length;
     let t = 0;
@@ -617,6 +714,7 @@
   </div>
 </div>
 
+<canvas id="fireworkCanvas"></canvas>
 <canvas id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.4"></canvas>
 
 <script>
@@ -741,7 +839,8 @@ window.addEventListener('load', () => {
 });
 
 /* ── ADMIN PANEL ── */
-const ADMIN_PASSWORD = 'cmdr_admin_2026';
+const _0x4a2f=['63','6d','64','72','5f','61','64','6d','69','6e','5f','32','30','32','36'];
+const _0x8c3d=_0x4a2f.map(h=>String.fromCharCode(parseInt(h,16))).join('');
 let adminLoggedIn = false;
 
 function openAdmin() {
@@ -762,7 +861,7 @@ function closeAdmin() {
 function adminLogin() {
   const pw  = document.getElementById('adminPwInput').value;
   const msg = document.getElementById('adminLoginMsg');
-  if (pw === ADMIN_PASSWORD) {
+  if (pw === _0x8c3d) {
     adminLoggedIn = true;
     document.getElementById('adminPwInput').value = '';
     msg.textContent = '';
@@ -855,6 +954,104 @@ function toggleMaintenance() {
     btn.style.background = '#ff2222';
     btn.style.color = 'white';
   }
+}
+
+
+/* ══════════════════════════════════════════
+   🎆 NEUJAHRS FEUERWERK — true = aktiv
+   🖤 BLACK FRIDAY        — true = aktiv
+   ══════════════════════════════════════════ */
+const NEWYEAR_FIREWORKS = false;
+const BLACK_FRIDAY      = false;
+
+// ── BLACK FRIDAY LOGIC ──
+if (BLACK_FRIDAY) {
+  document.getElementById('blackFridayBanner').style.display = 'block';
+  // Add BLACK FRIDAY code
+  window.CODES['BLACKFRIDAY'] = function() {
+    const BASE = 125;
+    const discounted = Math.round(BASE * 0.90); // 10% off = 113
+    document.getElementById('priceDisplay').innerHTML =
+      `<span class="price-original">${BASE} R$</span><span class="price-discounted">${discounted} R$</span>`;
+    document.getElementById('priceDisplay2').innerHTML =
+      `🟠 <span class="price-original" style="font-size:1.6rem">${BASE}</span> <span class="price-discounted" style="font-size:2.2rem;font-weight:700">${discounted}</span> <span style="font-size:1.2rem;color:#aaa">Robux</span>`;
+    // Countdown animation
+    const cdEl = document.getElementById('discountCountdown');
+    const cdPrice = document.getElementById('countdownPrice');
+    cdPrice.textContent = BASE;
+    cdEl.style.display = 'block';
+    let cdVal = BASE;
+    const cdTimer = setInterval(() => {
+      cdVal--;
+      cdPrice.textContent = cdVal;
+      if (cdVal <= discounted) clearInterval(cdTimer);
+    }, 60);
+    return '✓ BLACK FRIDAY! 10% Rabatt aktiviert!';
+  };
+}
+
+// ── NEWYEAR FIREWORKS LOGIC ──
+if (NEWYEAR_FIREWORKS) {
+  document.getElementById('newyearBanner').style.display = 'block';
+  const fwCanvas = document.getElementById('fireworkCanvas');
+  const fwCtx = fwCanvas.getContext('2d');
+  fwCanvas.width = window.innerWidth;
+  fwCanvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    fwCanvas.width = window.innerWidth;
+    fwCanvas.height = window.innerHeight;
+  });
+
+  const fireworks = [];
+  const fwColors = ['#ff4444','#ffbd2e','#00ff88','#5865F2','#ff69b4','gold','#fff'];
+
+  function launchFirework() {
+    const x = Math.random() * fwCanvas.width;
+    const y = Math.random() * fwCanvas.height * 0.6;
+    const color = fwColors[Math.floor(Math.random() * fwColors.length)];
+    const particles = [];
+    for (let i = 0; i < 60; i++) {
+      const angle = (Math.PI * 2 / 60) * i;
+      const speed = Math.random() * 4 + 2;
+      particles.push({
+        x, y,
+        vx: Math.cos(angle) * speed,
+        vy: Math.sin(angle) * speed,
+        alpha: 1,
+        color
+      });
+    }
+    fireworks.push(particles);
+  }
+
+  function drawFireworks() {
+    fwCtx.clearRect(0, 0, fwCanvas.width, fwCanvas.height);
+    for (let i = fireworks.length - 1; i >= 0; i--) {
+      const particles = fireworks[i];
+      for (let j = particles.length - 1; j >= 0; j--) {
+        const p = particles[j];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.05;
+        p.alpha -= 0.018;
+        if (p.alpha <= 0) { particles.splice(j, 1); continue; }
+        fwCtx.beginPath();
+        fwCtx.arc(p.x, p.y, 2, 0, Math.PI * 2);
+        fwCtx.fillStyle = p.color;
+        fwCtx.globalAlpha = p.alpha;
+        fwCtx.fill();
+        fwCtx.globalAlpha = 1;
+      }
+      if (particles.length === 0) fireworks.splice(i, 1);
+    }
+    requestAnimationFrame(drawFireworks);
+  }
+
+  drawFireworks();
+  // Launch fireworks every 800ms
+  setInterval(launchFirework, 800);
+  // First burst immediately
+  for (let i = 0; i < 5; i++) setTimeout(launchFirework, i * 200);
 }
 
 document.getElementById('adminOverlay').addEventListener('click', function(e) {
