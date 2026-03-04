@@ -593,13 +593,14 @@
   #newyearBanner {
     display: none; position: fixed; top: 80px; left: 50%; transform: translateX(-50%);
     z-index: 99999; background: linear-gradient(135deg, #1a0a00, #0a0a1a);
-    border: 1px solid gold; border-radius: 12px; padding: 1rem 2.5rem;
+    border: 1px solid gold; border-radius: 12px; padding: 0.8rem 2rem;
     text-align: center; animation: fadeIn 0.5s ease;
     box-shadow: 0 0 40px rgba(255,215,0,0.3);
+    width: 90%; max-width: 420px; pointer-events: none;
   }
   #newyearBanner h2 {
-    font-size: 1.8rem; color: gold; letter-spacing: 4px;
-    text-shadow: 0 0 20px rgba(255,215,0,0.8); margin-bottom: 0.3rem;
+    font-size: 1.3rem; color: gold; letter-spacing: 3px;
+    text-shadow: 0 0 20px rgba(255,215,0,0.8); margin-bottom: 0.2rem;
   }
   #newyearBanner p { color: #aaa; font-size: 0.8rem; letter-spacing: 2px; }
 
@@ -636,7 +637,7 @@
 <body>
 
 <nav>
-  <div class="logo">&gt; CMDR_</div>
+  <div class="logo">&gt; CMDR</div>
   <div>
     <a href="#product">Product</a>
     <a href="#license">License</a>
@@ -662,15 +663,14 @@
 <!-- BLACK FRIDAY BANNER -->
 <div id="blackFridayBanner">
   <span class="bf-badge">BLACK FRIDAY</span>
-  <span style="color:#fff">Exklusiver Rabatt aktiv –</span>
-  <span> 10% OFF mit Code </span>
-  <span style="color:#ff4400; font-weight:700">BLACKFRIDAY</span>
+  <span style="color:#fff">Exclusive deal active –</span>
+  <span style="color:#ff4400; font-weight:700"> 10% OFF · 113 Robux only!</span>
 </div>
 
 <!-- NEW YEAR BANNER -->
 <div id="newyearBanner">
   <h2>🎆 HAPPY NEW YEAR! 🎆</h2>
-  <p>Frohes neues Jahr von CMDR_SYSTEM</p>
+  <p>Happy New Year from CMDR SYSTEM! 🎉</p>
 </div>
 
 <div class="hero">
@@ -943,13 +943,19 @@
       var ld = document.getElementById("loader");
       if (!ld || ld.style.display === "none" || ld.style.opacity === "0") {
         clearInterval(checkLoader);
+        var finalPrice = BLACK_FRIDAY ? 113 : 125;
         document.getElementById("priceDisplay").innerHTML = "<span id=\"ap1\">0</span> R$";
         document.getElementById("priceDisplay2").innerHTML = "🟠 <span id=\"ap2\">0</span> <span style=\"font-size:1.2rem;color:#aaa\">Robux</span>";
-        animateCounter(document.getElementById("ap1"), 125, 1500);
-        animateCounter(document.getElementById("ap2"), 125, 1500);
-        setTimeout(() => {
-          document.getElementById("priceDisplay").innerHTML = "125 R$";
-          document.getElementById("priceDisplay2").innerHTML = "🟠 125 <span style=\"font-size:1.2rem;color:#aaa\">Robux</span>";
+        animateCounter(document.getElementById("ap1"), finalPrice, 1500);
+        animateCounter(document.getElementById("ap2"), finalPrice, 1500);
+        setTimeout(function() {
+          if (BLACK_FRIDAY) {
+            document.getElementById("priceDisplay").innerHTML = "<span class=\"price-original\">125 R$</span><span class=\"price-discounted\">113 R$</span>";
+            document.getElementById("priceDisplay2").innerHTML = "🟠 <span class=\"price-original\" style=\"font-size:1.6rem\">125</span> <span class=\"price-discounted\" style=\"font-size:2.2rem;font-weight:700\">113</span> <span style=\"font-size:1.2rem;color:#aaa\">Robux</span>";
+          } else {
+            document.getElementById("priceDisplay").innerHTML = "125 R$";
+            document.getElementById("priceDisplay2").innerHTML = "🟠 125 <span style=\"font-size:1.2rem;color:#aaa\">Robux</span>";
+          }
         }, 1600);
       }
     }, 200);
@@ -1422,10 +1428,10 @@ const THEME_EASTER     = false;   // 🐣 Purple & pastel
    ⚠️  Warning:      type='warning',     icon='⚠️'
    ══════════════════════════════════════════════════════ */
 
-const ANNOUNCEMENT_ENABLED = true;
-const ANNOUNCEMENT_TYPE    = 'warning';   // maintenance | update | info | warning
+const ANNOUNCEMENT_ENABLED = false;
+const ANNOUNCEMENT_TYPE    = 'maintenance';   // maintenance | update | info | warning
 const ANNOUNCEMENT_ICON    = '🔧';
-const ANNOUNCEMENT_TEXT    = 'Warn <strong>Announcement</strong> – The website will be briefly offline.';
+const ANNOUNCEMENT_TEXT    = 'Scheduled <strong>Maintenance</strong> – The website will be briefly offline.';
 const ANNOUNCEMENT_TIME    = '01/01/2026 at 8:00 PM';
 
 if (ANNOUNCEMENT_ENABLED) {
@@ -1442,33 +1448,17 @@ if (ANNOUNCEMENT_ENABLED) {
    🖤 BLACK FRIDAY        — true = active
    ══════════════════════════════════════════ */
 const NEWYEAR_FIREWORKS = false;  // 🎆 New Year fireworks
-const BLACK_FRIDAY      = true;  // 🖤 Black Friday discount
+const BLACK_FRIDAY      = false;  // 🖤 Black Friday discount
 
 // ── BLACK FRIDAY LOGIC ──
 if (BLACK_FRIDAY) {
   document.getElementById('blackFridayBanner').style.display = 'block';
-  // Add BLACK FRIDAY code
-  window.CODES['BLACKFRIDAY'] = function() {
-    const bfBASE = 125;
-    const bfDiscounted = 113;
-    document.getElementById('priceDisplay').innerHTML =
-      `<span class="price-original">${bfBASE} R$</span><span class="price-discounted">${bfDiscounted} R$</span>`;
-    document.getElementById('priceDisplay2').innerHTML =
-      `🟠 <span class="price-original" style="font-size:1.6rem">${bfBASE}</span> <span class="price-discounted" style="font-size:2.2rem;font-weight:700">${bfDiscounted}</span> <span style="font-size:1.2rem;color:#aaa">Robux</span>`;
-    document.getElementById('buyBtn').href = 'https://www.roblox.com/de/game-pass/1737709642/113-Rbx';
-    // Countdown animation
-    const bfCdEl = document.getElementById('discountCountdown');
-    const bfCdPrice = document.getElementById('countdownPrice');
-    bfCdPrice.textContent = bfBASE;
-    bfCdEl.style.display = 'block';
-    let bfCdVal = bfBASE;
-    const bfCdTimer = setInterval(() => {
-      bfCdVal--;
-      bfCdPrice.textContent = bfCdVal;
-      if (bfCdVal <= bfDiscounted) clearInterval(bfCdTimer);
-    }, 60);
-    return '✓ BLACK FRIDAY! 10% discount activated!';
-  };
+  // Apply discount automatically
+  document.getElementById('priceDisplay').innerHTML =
+    '<span class="price-original">125 R$</span><span class="price-discounted">113 R$</span>';
+  document.getElementById('priceDisplay2').innerHTML =
+    '🟠 <span class="price-original" style="font-size:1.6rem">125</span> <span class="price-discounted" style="font-size:2.2rem;font-weight:700">113</span> <span style="font-size:1.2rem;color:#aaa">Robux</span>';
+  document.getElementById('buyBtn').href = 'https://www.roblox.com/de/game-pass/1737709642/113-Rbx';
 }
 
 // ── NEWYEAR FIREWORKS LOGIC ──
@@ -1647,6 +1637,9 @@ function openTeamModal(name, role, roleClass, img, avatarName, text) {
 function closeTeamModal() {
   document.getElementById('teamModal').classList.remove('open');
 }
+</script>
+</body>
+</html>
 </script>
 </body>
 </html>
