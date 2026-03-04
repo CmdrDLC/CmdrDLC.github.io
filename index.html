@@ -305,7 +305,16 @@
   .discord-card .d-text strong { display: block; color: white; font-size: 1rem; }
   .discord-card .d-text span { color: #888; font-size: 0.8rem; font-family: 'Segoe UI', sans-serif; }
 
-  .thumb { width: 100%; border-radius: 8px 8px 0 0; display: block; }
+  .thumb {
+    width: 100%; border-radius: 8px 8px 0 0; display: block;
+    transition: box-shadow 0.4s ease, transform 0.4s ease, filter 0.4s ease;
+    filter: brightness(0.95);
+  }
+  .thumb:hover {
+    box-shadow: 0 0 30px rgba(0,255,136,0.5), 0 0 60px rgba(0,255,136,0.2);
+    transform: scale(1.02);
+    filter: brightness(1.05);
+  }
   footer { text-align: center; padding: 2rem; background: var(--card); color: #333; font-size: 0.8rem; border-top: 1px solid #1a1a1a; }
   footer span { color: var(--primary); }
 </style>
