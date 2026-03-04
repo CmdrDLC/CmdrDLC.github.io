@@ -306,6 +306,50 @@
   .discord-card .d-text span { color: #888; font-size: 0.8rem; font-family: 'Segoe UI', sans-serif; }
 
 
+
+  /* ANNOUNCEMENT BANNER */
+  #announcementBanner {
+    display: none; background: #0d0d0d;
+    border-bottom: 1px solid #333;
+    text-align: center; padding: 0.6rem 1rem;
+    font-family: 'Courier New', monospace;
+    font-size: 0.82rem; letter-spacing: 1px;
+    position: relative; z-index: 200;
+  }
+  #announcementBanner.type-maintenance {
+    border-bottom-color: #ffbd2e;
+    background: rgba(255,189,46,0.05);
+  }
+  #announcementBanner.type-update {
+    border-bottom-color: #00ff88;
+    background: rgba(0,255,136,0.05);
+  }
+  #announcementBanner.type-info {
+    border-bottom-color: #5865F2;
+    background: rgba(88,101,242,0.05);
+  }
+  #announcementBanner.type-warning {
+    border-bottom-color: #ff4444;
+    background: rgba(255,68,68,0.05);
+  }
+  #announcementBanner .ann-icon { margin-right: 0.5rem; }
+  #announcementBanner .ann-text { color: #aaa; }
+  #announcementBanner .ann-text strong { color: #fff; }
+  #announcementBanner .ann-time {
+    margin-left: 0.8rem; padding: 0.15rem 0.6rem;
+    border-radius: 4px; font-size: 0.75rem; font-weight: 700;
+  }
+  #announcementBanner.type-maintenance .ann-time { background: rgba(255,189,46,0.15); color: #ffbd2e; }
+  #announcementBanner.type-update .ann-time { background: rgba(0,255,136,0.15); color: #00ff88; }
+  #announcementBanner.type-info .ann-time { background: rgba(88,101,242,0.15); color: #5865F2; }
+  #announcementBanner.type-warning .ann-time { background: rgba(255,68,68,0.15); color: #ff4444; }
+  #announcementBanner .ann-close {
+    position: absolute; right: 1rem; top: 50%; transform: translateY(-50%);
+    background: none; border: none; color: #555; cursor: pointer;
+    font-size: 1rem; font-family: 'Courier New', monospace;
+    transition: color 0.2s;
+  }
+  #announcementBanner .ann-close:hover { color: #aaa; }
   /* FIREWORKS */
   .firework {
     position: fixed; pointer-events: none; z-index: 99998;
@@ -375,6 +419,15 @@
   </div>
 </nav>
 
+
+
+<!-- ANNOUNCEMENT BANNER -->
+<div id="announcementBanner">
+  <span class="ann-icon" id="annIcon">🔧</span>
+  <span class="ann-text" id="annText">Ankündigung</span>
+  <span class="ann-time" id="annTime"></span>
+  <button class="ann-close" onclick="document.getElementById('announcementBanner').style.display='none'">✕</button>
+</div>
 
 <!-- BLACK FRIDAY BANNER -->
 <div id="blackFridayBanner">
@@ -956,6 +1009,37 @@ function toggleMaintenance() {
   }
 }
 
+
+
+/* ══════════════════════════════════════════════════════
+   📢 ANKÜNDIGUNG / ANNOUNCEMENT BANNER
+   
+   ANNOUNCEMENT_ENABLED  — true = Banner anzeigen
+   ANNOUNCEMENT_TYPE     — 'maintenance' | 'update' | 'info' | 'warning'
+   ANNOUNCEMENT_TEXT     — Dein Ankündigungstext
+   ANNOUNCEMENT_TIME     — Datum/Uhrzeit (z.B. "01.01.2026 um 20:00 Uhr")
+   
+   Beispiele:
+   🔧 Maintenance:  type='maintenance', icon='🔧'
+   🆕 Update:       type='update',      icon='🆕'
+   ℹ️  Info:         type='info',        icon='ℹ️'
+   ⚠️  Warnung:      type='warning',     icon='⚠️'
+   ══════════════════════════════════════════════════════ */
+
+const ANNOUNCEMENT_ENABLED = false;
+const ANNOUNCEMENT_TYPE    = 'maintenance';   // maintenance | update | info | warning
+const ANNOUNCEMENT_ICON    = '🔧';
+const ANNOUNCEMENT_TEXT    = 'Geplante <strong>Wartung</strong> – Die Website wird kurzzeitig offline sein.';
+const ANNOUNCEMENT_TIME    = '01.01.2026 um 20:00 Uhr';
+
+if (ANNOUNCEMENT_ENABLED) {
+  const banner = document.getElementById('announcementBanner');
+  banner.className = 'type-' + ANNOUNCEMENT_TYPE;
+  banner.style.display = 'block';
+  document.getElementById('annIcon').textContent = ANNOUNCEMENT_ICON;
+  document.getElementById('annText').innerHTML = ANNOUNCEMENT_TEXT;
+  document.getElementById('annTime').textContent = ANNOUNCEMENT_TIME;
+}
 
 /* ══════════════════════════════════════════
    🎆 NEUJAHRS FEUERWERK — true = aktiv
