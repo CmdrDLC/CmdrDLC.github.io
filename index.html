@@ -18,6 +18,31 @@
 
 
 
+
+  /* MAINTENANCE COUNTDOWN */
+  .m-countdown {
+    display: flex; gap: 1.5rem; justify-content: center;
+    margin-top: 1.5rem;
+  }
+  .m-countdown-box {
+    text-align: center; min-width: 60px;
+  }
+  .m-countdown-num {
+    font-size: 2.5rem; font-weight: 900; color: #ff2222;
+    font-family: 'Courier New', monospace; letter-spacing: 2px;
+    text-shadow: 0 0 20px rgba(255,34,34,0.5);
+    animation: mpulse 1.5s ease-in-out infinite;
+  }
+  .m-countdown-label {
+    font-size: 0.65rem; color: #555; letter-spacing: 2px;
+    font-family: 'Courier New', monospace; margin-top: 0.2rem;
+  }
+  .m-countdown-done {
+    font-size: 1rem; color: #00ff88; letter-spacing: 2px;
+    font-family: 'Courier New', monospace; margin-top: 1rem;
+    animation: mpulse 1.5s ease-in-out infinite;
+  }
+
   /* LOADER */
   #loader {
     position: fixed; inset: 0; background: #0a0a0a;
@@ -615,7 +640,7 @@
   <div>
     <a href="#product">Product</a>
     <a href="#license">License</a>
-    <a href="#team">Team</a>
+    <button onclick="openTeamPage()" style="background:var(--primary);color:#000;padding:0.4rem 1rem;border-radius:4px;font-weight:700;border:none;cursor:pointer;font-family:'Courier New',monospace;font-size:0.85rem;letter-spacing:1px;">👥 TeamList</button>
     <a href="#support">Support</a>
     <a href="https://discord.gg/XaZSGVFvzV" class="discord-nav">💬 Discord</a>
     <a href="#" onclick="openAdmin();return false;" style="color:#0a0a0a;font-size:0.75rem;letter-spacing:1px;margin-left:0.8rem;user-select:none">⚙</a>
@@ -751,49 +776,7 @@
 </section>
 
 
-<!-- TEAM -->
-<section id="team" style="padding-bottom:0">
-  <h2>&gt; <span>THE TEAM</span>_</h2>
-  <div class="team-grid">
 
-    <div class="team-card" onclick="openTeamModal('Max','✦ Creator','role-creator','max.png','Max','Creator of this Website with the Cmdr!')">
-      <img src="max.png" class="team-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Max&background=00ff88&color=000&size=80&font-size=0.4&bold=true'" alt="Max">
-      <div class="team-name">Max</div>
-      <div class="team-role role-creator">✦ Creator</div>
-    </div>
-
-    <div class="team-card" onclick="openTeamModal('Tazz','✦ Co-Creator','role-cocreator','tazz.png','Tazz','Co Creator for the Discord')">
-      <img src="tazz.png" class="team-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Tazz&background=00cfff&color=000&size=80&font-size=0.4&bold=true'" alt="Tazz">
-      <div class="team-name">Tazz</div>
-      <div class="team-role role-cocreator">✦ Co-Creator</div>
-    </div>
-
-    <div class="team-card" onclick="openTeamModal('Bobasimi','✦ Developer','role-developer','bobasimi.png','Bobasimi','Hi im the Developer for the Server')">
-      <img src="bobasimi.png" class="team-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Bobasimi&background=ffbd2e&color=000&size=80&font-size=0.4&bold=true'" alt="Bobasimi">
-      <div class="team-name">Bobasimi</div>
-      <div class="team-role role-developer">✦ Developer</div>
-    </div>
-
-    <div class="team-card" onclick="openTeamModal('Batman','✦ Moderator','role-moderator','batman.png','Batman','Hello im an Moderator to keep the Server Safe')">
-      <img src="batman.png" class="team-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Batman&background=5865F2&color=fff&size=80&font-size=0.4&bold=true'" alt="Batman">
-      <div class="team-name">Batman</div>
-      <div class="team-role role-moderator">✦ Moderator</div>
-    </div>
-
-    <div class="team-card" onclick="openTeamModal('Levi','✦ Moderator','role-moderator','levi.png','Levi','Im here for the Cmdr Website')">
-      <img src="levi.png" class="team-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Levi&background=5865F2&color=fff&size=80&font-size=0.4&bold=true'" alt="Levi">
-      <div class="team-name">Levi</div>
-      <div class="team-role role-moderator">✦ Moderator</div>
-    </div>
-
-    <div class="team-card" onclick="openTeamModal('Kyle','✦ Trial Moderator','role-trial','kyle.png','Kyle','New Trial Moderator nice to meet you')">
-      <img src="kyle.png" class="team-avatar" onerror="this.src='https://ui-avatars.com/api/?name=Kyle&background=444444&color=fff&size=80&font-size=0.4&bold=true'" alt="Kyle">
-      <div class="team-name">Kyle</div>
-      <div class="team-role role-trial">✦ Trial Moderator</div>
-    </div>
-
-  </div>
-</section>
 
 <!-- DISCORD -->
 <div class="discord-section" id="support">
@@ -813,6 +796,21 @@
 </footer>
 
 <script>
+  function openTeamPage() {
+    var tp = document.getElementById('teamPage');
+    tp.style.display = 'block';
+    tp.style.position = 'fixed';
+    tp.style.inset = '0';
+    tp.style.background = '#0a0a0a';
+    tp.style.zIndex = '5000';
+    tp.style.overflowY = 'auto';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeTeamPage() {
+    document.getElementById('teamPage').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+
   const MAX_CODES = 10;
   const usedCodes = [];
 
@@ -983,6 +981,25 @@
     <div class="m-triangle">⚠️</div>
     <h1>! MAINTENANCE !</h1>
     <p>This site is currently under maintenance.<br>Please check back later.</p>
+    <div class="m-countdown" id="mCountdown" style="display:none">
+      <div class="m-countdown-box">
+        <div class="m-countdown-num" id="mDays">00</div>
+        <div class="m-countdown-label">DAYS</div>
+      </div>
+      <div class="m-countdown-box">
+        <div class="m-countdown-num" id="mHours">00</div>
+        <div class="m-countdown-label">HOURS</div>
+      </div>
+      <div class="m-countdown-box">
+        <div class="m-countdown-num" id="mMinutes">00</div>
+        <div class="m-countdown-label">MINUTES</div>
+      </div>
+      <div class="m-countdown-box">
+        <div class="m-countdown-num" id="mSeconds">00</div>
+        <div class="m-countdown-label">SECONDS</div>
+      </div>
+    </div>
+    <div class="m-countdown-done" id="mCountdownDone" style="display:none">✓ Maintenance complete – please refresh!</div>
   </div>
 </div>
 
@@ -1405,11 +1422,11 @@ const THEME_EASTER     = false;   // 🐣 Purple & pastel
    ⚠️  Warning:      type='warning',     icon='⚠️'
    ══════════════════════════════════════════════════════ */
 
-const ANNOUNCEMENT_ENABLED = false;
-const ANNOUNCEMENT_TYPE    = 'maintenance';   // maintenance | update | info | warning
-const ANNOUNCEMENT_ICON    = '🔧';
+const ANNOUNCEMENT_ENABLED = true;
+const ANNOUNCEMENT_TYPE    = 'info';   // maintenance | update | info | warning
+const ANNOUNCEMENT_ICON    = 'ℹ️';
 const ANNOUNCEMENT_TEXT    = 'Scheduled <strong>Maintenance</strong> – The website will be briefly offline.';
-const ANNOUNCEMENT_TIME    = '01/01/2026 at 8:00 PM';
+const ANNOUNCEMENT_TIME    = '04/03/2026 at 7:30 PM';
 
 if (ANNOUNCEMENT_ENABLED) {
   const annBanner = document.getElementById('announcementBanner');
@@ -1425,7 +1442,7 @@ if (ANNOUNCEMENT_ENABLED) {
    🖤 BLACK FRIDAY        — true = aktiv
    ══════════════════════════════════════════ */
 const NEWYEAR_FIREWORKS = false;
-const BLACK_FRIDAY      = false;
+const BLACK_FRIDAY      = true;
 
 // ── BLACK FRIDAY LOGIC ──
 if (BLACK_FRIDAY) {
@@ -1522,6 +1539,82 @@ document.getElementById('adminOverlay').addEventListener('click', function(e) {
 });
 </script>
 
+
+<!-- TEAM PAGE -->
+<div id="teamPage" style="display:none;position:fixed;inset:0;background:#0a0a0a;z-index:5000;overflow-y:auto;font-family:'Courier New',monospace;">
+  
+  <!-- Nav -->
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:1.2rem 2rem;background:#111;border-bottom:1px solid #00ff88;position:sticky;top:0;z-index:100;">
+    <div style="font-size:1.4rem;font-weight:700;color:#00ff88;letter-spacing:2px;">&gt; CMDR_</div>
+    <button onclick="closeTeamPage()" style="background:none;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:0.5rem 1rem;font-family:'Courier New',monospace;font-size:0.85rem;cursor:pointer;letter-spacing:1px;">← Back</button>
+  </div>
+
+  <!-- Hero -->
+  <div style="text-align:center;padding:3rem 2rem 2rem;background:radial-gradient(ellipse at center,#001a0d 0%,#0a0a0a 70%);border-bottom:1px solid #1a1a1a;">
+    <h1 style="font-size:2rem;margin-bottom:0.5rem;">&gt; <span style="color:#00ff88">THE TEAM</span>_</h1>
+    <p style="color:#555;font-size:0.85rem;letter-spacing:2px;">Meet the people behind CMDR_SYSTEM</p>
+  </div>
+
+  <!-- Grid -->
+  <div style="max-width:900px;margin:0 auto;padding:2rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.5rem;">
+
+    <div onclick="openTeamModal('Max','✦ Creator','role-creator','max.png','Max','Creator of this Website with the Cmdr!')" style="background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:border-color 0.3s;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='#1a1a1a'">
+      <img src="max.png" style="width:60px;height:60px;border-radius:50%;border:2px solid #2a2a2a;object-fit:cover;flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name=Max&background=00ff88&color=000&size=60&bold=true'" alt="Max">
+      <div>
+        <div style="font-weight:700;color:#e0e0e0;letter-spacing:1px;margin-bottom:0.2rem;">Max</div>
+        <div style="font-size:0.72rem;color:#00ff88;letter-spacing:1.5px;margin-bottom:0.4rem;">✦ CREATOR</div>
+        <div style="font-size:0.82rem;color:#666;font-family:'Segoe UI',sans-serif;">Creator of this Website with the Cmdr!</div>
+      </div>
+    </div>
+
+    <div onclick="openTeamModal('Tazz','✦ Co-Creator','role-cocreator','tazz.png','Tazz','Co Creator for the Discord')" style="background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='#1a1a1a'">
+      <img src="tazz.png" style="width:60px;height:60px;border-radius:50%;border:2px solid #2a2a2a;object-fit:cover;flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name=Tazz&background=00cfff&color=000&size=60&bold=true'" alt="Tazz">
+      <div>
+        <div style="font-weight:700;color:#e0e0e0;letter-spacing:1px;margin-bottom:0.2rem;">Tazz</div>
+        <div style="font-size:0.72rem;color:#00cfff;letter-spacing:1.5px;margin-bottom:0.4rem;">✦ CO-CREATOR</div>
+        <div style="font-size:0.82rem;color:#666;font-family:'Segoe UI',sans-serif;">Co Creator for the Discord</div>
+      </div>
+    </div>
+
+    <div onclick="openTeamModal('Bobasimi','✦ Developer','role-developer','bobasimi.png','Bobasimi','Hi im the Developer for the Server')" style="background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='#1a1a1a'">
+      <img src="bobasimi.png" style="width:60px;height:60px;border-radius:50%;border:2px solid #2a2a2a;object-fit:cover;flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name=Bobasimi&background=ffbd2e&color=000&size=60&bold=true'" alt="Bobasimi">
+      <div>
+        <div style="font-weight:700;color:#e0e0e0;letter-spacing:1px;margin-bottom:0.2rem;">Bobasimi</div>
+        <div style="font-size:0.72rem;color:#ffbd2e;letter-spacing:1.5px;margin-bottom:0.4rem;">✦ DEVELOPER</div>
+        <div style="font-size:0.82rem;color:#666;font-family:'Segoe UI',sans-serif;">Hi im the Developer for the Server</div>
+      </div>
+    </div>
+
+    <div onclick="openTeamModal('Batman','✦ Moderator','role-moderator','batman.png','Batman','Hello im an Moderator to keep the Server Safe')" style="background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='#1a1a1a'">
+      <img src="batman.png" style="width:60px;height:60px;border-radius:50%;border:2px solid #2a2a2a;object-fit:cover;flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name=Batman&background=5865F2&color=fff&size=60&bold=true'" alt="Batman">
+      <div>
+        <div style="font-weight:700;color:#e0e0e0;letter-spacing:1px;margin-bottom:0.2rem;">Batman</div>
+        <div style="font-size:0.72rem;color:#5865F2;letter-spacing:1.5px;margin-bottom:0.4rem;">✦ MODERATOR</div>
+        <div style="font-size:0.82rem;color:#666;font-family:'Segoe UI',sans-serif;">Hello im an Moderator to keep the Server Safe</div>
+      </div>
+    </div>
+
+    <div onclick="openTeamModal('Levi','✦ Moderator','role-moderator','levi.png','Levi','Im here for the Cmdr Website')" style="background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='#1a1a1a'">
+      <img src="levi.png" style="width:60px;height:60px;border-radius:50%;border:2px solid #2a2a2a;object-fit:cover;flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name=Levi&background=5865F2&color=fff&size=60&bold=true'" alt="Levi">
+      <div>
+        <div style="font-weight:700;color:#e0e0e0;letter-spacing:1px;margin-bottom:0.2rem;">Levi</div>
+        <div style="font-size:0.72rem;color:#5865F2;letter-spacing:1.5px;margin-bottom:0.4rem;">✦ MODERATOR</div>
+        <div style="font-size:0.82rem;color:#666;font-family:'Segoe UI',sans-serif;">Im here for the Cmdr Website</div>
+      </div>
+    </div>
+
+    <div onclick="openTeamModal('Kyle','✦ Trial Moderator','role-trial','kyle.png','Kyle','New Trial Moderator nice to meet you')" style="background:#111;border:1px solid #1a1a1a;border-radius:12px;padding:1.2rem;display:flex;align-items:center;gap:1rem;cursor:pointer;" onmouseover="this.style.borderColor='#00ff88'" onmouseout="this.style.borderColor='#1a1a1a'">
+      <img src="kyle.png" style="width:60px;height:60px;border-radius:50%;border:2px solid #2a2a2a;object-fit:cover;flex-shrink:0;" onerror="this.src='https://ui-avatars.com/api/?name=Kyle&background=444&color=fff&size=60&bold=true'" alt="Kyle">
+      <div>
+        <div style="font-weight:700;color:#e0e0e0;letter-spacing:1px;margin-bottom:0.2rem;">Kyle</div>
+        <div style="font-size:0.72rem;color:#aaa;letter-spacing:1.5px;margin-bottom:0.4rem;">✦ TRIAL MODERATOR</div>
+        <div style="font-size:0.82rem;color:#666;font-family:'Segoe UI',sans-serif;">New Trial Moderator nice to meet you</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
 <!-- TEAM MODAL -->
 <div id="teamModal" onclick="if(event.target===this)closeTeamModal()">
   <div class="team-modal-box">
@@ -1534,6 +1627,8 @@ document.getElementById('adminOverlay').addEventListener('click', function(e) {
 </div>
 
 <script>
+
+
 /* ── TEAM MODAL ── */
 function openTeamModal(name, role, roleClass, img, avatarName, text) {
   var fallback = 'https://ui-avatars.com/api/?name=' + encodeURIComponent(avatarName) + '&background=00ff88&color=000&size=90&font-size=0.4&bold=true';
@@ -1551,9 +1646,6 @@ function openTeamModal(name, role, roleClass, img, avatarName, text) {
 function closeTeamModal() {
   document.getElementById('teamModal').classList.remove('open');
 }
-</script>
-</body>
-</html>
 </script>
 </body>
 </html>
