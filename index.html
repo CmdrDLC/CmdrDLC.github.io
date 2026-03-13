@@ -2,6 +2,9 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cmdr System – Event DLC</title>
 <style>
@@ -58,26 +61,26 @@
   #loader .l-text { font-size: 0.75rem; color: #555; letter-spacing: 2px; }
   #loader .l-line { font-size: 0.78rem; color: #333; letter-spacing: 1px; min-height: 1.2rem; }
 
-  /*  */
-  #Screen {
+  /* MAINTENANCE */
+  #maintenanceScreen {
     display: none; position: fixed; inset: 0; z-index: 999999;
     background: #0a0a0a; flex-direction: column;
     align-items: center; justify-content: center; gap: 1.5rem;
     text-align: center;
   }
-  #Screen .m-triangle {
+  #maintenanceScreen .m-triangle {
     font-size: 5rem; animation: mpulse 1.5s ease-in-out infinite;
   }
-  #Screen h1 {
+  #maintenanceScreen h1 {
     font-size: 3.5rem; font-weight: 900; color: #ff2222;
     letter-spacing: 6px; text-shadow: 0 0 30px rgba(255,34,34,0.6);
     animation: mpulse 1.5s ease-in-out infinite;
   }
-  #Screen p {
+  #maintenanceScreen p {
     color: #555; font-size: 0.9rem; letter-spacing: 2px;
     font-family: 'Courier New', monospace;
   }
-  #Screen .m-border {
+  #maintenanceScreen .m-border {
     border: 2px solid #ff2222; border-radius: 12px;
     padding: 3rem 4rem; box-shadow: 0 0 60px rgba(255,34,34,0.15);
   }
@@ -137,18 +140,15 @@
   #adminPanel .a-section-title { color: #555; font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 0.6rem; }
 
   nav {
-    display: flex; justify-content: space-between; align-items: center;
+    display: flex !important; justify-content: space-between; align-items: center;
     padding: 1.2rem 2rem; background: var(--card);
     border-bottom: 1px solid var(--primary);
-    position: sticky; top: 0; z-index: 100; flex-wrap: wrap; gap: 0.5rem;
+    position: sticky; top: 0; z-index: 100;
   }
   .logo { font-size: 1.4rem; font-weight: 700; color: var(--primary); letter-spacing: 2px; }
-  nav a { color: var(--text); text-decoration: none; margin-left: 1.2rem; font-size: 0.85rem; transition: color 0.2s; }
-  nav a:hover { color: var(--primary); }
-  .discord-nav {
-    background: #5865F2; color: white !important;
-    padding: 0.4rem 1rem; border-radius: 4px; font-weight: 700;
-  }
+  nav > div { display: none !important; }
+  nav a { display: none !important; }
+  .discord-nav { display: none !important; }
 
   .hero {
     text-align: center; padding: 5rem 2rem 3rem;
@@ -544,7 +544,7 @@
     font-size: 0.82rem; letter-spacing: 1px;
     position: relative; z-index: 200;
   }
-  #announcementBanner.type- {
+  #announcementBanner.type-maintenance {
     border-bottom-color: #ffbd2e;
     background: rgba(255,189,46,0.05);
   }
@@ -567,7 +567,7 @@
     margin-left: 0.8rem; padding: 0.15rem 0.6rem;
     border-radius: 4px; font-size: 0.75rem; font-weight: 700;
   }
-  #announcementBanner.type- .ann-time { background: rgba(255,189,46,0.15); color: #ffbd2e; }
+  #announcementBanner.type-maintenance .ann-time { background: rgba(255,189,46,0.15); color: #ffbd2e; }
   #announcementBanner.type-update .ann-time { background: rgba(0,255,136,0.15); color: #00ff88; }
   #announcementBanner.type-info .ann-time { background: rgba(88,101,242,0.15); color: #5865F2; }
   #announcementBanner.type-warning .ann-time { background: rgba(255,68,68,0.15); color: #ff4444; }
@@ -633,21 +633,46 @@
   }
   footer { text-align: center; padding: 2rem; background: var(--card); color: #333; font-size: 0.8rem; border-top: 1px solid #1a1a1a; }
   footer span { color: var(--primary); }
+
+  @keyframes menuSlideIn {
+    from { transform: translateX(100%); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+  }
+  @keyframes menuItemIn {
+    from { transform: translateX(20px); opacity: 0; }
+    to   { transform: translateX(0);    opacity: 1; }
+  }
+
 </style>
 </head>
 <body>
 
-<nav>
-  <div class="logo">&gt; CMDR</div>
-  <div>
-    <a href="#product">Product</a>
-    <button onclick="openLicensePage()" style="background:none;border:none;color:#e0e0e0;cursor:pointer;font-family:'Courier New',monospace;font-size:0.85rem;letter-spacing:0;margin-left:1.2rem;transition:color 0.2s;" onmouseover="this.style.color='#00ff88'" onmouseout="this.style.color='#e0e0e0'">License</button>
-    <button onclick="openTeamPage()" style="background:var(--primary);color:#000;padding:0.4rem 1rem;border-radius:4px;font-weight:700;border:none;cursor:pointer;font-family:'Courier New',monospace;font-size:0.85rem;letter-spacing:1px;">👥 TeamList</button>
-    <a href="#support">Support</a>
-    <a href="https://discord.gg/XaZSGVFvzV" class="discord-nav">💬 Discord</a>
-    <a href="#" onclick="openAdmin();return false;" style="color:#0a0a0a;font-size:0.75rem;letter-spacing:1px;margin-left:0.8rem;user-select:none">⚙</a>
-  </div>
-</nav>
+<!-- Nav Overlay -->
+<!-- Nav Overlay -->
+<div id="navOverlay" onclick="closeBurger()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;"></div>
+
+<!-- Navbar -->
+<div style="display:flex;justify-content:space-between;align-items:center;padding:1rem 2rem;background:#111;border-bottom:1px solid #00ff88;position:sticky;top:0;z-index:9999;">
+  <div style="font-size:1.4rem;font-weight:700;color:#00ff88;letter-spacing:2px;font-family:'Courier New',monospace;">&gt; CMDR</div>
+  <button id="burgerBtn" onclick="toggleBurger()" style="display:flex;flex-direction:column;justify-content:center;gap:5px;background:#1a1a1a;border:1px solid #333;border-radius:8px;cursor:pointer;padding:0.55rem 0.65rem;">
+    <span style="display:block;width:22px;height:2px;background:#00ff88;border-radius:2px;transition:all 0.3s;"></span>
+    <span style="display:block;width:22px;height:2px;background:#00ff88;border-radius:2px;transition:all 0.3s;"></span>
+    <span style="display:block;width:22px;height:2px;background:#00ff88;border-radius:2px;transition:all 0.3s;"></span>
+  </button>
+</div>
+
+<!-- Slide-in Menu -->
+<div id="navMenu" style="display:none;position:fixed;top:0;right:0;width:270px;height:100vh;background:#0d0d0d;border-left:1px solid #00ff88;z-index:99999;flex-direction:column;padding:4.5rem 1.2rem 2rem;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,0.8);">
+  <button onclick="closeBurger();location.href='#product'" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📦 Product</button>
+  <button onclick="closeBurger();openAnnouncementsPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📢 Announcements</button>
+  <button onclick="closeBurger();openEventPacksPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#ffbd2e';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">🎁 Event Packs</button>
+  <button onclick="closeBurger();openCollaboratorPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#ff69b4';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">🤝 Collaborators</button>
+  <button onclick="closeBurger();openLicensePage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📄 License</button>
+  <button onclick="closeBurger();location.href='#support'" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">🛠 Support</button>
+  <button onclick="closeBurger();openTeamPage()" style="display:block;width:100%;text-align:center;background:#00ff88;border:none;border-radius:8px;color:#000;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:1rem;">👥 TeamList</button>
+  <button onclick="closeBurger();window.open('https://discord.gg/XaZSGVFvzV','_blank')" style="display:block;width:100%;text-align:center;background:#5865F2;border:none;border-radius:8px;color:#fff;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:0.6rem;">💬 Discord</button>
+  <button onclick="openAdmin();closeBurger()" style="display:block;width:100%;text-align:center;background:none;border:none;color:#1e1e1e;padding:0.8rem;font-size:0.7rem;cursor:pointer;margin-top:0.5rem;">⚙</button>
+</div>
 
 
 
@@ -701,19 +726,7 @@
 </div>
 
 
-<!-- COLLABORATOR -->
-<section style="padding-bottom:0; max-width:900px; margin:0 auto; padding:2rem 2rem 0;">
-  <h2 style="font-size:1.6rem;margin-bottom:1.5rem;text-align:center;letter-spacing:2px;">&gt; <span style="color:#00ff88">COLLABORATOR</span>_</h2>
-  <div style="background:#111;border:1px solid #ff69b4;border-radius:12px;padding:1.8rem;display:flex;align-items:center;gap:1.5rem;max-width:500px;margin:0 auto;box-shadow:0 0 30px rgba(255,105,180,0.1);">
-    <img src="roky.png" style="width:75px;height:75px;border-radius:50%;border:2px solid #ff69b4;object-fit:cover;flex-shrink:0;box-shadow:0 0 15px rgba(255,105,180,0.3);" onerror="this.src='https://ui-avatars.com/api/?name=Roky&background=ff69b4&color=fff&size=75&bold=true'" alt="Roky">
-    <div style="flex:1;">
-      <div style="font-family:'Courier New',monospace;font-weight:700;color:#e0e0e0;font-size:1.1rem;letter-spacing:1px;margin-bottom:0.2rem;">Roky</div>
-      <div style="font-size:0.72rem;color:#ff69b4;letter-spacing:1.5px;font-family:'Courier New',monospace;margin-bottom:0.6rem;">✦ COLLABORATOR</div>
-      <div style="font-size:0.85rem;color:#888;font-family:'Segoe UI',sans-serif;line-height:1.5;margin-bottom:1rem;">Buy from me the Events! 3 packs available: Gold, Silver and Bronze</div>
-      <button disabled style="width:100%;padding:0.7rem;background:#1a1a1a;border:1px solid #444;border-radius:6px;color:#555;font-family:'Courier New',monospace;font-size:0.85rem;letter-spacing:1px;cursor:not-allowed;opacity:0.6;">🔒 SOON</button>
-    </div>
-  </div>
-</section>
+
 
 <!-- PRODUCT -->
 <section id="product">
@@ -799,6 +812,55 @@
 <script>
 
 
+
+  /* ── BURGER MENU ── */
+  function toggleBurger() {
+    var btn = document.getElementById('burgerBtn');
+    var menu = document.getElementById('navMenu');
+    var overlay = document.getElementById('navOverlay');
+    var isOpen = menu.style.display === 'flex';
+    if (isOpen) {
+      menu.style.animation = 'none';
+      menu.style.transform = 'translateX(100%)';
+      menu.style.opacity = '0';
+      setTimeout(function() {
+        menu.style.display = 'none';
+        menu.style.transform = '';
+        menu.style.opacity = '';
+      }, 200);
+      overlay.style.display = 'none';
+      btn.classList.remove('open');
+      document.body.style.overflow = '';
+    } else {
+      menu.style.display = 'flex';
+      menu.style.flexDirection = 'column';
+      menu.style.animation = 'menuSlideIn 0.3s cubic-bezier(0.4,0,0.2,1) forwards';
+      overlay.style.display = 'block';
+      overlay.style.animation = 'fadeIn 0.3s ease';
+      btn.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      // Animate each menu item
+      var items = menu.querySelectorAll('button');
+      items.forEach(function(item, i) {
+        item.style.animation = 'none';
+        item.style.opacity = '0';
+        setTimeout(function() {
+          item.style.animation = 'menuItemIn 0.25s ease forwards';
+          item.style.opacity = '';
+        }, 80 + i * 40);
+      });
+    }
+  }
+  function closeBurger() {
+    var menu = document.getElementById('navMenu');
+    var overlay = document.getElementById('navOverlay');
+    var btn = document.getElementById('burgerBtn');
+    if (menu) menu.style.display = 'none';
+    if (overlay) overlay.style.display = 'none';
+    if (btn) btn.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
   var buyUrl = 'https://www.roblox.com/de/game-pass/1738044254/125';
   function openWarningModal() {
     var modal = document.getElementById('warningModal');
@@ -820,30 +882,7 @@
     });
   });
 
-  function openLicensePage() {
-    var lp = document.getElementById('licensePage');
-    lp.style.display = 'block';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeLicensePage() {
-    document.getElementById('licensePage').style.display = 'none';
-    document.body.style.overflow = '';
-  }
-
-  function openTeamPage() {
-    var tp = document.getElementById('teamPage');
-    tp.style.display = 'block';
-    tp.style.position = 'fixed';
-    tp.style.inset = '0';
-    tp.style.background = '#0a0a0a';
-    tp.style.zIndex = '5000';
-    tp.style.overflowY = 'auto';
-    document.body.style.overflow = 'hidden';
-  }
-  function closeTeamPage() {
-    document.getElementById('teamPage').style.display = 'none';
-    document.body.style.overflow = '';
-  }
+  /* Page functions loaded from pages.js */
 
   const MAX_CODES = 10;
   const usedCodes = [];
@@ -984,11 +1023,30 @@
         animateCounter(document.getElementById("ap2"), finalPrice, 1500);
         setTimeout(function() {
           if (DISABLE_BUY_BUTTON) {
+  // Disable Buy Button
   var btn = document.getElementById('buyBtn');
   btn.style.opacity = '0.4';
   btn.style.pointerEvents = 'none';
   btn.style.cursor = 'not-allowed';
   btn.textContent = '🚫 CURRENTLY UNAVAILABLE';
+
+  // Block applyCode function entirely
+  window.applyCode = function(slotId) {
+    var msg = document.getElementById('msg_' + slotId);
+    if (msg) {
+      msg.textContent = '🚫 Codes are currently disabled.';
+      msg.className = 'discount-msg err';
+      msg.style.display = 'block';
+    }
+  };
+
+  // Hide the add code button
+  var addBtn = document.getElementById('addCodeBtn');
+  if (addBtn) {
+    addBtn.style.opacity = '0.4';
+    addBtn.style.pointerEvents = 'none';
+    addBtn.style.cursor = 'not-allowed';
+  }
 }
 
 if (BLACK_FRIDAY) {
@@ -1023,12 +1081,12 @@ if (BLACK_FRIDAY) {
     animateWave();
   });
 </script>
-<!--  -->
-<div id="Screen">
+<!-- MAINTENANCE -->
+<div id="maintenanceScreen">
   <div class="m-border">
     <div class="m-triangle">⚠️</div>
-    <h1>!  !</h1>
-    <p>This site is currently under .<br>Please check back later.</p>
+    <h1>! MAINTENANCE !</h1>
+    <p>This site is currently under maintenance.<br>Please check back later.</p>
     <div class="m-countdown" id="mCountdown" style="display:none">
       <div class="m-countdown-box">
         <div class="m-countdown-num" id="mDays">00</div>
@@ -1047,7 +1105,7 @@ if (BLACK_FRIDAY) {
         <div class="m-countdown-label">SECONDS</div>
       </div>
     </div>
-    <div class="m-countdown-done" id="mCountdownDone" style="display:none">✓  complete – please refresh!</div>
+    <div class="m-countdown-done" id="mCountdownDone" style="display:none">✓ Maintenance complete – please refresh!</div>
   </div>
 </div>
 
@@ -1077,7 +1135,7 @@ if (BLACK_FRIDAY) {
       <div class="a-msg" id="adminDashMsg"></div>
       <button class="a-btn" onclick="adminAddCode()">+ ADD CODE</button>
       <hr class="a-divider">
-      <div class="a-section-title">&gt;  MODE</div>
+      <div class="a-section-title">&gt; MAINTENANCE MODE</div>
       <button class="a-btn" id="maintenanceBtn" onclick="toggleMaintenance()" style="background:#ff2222;color:white;margin-bottom:0.5rem">⚠ ENABLE MAINTENANCE</button>
       <hr class="a-divider">
       <div class="a-section-title">&gt; ACTIVE CODES</div>
@@ -1316,7 +1374,7 @@ function adminDeleteCode(code) {
 }
 
 /* ── MAINTENANCE MODE ── */
-const MAINTENANCE_MODE = true;
+const MAINTENANCE_MODE = false;
 let maintenanceActive = MAINTENANCE_MODE;
 
 if (MAINTENANCE_MODE) {
@@ -1494,16 +1552,35 @@ const BLACK_FRIDAY      = false;  // 🖤 Black Friday discount
 
 // =============================================
 // 🛒 DISABLE BUY BUTTON — true = disabled
-const DISABLE_BUY_BUTTON = true;
+const DISABLE_BUY_BUTTON = false;
 // =============================================
 
 // ── BLACK FRIDAY LOGIC ──
 if (DISABLE_BUY_BUTTON) {
+  // Disable Buy Button
   var btn = document.getElementById('buyBtn');
   btn.style.opacity = '0.4';
   btn.style.pointerEvents = 'none';
   btn.style.cursor = 'not-allowed';
   btn.textContent = '🚫 CURRENTLY UNAVAILABLE';
+
+  // Block applyCode function entirely
+  window.applyCode = function(slotId) {
+    var msg = document.getElementById('msg_' + slotId);
+    if (msg) {
+      msg.textContent = '🚫 Codes are currently disabled.';
+      msg.className = 'discount-msg err';
+      msg.style.display = 'block';
+    }
+  };
+
+  // Hide the add code button
+  var addBtn = document.getElementById('addCodeBtn');
+  if (addBtn) {
+    addBtn.style.opacity = '0.4';
+    addBtn.style.pointerEvents = 'none';
+    addBtn.style.cursor = 'not-allowed';
+  }
 }
 
 if (BLACK_FRIDAY) {
@@ -1800,5 +1877,23 @@ function closeTeamModal() {
   document.getElementById('teamModal').classList.remove('open');
 }
 </script>
+
+<script src="pages.js"></script>
+<script>
+  // Load external page HTML files
+  function loadPage(file, containerId) {
+    fetch(file)
+      .then(function(r) { return r.text(); })
+      .then(function(html) {
+        var div = document.createElement('div');
+        div.innerHTML = html;
+        document.body.appendChild(div.firstElementChild);
+      });
+  }
+  loadPage('collaborators.html', 'collaboratorPage');
+  loadPage('eventpacks.html', 'eventPacksPage');
+  loadPage('announcements.html', 'announcementsPage');
+</script>
+
 </body>
 </html>
