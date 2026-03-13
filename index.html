@@ -732,6 +732,7 @@
   <button onclick="closeBurger();openCollaboratorPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#ff69b4';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navCollaborators">🤝 Collaborators</button>
   <button onclick="closeBurger();openLicensePage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navLicense">📄 License</button>
   <button onclick="closeBurger();openChangelogPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📋 Changelog</button>
+  <button onclick="closeBurger();openSneakPeekPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#a855f7';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">👁️ Sneak Peek</button>
   <button onclick="closeBurger();location.href='#support'" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navSupport">🛠 Support</button>
   <button onclick="closeBurger();openTeamPage()" style="display:block;width:100%;text-align:center;background:#00ff88;border:none;border-radius:8px;color:#000;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:1rem;" data-lang="navTeam">👥 TeamList</button>
   <button onclick="closeBurger();window.open('https://discord.gg/XaZSGVFvzV','_blank')" style="display:block;width:100%;text-align:center;background:#5865F2;border:none;border-radius:8px;color:#fff;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:0.6rem;">💬 Discord</button>
@@ -891,7 +892,7 @@ var DISABLE_BUY_BUTTON = false;  // true = disables buy button & codes
 
 // ── 🔧 MAINTENANCE ───────────────────────────────────────
 var MAINTENANCE_MODE = false;    // true = shows maintenance screen
-var MAINTENANCE_END  = '2026/03/14 13:00:00';       // e.g. '2026/03/20 20:00:00'
+var MAINTENANCE_END  = '';       // e.g. '2026/03/20 20:00:00'
 
 // ── 📢 ANNOUNCEMENT BANNER ───────────────────────────────
 var ANNOUNCEMENT_ENABLED = false;
@@ -1061,6 +1062,34 @@ var THEME_EASTER     = false;   // 🐣 Purple & pastel
     if (warnText && t.warnText) warnText.textContent = t.warnText;
     if (warnBuyBtn && t.warnBuyBtn) warnBuyBtn.textContent = t.warnBuyBtn;
     if (warnCancelBtn && t.warnCancelBtn) warnCancelBtn.textContent = t.warnCancelBtn;
+
+    // Chatbot language update
+    var chatInput = document.getElementById('chatInput');
+    var chatHeader = document.querySelector('#chatbotWindow .chat-subtitle');
+    if (chatInput) chatInput.placeholder = currentLang === 'de' ? 'Frage stellen...' : 'Ask a question...';
+
+    // Update welcome message if not yet interacted
+    if (!chatWelcomeDone) {
+      var welcomeEl = document.getElementById('chatWelcome');
+      if (welcomeEl) welcomeEl.textContent = '';
+    } else {
+      var welcomeEl = document.getElementById('chatWelcome');
+      if (welcomeEl) {
+        welcomeEl.textContent = '';
+        var welcomeText = currentLang === 'de'
+          ? '👋 Hi! Ich bin der CMDR Assistant. Frag mich alles über das CMDR System V1 DLC!'
+          : '👋 Hi! I\'m the CMDR Assistant. Ask me anything about the CMDR System V1 DLC!';
+        var i = 0;
+        var tw = setInterval(function() {
+          welcomeEl.textContent += welcomeText[i++];
+          if (i >= welcomeText.length) clearInterval(tw);
+        }, 28);
+      }
+    }
+
+    // Update chatbot subtitle
+    var subtitle = document.getElementById('chatSubtitle');
+    if (subtitle) subtitle.textContent = currentLang === 'de' ? 'Beantwortet CMDR Fragen' : 'Answers CMDR questions';
   }
 
 
@@ -1071,6 +1100,14 @@ var THEME_EASTER     = false;   // 🐣 Purple & pastel
   }
   function closeTeamPage() {
     var el = document.getElementById('teamPage');
+    if (el) { el.style.display = 'none'; document.body.style.overflow = ''; }
+  }
+  function openSneakPeekPage() {
+    var el = document.getElementById('sneakPeekPage');
+    if (el) { el.style.cssText = 'display:block!important;position:fixed!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;z-index:999999!important;overflow-y:auto!important;background:#0a0a0a!important;'; document.body.style.overflow = 'hidden'; }
+  }
+  function closeSneakPeekPage() {
+    var el = document.getElementById('sneakPeekPage');
     if (el) { el.style.display = 'none'; document.body.style.overflow = ''; }
   }
   function openChangelogPage() {
@@ -2280,100 +2317,290 @@ function closeTeamModal() {
 </div>
 
 <!-- AI CHATBOT -->
-<div id="chatbotWidget" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:99990;font-family:'Courier New',monospace;">
+<div id="chatbotWidget" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:99990;font-family:'Courier New',monospace;max-width:calc(100vw - 3rem);">
   <!-- Toggle Button -->
   <button id="chatbotToggle" onclick="toggleChatbot()" style="width:54px;height:54px;border-radius:50%;background:#00ff88;border:none;cursor:pointer;font-size:1.4rem;box-shadow:0 4px 20px rgba(0,255,136,0.4);transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</button>
 
   <!-- Chat Window -->
-  <div id="chatbotWindow" style="display:none;position:absolute;bottom:65px;right:0;width:320px;background:#111;border:1px solid #00ff88;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,255,136,0.15);">
+  <div id="chatbotWindow" style="display:none;position:fixed;bottom:80px;right:1.5rem;width:min(380px,calc(100vw - 3rem));background:#111;border:1px solid #00ff88;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,255,136,0.15);">
     <!-- Header -->
     <div style="background:#0d1a0d;padding:0.8rem 1rem;border-bottom:1px solid #1a2a1a;display:flex;align-items:center;gap:0.6rem;">
       <span style="color:#00ff88;font-size:1rem;">🤖</span>
       <div>
         <div style="color:#00ff88;font-size:0.82rem;font-weight:700;letter-spacing:1px;">CMDR Assistant</div>
-        <div style="color:#444;font-size:0.65rem;letter-spacing:1px;">Beantwortet CMDR Fragen</div>
+        <div id="chatSubtitle" style="color:#444;font-size:0.65rem;letter-spacing:1px;">Answers CMDR questions</div>
       </div>
       <button onclick="toggleChatbot()" style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:1rem;padding:0.2rem;">✕</button>
     </div>
 
     <!-- Messages -->
-    <div id="chatMessages" style="height:260px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.7rem;">
-      <div style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.5;">
-        👋 Hi! Ich bin der CMDR Assistant. Stell mir Fragen über das CMDR System V1 DLC!
-      </div>
+    <div id="chatMessages" style="height:280px;overflow-y:auto;overflow-x:hidden;padding:0.8rem;display:flex;flex-direction:column;gap:0.6rem;box-sizing:border-box;">
+      <div id="chatWelcome" style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.6;word-break:break-word;overflow-wrap:anywhere;white-space:normal;max-width:100%;box-sizing:border-box;"></div>
     </div>
 
     <!-- Input -->
     <div style="padding:0.8rem;border-top:1px solid #1a1a1a;display:flex;gap:0.5rem;">
-      <input id="chatInput" type="text" placeholder="Frage stellen..." onkeydown="if(event.key==='Enter')sendChatMessage()" style="flex:1;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:0.5rem 0.7rem;font-family:'Courier New',monospace;font-size:0.78rem;outline:none;">
+      <input id="chatInput" type="text" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendChatMessage()" style="flex:1;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:0.5rem 0.7rem;font-family:'Courier New',monospace;font-size:0.78rem;outline:none;">
       <button onclick="sendChatMessage()" style="background:#00ff88;border:none;border-radius:6px;color:#000;padding:0.5rem 0.8rem;cursor:pointer;font-weight:700;font-size:0.8rem;">→</button>
     </div>
   </div>
 </div>
 
 <script>
-  // ── CHATBOT ──────────────────────────────────────────
+  // ── CHATBOT (FAQ-based, no API needed) ───────────────
+  var FAQ = [
+    // Price
+    { q: ['price','cost','how much','robux','preis','kosten','wie viel','was kostet','how expensive'], a: { en: '💰 The CMDR System V1 DLC costs **125 Robux**. One-time purchase — own it forever!', de: '💰 Das CMDR System V1 DLC kostet **125 Robux**. Einmalige Zahlung — für immer dein!' } },
+    // Buy
+    { q: ['buy','purchase','kaufen','kaufe','get it','erwerben','where to buy','wo kaufen','link'], a: { en: '🛒 Click the **Buy Now** button on the main page — you will be sent to the Roblox gamepass page directly!', de: '🛒 Klicke auf den **Jetzt kaufen** Button auf der Hauptseite — du wirst direkt zur Roblox Gamepass-Seite weitergeleitet!' } },
+    // Refund
+    { q: ['refund','rückerstattung','money back','geld zurück','zurückgeben','return'], a: { en: '❌ All sales are final. Due to the digital nature of the product, **no refunds** are possible.', de: '❌ Alle Verkäufe sind endgültig. Aufgrund der digitalen Natur des Produkts sind **keine Rückerstattungen** möglich.' } },
+    // Setup
+    { q: ['setup','install','installier','einrichten','how to use','wie benutze','configure','konfigurieren','anfangen','start','begin'], a: { en: '⚙️ Join our Discord and contact support — you will receive a full **setup video**! discord.gg/XaZSGVFvzV', de: '⚙️ Tritt unserem Discord bei und kontaktiere den Support — du erhältst ein vollständiges **Setup-Video**! discord.gg/XaZSGVFvzV' } },
+    // Discord
+    { q: ['discord','server','community','join'], a: { en: '💬 Join our Discord: **discord.gg/XaZSGVFvzV** — get support, updates and connect with the community!', de: '💬 Tritt unserem Discord bei: **discord.gg/XaZSGVFvzV** — erhalte Support, Updates und verbinde dich mit der Community!' } },
+    // Features
+    { q: ['feature','what does','was kann','function','funktion','command','befehl','include','beinhaltet','what is'], a: { en: '✨ CMDR V1 includes: Full command system, Event hooks, Automation tools, Discord support & all future updates free!', de: '✨ CMDR V1 beinhaltet: Vollständiges Befehlssystem, Event-Hooks, Automatisierungstools, Discord-Support & alle zukünftigen Updates kostenlos!' } },
+    // Updates
+    { q: ['update','updates','zukunft','future','new version','neue version'], a: { en: '🔄 All future CMDR V1 updates are **completely free** for existing owners!', de: '🔄 Alle zukünftigen CMDR V1 Updates sind für bestehende Käufer **komplett kostenlos**!' } },
+    // Codes
+    { q: ['code','discount','rabatt','coupon','promo'], a: { en: '🎟️ Enter discount codes in the product section on the main page using the **+ ADD CODE** button!', de: '🎟️ Gib Rabattcodes im Produktbereich auf der Hauptseite mit dem **+ CODE HINZUFÜGEN** Button ein!' } },
+    // Support
+    { q: ['support','help','hilfe','problem','issue','bug','error','fehler'], a: { en: '🛠️ Need help? Join our Discord: **discord.gg/XaZSGVFvzV** — our team responds fast!', de: '🛠️ Brauchst du Hilfe? Tritt unserem Discord bei: **discord.gg/XaZSGVFvzV** — unser Team antwortet schnell!' } },
+    // Roblox
+    { q: ['roblox','gamepass','game pass'], a: { en: '🎮 CMDR V1 is a **Roblox Gamepass**. You need the base Event System to use it.', de: '🎮 CMDR V1 ist ein **Roblox Gamepass**. Du benötigst das Basis-Event-System zur Nutzung.' } },
+    // What is CMDR
+    { q: ['what is cmdr','was ist cmdr','cmdr system','about cmdr','über cmdr'], a: { en: '🤖 CMDR System V1 is a powerful **command extension DLC** for the Roblox Event System. It adds advanced controls and automation!', de: '🤖 CMDR System V1 ist eine leistungsstarke **Befehlserweiterungs-DLC** für das Roblox Event System. Es fügt erweiterte Steuerung und Automatisierung hinzu!' } },
+    // Team
+    { q: ['team','who made','wer hat','creator','ersteller','developer','entwickler'], a: { en: '👥 CMDR was created by **Max** (Creator) and **Tazz** (Co-Creator), with help from Bobasimi (Developer) and the moderation team!', de: '👥 CMDR wurde von **Max** (Creator) und **Tazz** (Co-Creator) erstellt, mit Hilfe von Bobasimi (Entwickler) und dem Moderationsteam!' } },
+    // Safe / Trustworthy
+    { q: ['safe','legit','trust','sicher','seriös','scam','betrug'], a: { en: '✅ CMDR V1 is a **100% legitimate Roblox Gamepass**. You buy directly through Roblox — completely safe!', de: '✅ CMDR V1 ist ein **100% legitimer Roblox Gamepass**. Du kaufst direkt über Roblox — völlig sicher!' } },
+    // Free
+    { q: ['free','kostenlos','gratis','for free'], a: { en: '💸 CMDR V1 is not free — it costs **125 Robux**. However all future updates are free for buyers!', de: '💸 CMDR V1 ist nicht kostenlos — es kostet **125 Robux**. Allerdings sind alle zukünftigen Updates für Käufer kostenlos!' } },
+    // Transfer / Share
+    { q: ['transfer','share','teilen','weitergeben','friend','freund'], a: { en: '🔒 The gamepass is tied to your **personal Roblox account** and cannot be transferred or shared.', de: '🔒 Der Gamepass ist an dein **persönliches Roblox-Konto** gebunden und kann nicht übertragen oder geteilt werden.' } },
+    // Event Packs
+    { q: ['event pack','eventpack','gold','silver','bronze','roky'], a: { en: '🎁 Event Packs (Gold, Silver, Bronze) are sold by our collaborator **Roky**. Check the Collaborators page for more info!', de: '🎁 Event Packs (Gold, Silber, Bronze) werden von unserem Kooperationspartner **Roky** verkauft. Schau auf der Kollaboratoren-Seite nach!' } },
+    // Hello / Hi
+    { q: ['hello','hi','hey','hallo','guten tag','sup','yo'], a: { en: '👋 Hey! Ask me anything about the **CMDR System V1 DLC** — I am here to help!', de: '👋 Hey! Frag mich alles über das **CMDR System V1 DLC** — ich bin hier um zu helfen!' } },
+    // Thanks
+    { q: ['thank','thanks','danke','thx','ty'], a: { en: '😊 You are welcome! Let me know if you have more questions about CMDR!', de: '😊 Gern geschehen! Lass mich wissen wenn du weitere Fragen zu CMDR hast!' } },
+    // Works / Compatible
+    { q: ['works','work','compatible','funktioniert','kompatibel','which game','welches spiel'], a: { en: '🎮 CMDR V1 works with the **Roblox Event System**. Make sure you own the base system first!', de: '🎮 CMDR V1 funktioniert mit dem **Roblox Event System**. Stelle sicher, dass du zuerst das Basissystem besitzt!' } },
+    // How long
+    { q: ['how long','wie lange','lifetime','lebensdauer','expire','ablaufen'], a: { en: '♾️ CMDR V1 is a **lifetime purchase** — it never expires and never needs renewal!', de: '♾️ CMDR V1 ist ein **lebenslanger Kauf** — es läuft nie ab und muss nie erneuert werden!' } },
+    // Multiplayer
+    { q: ['multiplayer','multi','andere spieler','other players','friends','freunde'], a: { en: '👥 CMDR V1 is tied to your account. Ask in Discord for details on multiplayer usage!', de: '👥 CMDR V1 ist an dein Konto gebunden. Frag im Discord nach Details zur Multiplayer-Nutzung!' } },
+    // Version
+    { q: ['version','v1','v2','newest','neueste','latest'], a: { en: '📦 The current version is **CMDR System V1**. Future versions and updates are free for all buyers!', de: '📦 Die aktuelle Version ist **CMDR System V1**. Zukünftige Versionen und Updates sind für alle Käufer kostenlos!' } },
+    // How to get file
+    { q: ['file','datei','download','get the file','wie bekomme','how do i get'], a: { en: '📁 After purchase, join the Discord and contact support to receive your setup file and video!', de: '📁 Nach dem Kauf tritt dem Discord bei und kontaktiere den Support um deine Setup-Datei und das Video zu erhalten!' } },
+    // Payment
+    { q: ['pay','payment','zahlung','bezahlen','how to pay','wie zahle'], a: { en: '💳 Payment is done through **Roblox** directly using Robux — safe and secure!', de: '💳 Die Zahlung erfolgt direkt über **Roblox** mit Robux — sicher und zuverlässig!' } },
+    // Max
+    { q: ['max','creator','wer ist max','who is max'], a: { en: '👑 Max is the **Creator** of CMDR System and this website. He leads the whole project!', de: '👑 Max ist der **Creator** des CMDR Systems und dieser Website. Er leitet das gesamte Projekt!' } },
+    // Tazz
+    { q: ['tazz','co-creator','cocreator'], a: { en: '🤝 Tazz is the **Co-Creator** of CMDR — he manages the Discord community!', de: '🤝 Tazz ist der **Co-Creator** von CMDR — er verwaltet die Discord-Community!' } },
+    // Bobasimi
+    { q: ['bobasimi','developer','entwickler'], a: { en: '💻 Bobasimi is the **Developer** of the CMDR server system!', de: '💻 Bobasimi ist der **Entwickler** des CMDR-Server-Systems!' } },
+    // Worth it
+    { q: ['worth','lohnt','lohnt es','is it worth','gut','good'], a: { en: '⭐ CMDR V1 is absolutely worth it! 125 Robux for a lifetime command system with free updates and Discord support!', de: '⭐ CMDR V1 lohnt sich auf jeden Fall! 125 Robux für ein lebenslanges Befehlssystem mit kostenlosen Updates und Discord-Support!' } },
+    // Maintenance
+    { q: ['maintenance','wartung','offline','down','not working','funktioniert nicht'], a: { en: '🔧 If the site is in maintenance, check our Discord for updates: **discord.gg/XaZSGVFvzV**', de: '🔧 Wenn die Seite in Wartung ist, schau in unserem Discord nach Updates: **discord.gg/XaZSGVFvzV**' } },
+    // Announcement
+    { q: ['announcement','ankündigung','news','update news','neuigkeiten'], a: { en: '📢 Check the **Announcements** page for the latest news and updates about CMDR!', de: '📢 Schau auf der **Ankündigungen**-Seite nach den neuesten Nachrichten und Updates zu CMDR!' } },
+    // Sneak peek
+    { q: ['sneak peek','preview','vorschau','upcoming','kommend','sneak'], a: { en: '👁️ Check out the **Sneak Peek** page in the menu for exclusive previews of upcoming content!', de: '👁️ Schau auf der **Sneak Peek**-Seite im Menü für exklusive Vorschauen auf kommende Inhalte!' } },
+    // Changelog
+    { q: ['changelog','patch','patch notes','changes','änderungen','was ist neu','whats new'], a: { en: '📋 Check the **Changelog** page in the menu for all patch notes and version history!', de: '📋 Schau auf der **Changelog**-Seite im Menü für alle Patch Notes und die Versionshistorie!' } },
+    // License
+    { q: ['license','lizenz','terms','bedingungen','rules','regeln'], a: { en: '📄 Check the **License** page for full terms of purchase. Key points: no refunds, personal use only, no redistribution.', de: '📄 Schau auf der **Lizenz**-Seite für die vollständigen Kaufbedingungen. Wichtig: Keine Rückerstattungen, nur persönliche Nutzung, keine Weitergabe.' } },
+    // Bye
+    { q: ['bye','goodbye','tschüss','ciao','auf wiedersehen','see you'], a: { en: '👋 Goodbye! Feel free to come back if you have more questions about CMDR!', de: '👋 Auf Wiedersehen! Komm gerne wieder wenn du weitere Fragen zu CMDR hast!' } },
+  ];
+
+  var chatWelcomeDone = false;
   function toggleChatbot() {
     var w = document.getElementById('chatbotWindow');
     w.style.display = w.style.display === 'none' ? 'block' : 'none';
-    if (w.style.display === 'block') document.getElementById('chatInput').focus();
+    if (w.style.display === 'block') {
+      document.getElementById('chatInput').focus();
+      if (!chatWelcomeDone) {
+        chatWelcomeDone = true;
+        var el = document.getElementById('chatWelcome');
+        var text = '👋 Hi! I\'m the CMDR Assistant. Ask me anything about the CMDR System V1 DLC!';
+        var i = 0;
+        el.textContent = '';
+        var t = setInterval(function() {
+          el.textContent += text[i++];
+          if (i >= text.length) clearInterval(t);
+        }, 28);
+      }
+    }
   }
 
-  async function sendChatMessage() {
+  function sendChatMessage() {
     var input = document.getElementById('chatInput');
     var msg = input.value.trim();
     if (!msg) return;
     input.value = '';
 
     var msgs = document.getElementById('chatMessages');
-
-    // User message
-    msgs.innerHTML += '<div style="background:#1a2a1a;border:1px solid #2a3a2a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#e0e0e0;line-height:1.5;align-self:flex-end;max-width:85%;">' + msg + '</div>';
-
-    // Typing indicator
-    var typingId = 'typing_' + Date.now();
-    msgs.innerHTML += '<div id="' + typingId + '" style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#444;">...</div>';
-    msgs.scrollTop = msgs.scrollHeight;
-
     var lang = (typeof currentLang !== 'undefined' && currentLang === 'de') ? 'de' : 'en';
 
-    try {
-      var res = await fetch('https://api.anthropic.com/v1/messages', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          model: 'claude-sonnet-4-20250514',
-          max_tokens: 1000,
-          system: lang === 'de'
-            ? 'Du bist der CMDR Assistant, ein Support-Bot für das CMDR System V1 DLC – ein Roblox Gamepass. Beantworte NUR Fragen über CMDR System V1 DLC: Preis (125 Robux), Features (Befehlssystem, Event Hooks, Automatisierung), Kauf (einmalig, kein Refund), Discord Support (discord.gg/XaZSGVFvzV), Setup (Discord beitreten für Setup Video). Antworte kurz und auf Deutsch. Bei nicht relevanten Fragen sage: "Das ist außerhalb meines Wissensbereichs – ich beantworte nur CMDR Fragen."'
-            : 'You are the CMDR Assistant, a support bot for the CMDR System V1 DLC – a Roblox gamepass. Answer ONLY questions about CMDR System V1 DLC: price (125 Robux), features (command system, event hooks, automation), purchase (one-time, no refunds), Discord support (discord.gg/XaZSGVFvzV), setup (join Discord for setup video). Keep answers short and in English. For unrelated questions say: "That is outside my knowledge – I only answer CMDR questions."',
-          messages: [{ role: 'user', content: msg }]
-        })
-      });
-      var data = await res.json();
-      var reply = data.content && data.content[0] ? data.content[0].text : '⚠️ Fehler beim Laden der Antwort.';
-    } catch(e) {
-      var reply = lang === 'de' ? '⚠️ Verbindungsfehler. Bitte versuche es erneut.' : '⚠️ Connection error. Please try again.';
+    // User message
+    msgs.innerHTML += '<div style="background:#1a2a1a;border:1px solid #2a3a2a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#e0e0e0;line-height:1.5;margin-left:20%;word-break:break-word;overflow-wrap:break-word;">' + msg + '</div>';
+    msgs.scrollTop = msgs.scrollHeight;
+
+    // Find answer
+    var lower = msg.toLowerCase();
+    var reply = null;
+    for (var i = 0; i < FAQ.length; i++) {
+      for (var j = 0; j < FAQ[i].q.length; j++) {
+        if (lower.indexOf(FAQ[i].q[j]) !== -1) {
+          reply = FAQ[i].a[lang];
+          break;
+        }
+      }
+      if (reply) break;
     }
 
-    var typing = document.getElementById(typingId);
-    if (typing) typing.outerHTML = '<div style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.5;">' + reply + '</div>';
-    msgs.scrollTop = msgs.scrollHeight;
+    if (!reply) {
+      reply = lang === 'de'
+        ? '⛔ Ich beantworte nur Fragen über das CMDR System V1 DLC. Frag mich z.B. nach Preis, Features oder Setup!'
+        : '⛔ I only answer questions about the CMDR System V1 DLC. Try asking about price, features or setup!';
+    }
+
+    // Format bold
+    reply = reply.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+
+    setTimeout(function() {
+      var replyId = 'reply_' + Date.now();
+      msgs.innerHTML += '<div id="' + replyId + '" style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.6;word-break:break-word;overflow-wrap:anywhere;white-space:normal;max-width:100%;box-sizing:border-box;"></div>';
+      msgs.scrollTop = msgs.scrollHeight;
+      // Strip HTML for typewriter, then set innerHTML at end
+      var plainText = reply.replace(/<strong>(.*?)<\/strong>/g, '$1');
+      var el = document.getElementById(replyId);
+      var i = 0;
+      var t = setInterval(function() {
+        plainText += '';
+        el.textContent += plainText[i++];
+        msgs.scrollTop = msgs.scrollHeight;
+        if (i >= plainText.length) {
+          clearInterval(t);
+          el.innerHTML = reply; // set formatted version at end
+        }
+      }, 18);
+    }, 400);
   }
 
-  // ── DISCORD MEMBER COUNT via shields.io ─────────────
-  fetch('https://img.shields.io/discord/1467303301321326764.json')
+  // ── DISCORD MEMBER COUNT ─────────────────────────────
+  fetch('https://discord.com/api/guilds/1467303301321326764/widget.json')
     .then(function(r) { return r.json(); })
     .then(function(data) {
       var el = document.getElementById('discordMemberCount');
-      if (el && data.value) {
-        el.textContent = data.value;
+      if (el && data.presence_count !== undefined) {
+        el.textContent = data.presence_count;
       }
     })
     .catch(function() {
       var el = document.getElementById('discordMemberCount');
       if (el) el.textContent = '–';
     });
+</script>
+
+<!-- SNEAK PEEK PAGE -->
+<div id="sneakPeekPage" style="display:none;">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:#111;border-bottom:1px solid #a855f7;position:sticky;top:0;z-index:100;">
+    <div style="font-size:1.2rem;font-weight:700;color:#a855f7;font-family:'Courier New',monospace;letter-spacing:2px;">&gt; CMDR_</div>
+    <button onclick="closeSneakPeekPage()" style="background:none;border:1px solid #444;border-radius:6px;color:#ccc;padding:0.4rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;cursor:pointer;">← Back</button>
+  </div>
+
+  <div style="text-align:center;padding:2.5rem 1rem 2rem;background:radial-gradient(ellipse at center,#120a1a 0%,#0a0a0a 70%);">
+    <div style="font-size:1.8rem;font-weight:700;font-family:'Courier New',monospace;letter-spacing:3px;color:#fff;">&gt; <span style="color:#a855f7;">SNEAK PEEK</span>_</div>
+    <div style="color:#444;font-size:0.78rem;letter-spacing:2px;margin-top:0.5rem;font-family:'Courier New',monospace;">COMING SOON — EXCLUSIVE PREVIEW</div>
+  </div>
+
+  <div style="max-width:900px;margin:2rem auto;padding:0 2rem 4rem;">
+
+    <!-- ╔══════════════════════════════════════════════════╗ -->
+    <!-- ║   👁️ SNEAK PEEK BILDER HIER HINZUFÜGEN          ║ -->
+    <!-- ║   Benenne Bilder: sneakpeek1.png, sneakpeek2.png ║ -->
+    <!-- ╚══════════════════════════════════════════════════╝ -->
+
+    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;">
+
+      <!-- Sneakpeek 1 -->
+      <div id="sp1" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek1.png','Sneak Peek #1')">
+        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
+          <img src="sneakpeek1.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek1.png</div>')">
+          <div style="position:absolute;inset:0;background:rgba(168,85,247,0.0);transition:background 0.2s;display:flex;align-items:center;justify-content:center;">
+            <span style="color:#fff;font-size:1.5rem;opacity:0;transition:opacity 0.2s;" class="sp-zoom">🔍</span>
+          </div>
+        </div>
+        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
+          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #1</div>
+        </div>
+      </div>
+
+      <!-- Sneakpeek 2 -->
+      <div id="sp2" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek2.png','Sneak Peek #2')">
+        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
+          <img src="sneakpeek2.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek2.png</div>')">
+        </div>
+        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
+          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #2</div>
+        </div>
+      </div>
+
+      <!-- Sneakpeek 3 -->
+      <div id="sp3" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek3.png','Sneak Peek #3')">
+        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
+          <img src="sneakpeek3.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek3.png</div>')">
+        </div>
+        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
+          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #3</div>
+        </div>
+      </div>
+
+      <!-- Sneakpeek 4 -->
+      <div id="sp4" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek4.png','Sneak Peek #4')">
+        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
+          <img src="sneakpeek4.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek4.png</div>')">
+        </div>
+        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
+          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #4</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- SNEAK PEEK MODAL -->
+<div id="sneakModal" onclick="if(event.target===this)closeSneakModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999999;align-items:center;justify-content:center;padding:2rem;">
+  <div style="max-width:900px;width:100%;position:relative;">
+    <button onclick="closeSneakModal()" style="position:absolute;top:-2.5rem;right:0;background:none;border:none;color:#888;font-size:1.5rem;cursor:pointer;">✕</button>
+    <img id="sneakModalImg" src="" style="width:100%;border-radius:12px;border:1px solid #a855f7;">
+    <div id="sneakModalTitle" style="text-align:center;margin-top:0.8rem;font-family:'Courier New',monospace;color:#a855f7;letter-spacing:2px;font-size:0.85rem;"></div>
+  </div>
+</div>
+
+<script>
+  function openSneakModal(src, title) {
+    var modal = document.getElementById('sneakModal');
+    document.getElementById('sneakModalImg').src = src;
+    document.getElementById('sneakModalTitle').textContent = title;
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
+  function closeSneakModal() {
+    document.getElementById('sneakModal').style.display = 'none';
+    document.body.style.overflow = '';
+  }
+  document.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape') closeSneakModal();
+  });
 </script>
 
 </body>
