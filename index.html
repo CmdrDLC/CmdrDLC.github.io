@@ -726,14 +726,16 @@
 
 <!-- Slide-in Menu -->
 <div id="navMenu" style="display:none;position:fixed;top:0;right:0;width:270px;height:100vh;background:#0d0d0d;border-left:1px solid #00ff88;z-index:99999;flex-direction:column;padding:4.5rem 1.2rem 2rem;overflow-y:auto;box-shadow:-10px 0 40px rgba(0,0,0,0.8);">
-  <button onclick="closeBurger();location.href='#product'" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📦 Product</button>
-  <button onclick="closeBurger();openAnnouncementsPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📢 Announcements</button>
-  <button onclick="closeBurger();openEventPacksPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#ffbd2e';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">🎁 Event Packs</button>
-  <button onclick="closeBurger();openCollaboratorPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#ff69b4';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">🤝 Collaborators</button>
-  <button onclick="closeBurger();openLicensePage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📄 License</button>
-  <button onclick="closeBurger();location.href='#support'" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">🛠 Support</button>
-  <button onclick="closeBurger();openTeamPage()" style="display:block;width:100%;text-align:center;background:#00ff88;border:none;border-radius:8px;color:#000;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:1rem;">👥 TeamList</button>
+  <button onclick="closeBurger();location.href='#product'" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navProduct">📦 Product</button>
+  <button onclick="closeBurger();openAnnouncementsPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navAnnouncements">📢 Announcements</button>
+
+  <button onclick="closeBurger();openCollaboratorPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#ff69b4';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navCollaborators">🤝 Collaborators</button>
+  <button onclick="closeBurger();openLicensePage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navLicense">📄 License</button>
+  <button onclick="closeBurger();openChangelogPage()" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'">📋 Changelog</button>
+  <button onclick="closeBurger();location.href='#support'" style="display:block;width:100%;text-align:left;background:none;border:none;border-bottom:1px solid #1a1a1a;color:#e0e0e0;padding:1rem 0.8rem;font-family:'Courier New',monospace;font-size:0.9rem;letter-spacing:1px;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.color='#00ff88';this.style.paddingLeft='1.3rem'" onmouseout="this.style.color='#e0e0e0';this.style.paddingLeft='0.8rem'" data-lang="navSupport">🛠 Support</button>
+  <button onclick="closeBurger();openTeamPage()" style="display:block;width:100%;text-align:center;background:#00ff88;border:none;border-radius:8px;color:#000;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:1rem;" data-lang="navTeam">👥 TeamList</button>
   <button onclick="closeBurger();window.open('https://discord.gg/XaZSGVFvzV','_blank')" style="display:block;width:100%;text-align:center;background:#5865F2;border:none;border-radius:8px;color:#fff;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:0.6rem;">💬 Discord</button>
+  <button id="langToggleBtn" onclick="toggleLanguage()" style="display:block;width:100%;text-align:center;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#e0e0e0;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:0.6rem;">🌐 DE</button>
   <button onclick="openAdmin();closeBurger()" style="display:block;width:100%;text-align:center;background:none;border:none;color:#1e1e1e;padding:0.8rem;font-size:0.7rem;cursor:pointer;margin-top:0.5rem;">⚙</button>
 </div>
 
@@ -763,12 +765,15 @@
 </div>
 
 <div class="hero">
-  <div class="tag">🎮 ROBLOX DLC · EVENT SYSTEM</div>
+  <div class="tag" id="heroBadge">🎮 ROBLOX DLC · EVENT SYSTEM</div>
   <h1 id="heroTitle"><span class="wave-word">The</span> <span class="wave-word">Cmdr</span> <span class="wave-word">System</span> <span class="wave-word">V1</span> <span class="wave-word">DLC</span></h1>
-  <p>A powerful command extension for your Roblox Event System. Advanced controls, automation & more — one purchase, forever yours.</p>
-  <p class="sub">Requires base Event System · Roblox Gamepass · One-time purchase</p>
+  <p id="heroSub">A powerful command extension for your Roblox Event System. Advanced controls, automation & more — one purchase, forever yours.</p>
+  <p class="sub" id="heroHint">Requires base Event System · Roblox Gamepass · One-time purchase</p>
   <div class="btn-group">
-    <a href="https://discord.gg/XaZSGVFvzV" class="btn-discord">💬 Join Discord</a>
+    <a href="https://discord.gg/XaZSGVFvzV" class="btn-discord" id="joinDiscordBtn">💬 Join Discord</a>
+    <div style="margin-top:0.6rem;font-family:'Courier New',monospace;font-size:0.75rem;color:#444;letter-spacing:1px;">
+      <span style="color:#00ff88;">●</span> <span id="discordMemberCount">...</span> members
+    </div>
   </div>
 
   <div class="terminal">
@@ -793,16 +798,16 @@
 
 <!-- PRODUCT -->
 <section id="product">
-  <h2>&gt; <span>THE DLC</span>_</h2>
+  <h2 id="dlcTitle">&gt; <span>THE DLC</span>_</h2>
   <div class="product-card">
     <img src="20260303_214049.jpg" class="thumb">
     <div class="product-top">
-      <div class="badge">ROBLOX GAMEPASS</div>
-      <h3>Cmdr System V1</h3>
-      <p>The official command system DLC for the Event System.</p>
+      <div class="badge" id="dlcBadge">ROBLOX GAMEPASS</div>
+      <h3 id="dlcName">Cmdr System V1</h3>
+      <p id="dlcDesc">The official command system DLC for the Event System.</p>
       <div class="price-box">
         <div class="price" id="priceDisplay2">🟠 125 <span style="font-size:1.2rem;color:#aaa">Robux</span></div>
-        <div class="price-sub">One-time purchase · No subscription</div>
+        <div class="price-sub" id="dlcPriceSub">One-time purchase · No subscription</div>
         <div id="discountCountdown" style="display:none; margin-top:0.8rem; font-family:'Courier New',monospace; font-size:0.8rem; color:#555; letter-spacing:1px;">
           &gt; Discount: <span style="color:#555; text-decoration:line-through;">125</span> &rarr; <span id="countdownPrice" style="color:#00ff88; font-weight:700">125</span> R$
         </div>
@@ -810,19 +815,19 @@
     </div>
     <div class="product-body">
       <ul class="feat-list">
-        <li>Full Cmdr V1 command system</li>
+        <li id="feat1">Full Cmdr V1 command system</li>
         <!-- <li>Event System integration</li> -->
-        <li>Contact Support for Setup Video</li>
-        <li>All future updates included</li>
-        <li>Discord support included</li>
-        <li>One-time payment – own it forever</li>
+        <li id="feat2">Contact Support for Setup Video</li>
+        <li id="feat3">All future updates included</li>
+        <li id="feat4">Discord support included</li>
+        <li id="feat5">One-time payment – own it forever</li>
       </ul>
       <div class="warning-box">
-        ⚠️ <span>This is a <strong>one-time purchase</strong>. The gamepass cannot be transferred or refunded once activated.</span>
+        ⚠️ <span id="dlcWarning">This is a <strong>one-time purchase</strong>. The gamepass cannot be transferred or refunded once activated.</span>
       </div>
       <!-- DISCOUNT CODE -->
       <div class="discount-wrap">
-        <div class="discount-label">&gt; Discount Codes <span id="codeCounter" style="color:#555;font-size:0.75rem">(0/10 used)</span></div>
+        <div class="discount-label" id="discountLabel">&gt; Discount Codes <span id="codeCounter" style="color:#555;font-size:0.75rem">(0/10 used)</span></div>
         <div id="codeSlots"></div>
         <button class="discount-apply-btn" id="addCodeBtn" onclick="addCodeSlot()" style="margin-top:0.5rem;width:100%">+ ADD CODE</button>
       </div>
@@ -909,29 +914,176 @@ var THEME_EASTER     = false;   // 🐣 Purple & pastel
 
 /* ══════════════════════════════════════════════════════ */
 
+  /* ── LANGUAGE ── */
+  var currentLang = 'en';
+
+  var TRANSLATIONS = {
+    en: {
+      badge: 'ROBLOX DLC · EVENT SYSTEM',
+      heroTitle: 'The Cmdr System V1 DLC',
+      heroSub: 'A powerful command extension for your Roblox Event System. Advanced controls, automation & more — one purchase, forever yours.',
+      heroHint: 'Requires base Event System · Roblox Gamepass · One-time purchase',
+      joinDiscord: '💬 Join Discord',
+      terminalTitle: '> THE DLC_',
+      buyBtn: '🟠 Buy Now',
+      applyBtn: 'Apply',
+      codePlaceholder: 'Enter code...',
+      navProduct: '📦 Product',
+      navAnnouncements: '📢 Announcements',
+      navCollaborators: '🤝 Collaborators',
+      navLicense: '📄 License',
+      navSupport: '🛠 Support',
+      navTeam: '👥 TeamList',
+      langBtn: '🌐 DE',
+      warnTitle: 'WARNING!',
+      warnText: 'IF YOU BUY IT NOW YOU WILL GET NO REFUND!',
+      warnBuyBtn: '🟠 BUY NOW',
+      warnCancelBtn: '✕ CANCEL',
+      dlcTitle: '> DAS DLC_',
+      dlcBadge: 'ROBLOX GAMEPASS',
+      dlcName: 'Cmdr System V1',
+      dlcDesc: 'Das offizielle Befehlssystem-DLC für das Event System.',
+      dlcPriceSub: 'Einmalige Zahlung · Kein Abo',
+      feat1: 'Vollständiges Cmdr V1 Befehlssystem',
+      feat2: 'Support für Setup-Video kontaktieren',
+      feat3: 'Alle zukünftigen Updates inklusive',
+      feat4: 'Discord-Support inklusive',
+      feat5: 'Einmalige Zahlung – für immer dein',
+      dlcWarning: 'Dies ist ein <strong>Einmalkauf</strong>. Der Gamepass kann nach der Aktivierung nicht übertragen oder erstattet werden.',
+      discountLabel: '> Rabattcodes',
+    },
+    de: {
+      badge: 'ROBLOX DLC · EVENT SYSTEM',
+      heroTitle: 'Das Cmdr System V1 DLC',
+      heroSub: 'Eine leistungsstarke Befehlserweiterung für dein Roblox Event System. Erweiterte Steuerung, Automatisierung & mehr — einmal kaufen, für immer nutzen.',
+      heroHint: 'Benötigt das Basis-Event-System · Roblox Gamepass · Einmalige Zahlung',
+      joinDiscord: '💬 Discord beitreten',
+      terminalTitle: '> DAS DLC_',
+      buyBtn: '🟠 Jetzt kaufen',
+      applyBtn: 'Anwenden',
+      codePlaceholder: 'Code eingeben...',
+      navProduct: '📦 Produkt',
+      navAnnouncements: '📢 Ankündigungen',
+      navCollaborators: '🤝 Kollaboratoren',
+      navLicense: '📄 Lizenz',
+      navSupport: '🛠 Support',
+      navTeam: '👥 Team',
+      langBtn: '🌐 EN',
+      warnTitle: 'WARNUNG!',
+      warnText: 'WENN DU JETZT KAUFST, GIBT ES KEINE RÜCKERSTATTUNG!',
+      warnBuyBtn: '🟠 JETZT KAUFEN',
+      warnCancelBtn: '✕ ABBRECHEN',
+      dlcTitle: '> DAS DLC_',
+      dlcBadge: 'ROBLOX GAMEPASS',
+      dlcName: 'Cmdr System V1',
+      dlcDesc: 'Das offizielle Befehlssystem-DLC für das Event System.',
+      dlcPriceSub: 'Einmalige Zahlung · Kein Abo',
+      feat1: 'Vollständiges Cmdr V1 Befehlssystem',
+      feat2: 'Support für Setup-Video kontaktieren',
+      feat3: 'Alle zukünftigen Updates inklusive',
+      feat4: 'Discord-Support inklusive',
+      feat5: 'Einmalige Zahlung – für immer dein',
+      dlcWarning: 'Dies ist ein <strong>Einmalkauf</strong>. Der Gamepass kann nach der Aktivierung nicht übertragen oder erstattet werden.',
+      discountLabel: '> Rabattcodes',
+    }
+  };
+
+  function toggleLanguage() {
+    currentLang = currentLang === 'en' ? 'de' : 'en';
+    var t = TRANSLATIONS[currentLang];
+
+    // Update lang btn
+    var btn = document.getElementById('langToggleBtn');
+    if (btn) btn.textContent = t.langBtn;
+
+    // Hero
+    var badge = document.getElementById('heroBadge');
+    var heroTitle = document.getElementById('heroTitle');
+    var heroSub = document.getElementById('heroSub');
+    var heroHint = document.getElementById('heroHint');
+    var joinBtn = document.getElementById('joinDiscordBtn');
+    if (badge) badge.textContent = t.badge;
+    if (heroTitle) {
+      var spans = heroTitle.querySelectorAll('.wave-word');
+      var words = t.heroTitle.split(' ');
+      spans.forEach(function(span, i) {
+        if (words[i]) span.textContent = words[i];
+      });
+      // If more words than spans, add extra spans
+      if (words.length > spans.length) {
+        for (var i = spans.length; i < words.length; i++) {
+          var s = document.createElement('span');
+          s.className = 'wave-word';
+          s.textContent = words[i];
+          heroTitle.appendChild(document.createTextNode(' '));
+          heroTitle.appendChild(s);
+        }
+      }
+    }
+    if (heroSub) heroSub.textContent = t.heroSub;
+    if (heroHint) heroHint.textContent = t.heroHint;
+    if (joinBtn) joinBtn.textContent = t.joinDiscord;
+
+    // Buy button
+    var buyBtn = document.getElementById('buyBtnText');
+    if (buyBtn) buyBtn.textContent = t.buyBtn;
+
+    // Code input
+    var codeInput = document.getElementById('codeInput');
+    var applyBtn = document.getElementById('applyCodeBtn');
+    if (codeInput) codeInput.placeholder = t.codePlaceholder;
+    if (applyBtn) applyBtn.textContent = t.applyBtn;
+
+    // Burger menu buttons
+    var menuBtns = document.querySelectorAll('#navMenu button[data-lang]');
+    menuBtns.forEach(function(b) {
+      var key = b.getAttribute('data-lang');
+      if (t[key]) b.textContent = t[key];
+    });
+
+    // DLC section
+    var ids = ['dlcBadge','dlcName','dlcDesc','dlcPriceSub','feat1','feat2','feat3','feat4','feat5','discountLabel'];
+    ids.forEach(function(id) {
+      var el = document.getElementById(id);
+      if (el && t[id]) el.textContent = t[id];
+    });
+    var dlcTitle = document.getElementById('dlcTitle');
+    if (dlcTitle) dlcTitle.innerHTML = t.dlcTitle ? '&gt; <span>' + t.dlcTitle.replace('> ','').replace('_','') + '</span>_' : dlcTitle.innerHTML;
+    var dlcWarning = document.getElementById('dlcWarning');
+    if (dlcWarning && t.dlcWarning) dlcWarning.innerHTML = t.dlcWarning;
+
+    // Warning modal
+    var warnTitle = document.getElementById('warnTitle');
+    var warnText = document.getElementById('warnText');
+    var warnBuyBtn = document.getElementById('warnBuyBtn');
+    var warnCancelBtn = document.getElementById('warnCancelBtn');
+    if (warnTitle && t.warnTitle) warnTitle.textContent = t.warnTitle;
+    if (warnText && t.warnText) warnText.textContent = t.warnText;
+    if (warnBuyBtn && t.warnBuyBtn) warnBuyBtn.textContent = t.warnBuyBtn;
+    if (warnCancelBtn && t.warnCancelBtn) warnCancelBtn.textContent = t.warnCancelBtn;
+  }
+
+
   /* ── PAGE OPEN/CLOSE FUNCTIONS ── */
   function openTeamPage() {
     var el = document.getElementById('teamPage');
-    if (el) {
-      el.style.display = 'block';
-      el.style.position = 'fixed';
-      el.style.top = '0';
-      el.style.left = '0';
-      el.style.width = '100vw';
-      el.style.height = '100vh';
-      el.style.zIndex = '999999';
-      el.style.overflowY = 'auto';
-      el.style.background = '#0a0a0a';
-      document.body.style.overflow = 'hidden';
-    }
+    if (el) { el.style.cssText = 'display:block!important;position:fixed!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;z-index:999999!important;overflow-y:auto!important;background:#0a0a0a!important;'; document.body.style.overflow = 'hidden'; }
   }
   function closeTeamPage() {
     var el = document.getElementById('teamPage');
     if (el) { el.style.display = 'none'; document.body.style.overflow = ''; }
   }
+  function openChangelogPage() {
+    var el = document.getElementById('changelogPage');
+    if (el) { el.style.cssText = 'display:block!important;position:fixed!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;z-index:999999!important;overflow-y:auto!important;background:#0a0a0a!important;'; document.body.style.overflow = 'hidden'; }
+  }
+  function closeChangelogPage() {
+    var el = document.getElementById('changelogPage');
+    if (el) { el.style.display = 'none'; document.body.style.overflow = ''; }
+  }
   function openLicensePage() {
     var el = document.getElementById('licensePage');
-    if (el) { el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    if (el) { el.style.cssText = 'display:block!important;position:fixed!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;z-index:999999!important;overflow-y:auto!important;background:#0a0a0a!important;'; document.body.style.overflow = 'hidden'; }
   }
   function closeLicensePage() {
     var el = document.getElementById('licensePage');
@@ -939,7 +1091,7 @@ var THEME_EASTER     = false;   // 🐣 Purple & pastel
   }
   function openCollaboratorPage() {
     var el = document.getElementById('collaboratorPage');
-    if (el) { el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    if (el) { el.style.cssText = 'display:block!important;position:fixed!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;z-index:999999!important;overflow-y:auto!important;background:#0a0a0a!important;'; document.body.style.overflow = 'hidden'; }
   }
   function closeCollaboratorPage() {
     var el = document.getElementById('collaboratorPage');
@@ -947,7 +1099,7 @@ var THEME_EASTER     = false;   // 🐣 Purple & pastel
   }
   function openAnnouncementsPage() {
     var el = document.getElementById('announcementsPage');
-    if (el) { el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    if (el) { el.style.cssText = 'display:block!important;position:fixed!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;z-index:999999!important;overflow-y:auto!important;background:#0a0a0a!important;'; document.body.style.overflow = 'hidden'; }
   }
   function closeAnnouncementsPage() {
     var el = document.getElementById('announcementsPage');
@@ -955,7 +1107,7 @@ var THEME_EASTER     = false;   // 🐣 Purple & pastel
   }
   function openEventPacksPage() {
     var el = document.getElementById('eventPacksPage');
-    if (el) { el.style.display = 'flex'; document.body.style.overflow = 'hidden'; }
+    if (el) { el.style.cssText = 'display:block!important;position:fixed!important;top:0!important;left:0!important;width:100vw!important;height:100vh!important;z-index:999999!important;overflow-y:auto!important;background:#0a0a0a!important;'; document.body.style.overflow = 'hidden'; }
   }
   function closeEventPacksPage() {
     var el = document.getElementById('eventPacksPage');
@@ -1892,11 +2044,11 @@ document.getElementById('adminOverlay').addEventListener('click', function(e) {
 <div id="warningModal" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.85);z-index:9500;align-items:center;justify-content:center;" onclick="if(event.target===this)document.getElementById('warningModal').style.display='none'">
   <div class="warning-modal-box">
     <div class="w-icon">⚠️</div>
-    <h3>WARNING!</h3>
-    <p>IF YOU BUY IT NOW YOU WILL GET NO REFUND!</p>
+    <h3 id="warnTitle">WARNING!</h3>
+    <p id="warnText">IF YOU BUY IT NOW YOU WILL GET NO REFUND!</p>
     <div style="display:flex;gap:0.8rem;margin-top:0.5rem;">
-      <button onclick="closeWarningModal()" style="flex:1;padding:0.8rem;background:none;border:1px solid #444;border-radius:8px;color:#aaa;cursor:pointer;font-family:'Courier New',monospace;font-size:0.85rem;letter-spacing:1px;transition:all 0.2s;" onmouseover="this.style.borderColor='#888';this.style.color='#fff'" onmouseout="this.style.borderColor='#444';this.style.color='#aaa'">✕ CANCEL</button>
-      <button onclick="confirmBuy()" style="flex:2;padding:0.8rem;background:linear-gradient(135deg,#e8562a,#ff7043);border:none;border-radius:8px;color:white;cursor:pointer;font-family:'Courier New',monospace;font-size:0.95rem;font-weight:700;letter-spacing:1px;transition:all 0.2s;box-shadow:0 4px 15px rgba(232,86,42,0.4);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(232,86,42,0.6)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(232,86,42,0.4)'">🟠 BUY NOW</button>
+      <button onclick="closeWarningModal()" style="flex:1;padding:0.8rem;background:none;border:1px solid #444;border-radius:8px;color:#aaa;cursor:pointer;font-family:'Courier New',monospace;font-size:0.85rem;letter-spacing:1px;transition:all 0.2s;" onmouseover="this.style.borderColor='#888';this.style.color='#fff'" onmouseout="this.style.borderColor='#444';this.style.color='#aaa'" id="warnCancelBtn">✕ CANCEL</button>
+      <button onclick="confirmBuy()" style="flex:2;padding:0.8rem;background:linear-gradient(135deg,#e8562a,#ff7043);border:none;border-radius:8px;color:white;cursor:pointer;font-family:'Courier New',monospace;font-size:0.95rem;font-weight:700;letter-spacing:1px;transition:all 0.2s;box-shadow:0 4px 15px rgba(232,86,42,0.4);" onmouseover="this.style.transform='translateY(-2px)';this.style.boxShadow='0 6px 20px rgba(232,86,42,0.6)'" onmouseout="this.style.transform='translateY(0)';this.style.boxShadow='0 4px 15px rgba(232,86,42,0.4)'" id="warnBuyBtn">🟠 BUY NOW</button>
     </div>
   </div>
 </div>
@@ -2026,9 +2178,202 @@ function closeTeamModal() {
         document.body.appendChild(div.firstElementChild);
       });
   }
-  loadPage('collaborators.html', 'collaboratorPage');
-  loadPage('eventpacks.html', 'eventPacksPage');
-  loadPage('announcements.html', 'announcementsPage');
+</script>
+
+<!-- COLLABORATOR PAGE -->
+<div id="collaboratorPage" style="display:none;">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:#111;border-bottom:1px solid #ff69b4;position:sticky;top:0;z-index:100;">
+    <div style="font-size:1.2rem;font-weight:700;color:#ff69b4;font-family:'Courier New',monospace;letter-spacing:2px;">&gt; CMDR_</div>
+    <button onclick="closeCollaboratorPage()" style="background:none;border:1px solid #444;border-radius:6px;color:#ccc;padding:0.4rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;cursor:pointer;">← Back</button>
+  </div>
+  <div style="text-align:center;padding:2.5rem 1rem 2rem;background:radial-gradient(ellipse at center,#1a0010 0%,#0a0a0a 70%);">
+    <div style="font-size:1.8rem;font-weight:700;font-family:'Courier New',monospace;letter-spacing:3px;color:#fff;">&gt; <span style="color:#ff69b4;">COLLABORATORS</span>_</div>
+    <div style="color:#444;font-size:0.78rem;letter-spacing:2px;margin-top:0.5rem;font-family:'Courier New',monospace;">OFFICIAL PARTNERS</div>
+  </div>
+  <div style="max-width:700px;margin:2rem auto;padding:0 2rem 4rem;display:flex;flex-direction:column;gap:1rem;">
+    <div style="background:#111;border:1px solid #2a1a2a;border-radius:12px;padding:1.5rem;display:flex;align-items:center;gap:1.2rem;" onmouseover="this.style.borderColor='#ff69b4'" onmouseout="this.style.borderColor='#2a1a2a'">
+      <img src="roky.png" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #ff69b4;" onerror="this.src='https://ui-avatars.com/api/?name=Roky&background=ff69b4&color=fff&size=72&bold=true'" alt="Roky">
+      <div>
+        <div style="font-size:1.1rem;font-weight:700;color:#fff;font-family:'Courier New',monospace;letter-spacing:1px;">Roky</div>
+        <div style="font-size:0.7rem;color:#ff69b4;letter-spacing:2px;font-family:'Courier New',monospace;margin:0.3rem 0;">✦ EVENT PACK SELLER</div>
+        <div style="font-size:0.85rem;color:#666;font-family:'Segoe UI',sans-serif;line-height:1.5;">Sells exclusive Event Packs – Gold, Silver and Bronze. Visit his shop for the best deals!</div>
+        <a href="https://rokyshop.github.io/index.html" target="_blank" style="display:inline-block;margin-top:0.7rem;padding:0.4rem 1rem;background:#ff69b4;color:#000;border-radius:6px;font-family:'Courier New',monospace;font-size:0.78rem;font-weight:700;text-decoration:none;letter-spacing:1px;">Visit Shop →</a>
+      </div>
+    </div>
+    <div style="background:#111;border:1px solid #2a1a2a;border-radius:12px;padding:1.5rem;display:flex;align-items:center;gap:1.2rem;" onmouseover="this.style.borderColor='#00cfff'" onmouseout="this.style.borderColor='#2a1a2a'">
+      <img src="tazz.png" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #00cfff;" onerror="this.src='https://ui-avatars.com/api/?name=Tazz&background=00cfff&color=000&size=72&bold=true'" alt="Tazz">
+      <div>
+        <div style="font-size:1.1rem;font-weight:700;color:#fff;font-family:'Courier New',monospace;letter-spacing:1px;">Tazz</div>
+        <div style="font-size:0.7rem;color:#00cfff;letter-spacing:2px;font-family:'Courier New',monospace;margin:0.3rem 0;">✦ CO-CREATOR</div>
+        <div style="font-size:0.85rem;color:#666;font-family:'Segoe UI',sans-serif;line-height:1.5;">Co-Creator of the CMDR Discord server. Manages the community and keeps things running smoothly.</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ANNOUNCEMENTS PAGE -->
+<div id="announcementsPage" style="display:none;">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:#111;border-bottom:1px solid #00ff88;position:sticky;top:0;z-index:100;">
+    <div style="font-size:1.2rem;font-weight:700;color:#00ff88;font-family:'Courier New',monospace;letter-spacing:2px;">&gt; CMDR_</div>
+    <button onclick="closeAnnouncementsPage()" style="background:none;border:1px solid #444;border-radius:6px;color:#ccc;padding:0.4rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;cursor:pointer;">← Back</button>
+  </div>
+  <div style="text-align:center;padding:2.5rem 1rem 2rem;background:radial-gradient(ellipse at center,#001a0d 0%,#0a0a0a 70%);">
+    <div style="font-size:1.8rem;font-weight:700;font-family:'Courier New',monospace;letter-spacing:3px;color:#fff;">&gt; <span style="color:#00ff88;">ANNOUNCEMENTS</span>_</div>
+    <div style="color:#444;font-size:0.78rem;letter-spacing:2px;margin-top:0.5rem;font-family:'Courier New',monospace;">LATEST UPDATES</div>
+  </div>
+
+  <div style="max-width:700px;margin:2rem auto;padding:0 2rem 4rem;display:flex;flex-direction:column;gap:0.8rem;">
+
+    <!-- ╔══════════════════════════════════════════╗ -->
+    <!-- ║   📢 ANKÜNDIGUNGEN HIER HINZUFÜGEN       ║ -->
+    <!-- ║   Kopiere einen Block und fülle ihn aus  ║ -->
+    <!-- ╚══════════════════════════════════════════╝ -->
+
+    <!-- BEISPIEL — zum Aktivieren <!-- und --> entfernen:
+    <div style="background:#111;border-left:3px solid #00ff88;border-radius:0 10px 10px 0;padding:1.2rem 1.4rem;">
+      <div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem;">
+        <span style="font-size:1rem;">📢</span>
+        <span style="font-family:'Courier New',monospace;font-weight:700;color:#fff;font-size:0.95rem;">TITEL DER ANKÜNDIGUNG</span>
+        <span style="margin-left:auto;font-size:0.7rem;color:#444;font-family:'Courier New',monospace;">01.01.2026</span>
+      </div>
+      <div style="font-size:0.85rem;color:#888;font-family:'Segoe UI',sans-serif;line-height:1.6;">Text der Ankündigung hier schreiben.</div>
+    </div>
+    -->
+
+    <!-- Keine Ankündigungen vorhanden -->
+    <div id="noAnnMsg" style="color:#444;font-family:'Courier New',monospace;text-align:center;padding:3rem;">Keine Ankündigungen vorhanden.</div>
+
+  </div>
+</div>
+
+<!-- CHANGELOG PAGE -->
+<div id="changelogPage" style="display:none;">
+  <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:#111;border-bottom:1px solid #00ff88;position:sticky;top:0;z-index:100;">
+    <div style="font-size:1.2rem;font-weight:700;color:#00ff88;font-family:'Courier New',monospace;letter-spacing:2px;">&gt; CMDR_</div>
+    <button onclick="closeChangelogPage()" style="background:none;border:1px solid #444;border-radius:6px;color:#ccc;padding:0.4rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;cursor:pointer;">← Back</button>
+  </div>
+  <div style="text-align:center;padding:2.5rem 1rem 2rem;background:radial-gradient(ellipse at center,#001a0d 0%,#0a0a0a 70%);">
+    <div style="font-size:1.8rem;font-weight:700;font-family:'Courier New',monospace;letter-spacing:3px;color:#fff;">&gt; <span style="color:#00ff88;">CHANGELOG</span>_</div>
+    <div style="color:#444;font-size:0.78rem;letter-spacing:2px;margin-top:0.5rem;font-family:'Courier New',monospace;">PATCH NOTES & UPDATES</div>
+  </div>
+  <div style="max-width:700px;margin:2rem auto;padding:0 2rem 4rem;display:flex;flex-direction:column;gap:1.2rem;">
+
+    <!-- ╔═══════════════════════════════════════════╗ -->
+    <!-- ║   📋 CHANGELOG EINTRÄGE HIER HINZUFÜGEN  ║ -->
+    <!-- ║   Neueste Version zuerst!                ║ -->
+    <!-- ╚═══════════════════════════════════════════╝ -->
+
+    <div style="background:#111;border:1px solid #1a2a1a;border-radius:12px;padding:1.4rem;">
+      <div style="display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid #1a1a1a;">
+        <span style="background:#00ff88;color:#000;font-family:'Courier New',monospace;font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:4px;letter-spacing:1px;">v1.0.0</span>
+        <span style="font-family:'Courier New',monospace;font-weight:700;color:#fff;font-size:0.95rem;">Initial Release</span>
+        <span style="margin-left:auto;font-size:0.72rem;color:#444;font-family:'Courier New',monospace;">2026-03-01</span>
+      </div>
+      <ul style="list-style:none;display:flex;flex-direction:column;gap:0.5rem;">
+        <li style="font-size:0.85rem;color:#888;font-family:'Segoe UI',sans-serif;display:flex;gap:0.6rem;"><span style="color:#00ff88;flex-shrink:0;">+</span> CMDR System V1 DLC veröffentlicht</li>
+        <li style="font-size:0.85rem;color:#888;font-family:'Segoe UI',sans-serif;display:flex;gap:0.6rem;"><span style="color:#00ff88;flex-shrink:0;">+</span> Event System Integration</li>
+        <li style="font-size:0.85rem;color:#888;font-family:'Segoe UI',sans-serif;display:flex;gap:0.6rem;"><span style="color:#00ff88;flex-shrink:0;">+</span> Discord Support verfügbar</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<!-- AI CHATBOT -->
+<div id="chatbotWidget" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:99990;font-family:'Courier New',monospace;">
+  <!-- Toggle Button -->
+  <button id="chatbotToggle" onclick="toggleChatbot()" style="width:54px;height:54px;border-radius:50%;background:#00ff88;border:none;cursor:pointer;font-size:1.4rem;box-shadow:0 4px 20px rgba(0,255,136,0.4);transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</button>
+
+  <!-- Chat Window -->
+  <div id="chatbotWindow" style="display:none;position:absolute;bottom:65px;right:0;width:320px;background:#111;border:1px solid #00ff88;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,255,136,0.15);">
+    <!-- Header -->
+    <div style="background:#0d1a0d;padding:0.8rem 1rem;border-bottom:1px solid #1a2a1a;display:flex;align-items:center;gap:0.6rem;">
+      <span style="color:#00ff88;font-size:1rem;">🤖</span>
+      <div>
+        <div style="color:#00ff88;font-size:0.82rem;font-weight:700;letter-spacing:1px;">CMDR Assistant</div>
+        <div style="color:#444;font-size:0.65rem;letter-spacing:1px;">Beantwortet CMDR Fragen</div>
+      </div>
+      <button onclick="toggleChatbot()" style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:1rem;padding:0.2rem;">✕</button>
+    </div>
+
+    <!-- Messages -->
+    <div id="chatMessages" style="height:260px;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:0.7rem;">
+      <div style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.5;">
+        👋 Hi! Ich bin der CMDR Assistant. Stell mir Fragen über das CMDR System V1 DLC!
+      </div>
+    </div>
+
+    <!-- Input -->
+    <div style="padding:0.8rem;border-top:1px solid #1a1a1a;display:flex;gap:0.5rem;">
+      <input id="chatInput" type="text" placeholder="Frage stellen..." onkeydown="if(event.key==='Enter')sendChatMessage()" style="flex:1;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:0.5rem 0.7rem;font-family:'Courier New',monospace;font-size:0.78rem;outline:none;">
+      <button onclick="sendChatMessage()" style="background:#00ff88;border:none;border-radius:6px;color:#000;padding:0.5rem 0.8rem;cursor:pointer;font-weight:700;font-size:0.8rem;">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── CHATBOT ──────────────────────────────────────────
+  function toggleChatbot() {
+    var w = document.getElementById('chatbotWindow');
+    w.style.display = w.style.display === 'none' ? 'block' : 'none';
+    if (w.style.display === 'block') document.getElementById('chatInput').focus();
+  }
+
+  async function sendChatMessage() {
+    var input = document.getElementById('chatInput');
+    var msg = input.value.trim();
+    if (!msg) return;
+    input.value = '';
+
+    var msgs = document.getElementById('chatMessages');
+
+    // User message
+    msgs.innerHTML += '<div style="background:#1a2a1a;border:1px solid #2a3a2a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#e0e0e0;line-height:1.5;align-self:flex-end;max-width:85%;">' + msg + '</div>';
+
+    // Typing indicator
+    var typingId = 'typing_' + Date.now();
+    msgs.innerHTML += '<div id="' + typingId + '" style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#444;">...</div>';
+    msgs.scrollTop = msgs.scrollHeight;
+
+    var lang = (typeof currentLang !== 'undefined' && currentLang === 'de') ? 'de' : 'en';
+
+    try {
+      var res = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-20250514',
+          max_tokens: 1000,
+          system: lang === 'de'
+            ? 'Du bist der CMDR Assistant, ein Support-Bot für das CMDR System V1 DLC – ein Roblox Gamepass. Beantworte NUR Fragen über CMDR System V1 DLC: Preis (125 Robux), Features (Befehlssystem, Event Hooks, Automatisierung), Kauf (einmalig, kein Refund), Discord Support (discord.gg/XaZSGVFvzV), Setup (Discord beitreten für Setup Video). Antworte kurz und auf Deutsch. Bei nicht relevanten Fragen sage: "Das ist außerhalb meines Wissensbereichs – ich beantworte nur CMDR Fragen."'
+            : 'You are the CMDR Assistant, a support bot for the CMDR System V1 DLC – a Roblox gamepass. Answer ONLY questions about CMDR System V1 DLC: price (125 Robux), features (command system, event hooks, automation), purchase (one-time, no refunds), Discord support (discord.gg/XaZSGVFvzV), setup (join Discord for setup video). Keep answers short and in English. For unrelated questions say: "That is outside my knowledge – I only answer CMDR questions."',
+          messages: [{ role: 'user', content: msg }]
+        })
+      });
+      var data = await res.json();
+      var reply = data.content && data.content[0] ? data.content[0].text : '⚠️ Fehler beim Laden der Antwort.';
+    } catch(e) {
+      var reply = lang === 'de' ? '⚠️ Verbindungsfehler. Bitte versuche es erneut.' : '⚠️ Connection error. Please try again.';
+    }
+
+    var typing = document.getElementById(typingId);
+    if (typing) typing.outerHTML = '<div style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.5;">' + reply + '</div>';
+    msgs.scrollTop = msgs.scrollHeight;
+  }
+
+  // ── DISCORD MEMBER COUNT via shields.io ─────────────
+  fetch('https://img.shields.io/discord/1467303301321326764.json')
+    .then(function(r) { return r.json(); })
+    .then(function(data) {
+      var el = document.getElementById('discordMemberCount');
+      if (el && data.value) {
+        el.textContent = data.value;
+      }
+    })
+    .catch(function() {
+      var el = document.getElementById('discordMemberCount');
+      if (el) el.textContent = '–';
+    });
 </script>
 
 </body>
