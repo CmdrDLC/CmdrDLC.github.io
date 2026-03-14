@@ -2310,10 +2310,10 @@ function closeTeamModal() {
     div.innerHTML =
       '<div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem;">' +
         '<span style="font-size:1rem;">' + icon + '</span>' +
-        '<span style="font-family:'Courier New',monospace;font-weight:700;color:#fff;font-size:0.92rem;letter-spacing:1px;">' + ann.title + '</span>' +
-        '<span style="margin-left:auto;font-size:0.7rem;color:#444;font-family:'Courier New',monospace;">' + ann.date + '</span>' +
+        '<span style="font-family:monospace;font-weight:700;color:#fff;font-size:0.92rem;letter-spacing:1px;">' + ann.title + '</span>' +
+        '<span style="margin-left:auto;font-size:0.7rem;color:#444;font-family:monospace;">' + ann.date + '</span>' +
       '</div>' +
-      '<div style="font-size:0.85rem;color:#888;font-family:'Segoe UI',sans-serif;line-height:1.6;">' + ann.text + '</div>';
+      '<div style="font-size:0.85rem;color:#888;line-height:1.6;">' + ann.text + '</div>';
     list.appendChild(div);
   });
 })();
@@ -2453,6 +2453,26 @@ function closeTeamModal() {
     { q: ['license','lizenz','terms','bedingungen','rules','regeln'], a: { en: '📄 Check the **License** page for full terms of purchase. Key points: no refunds, personal use only, no redistribution.', de: '📄 Schau auf der **Lizenz**-Seite für die vollständigen Kaufbedingungen. Wichtig: Keine Rückerstattungen, nur persönliche Nutzung, keine Weitergabe.' } },
     // Bye
     { q: ['bye','goodbye','tschüss','ciao','auf wiedersehen','see you'], a: { en: '👋 Goodbye! Feel free to come back if you have more questions about CMDR!', de: '👋 Auf Wiedersehen! Komm gerne wieder wenn du weitere Fragen zu CMDR hast!' } },
+    // V2
+    { q: ['v2','version 2','next version','nächste version','upcoming version'], a: { en: '🔮 CMDR V2 is in development! Check the **Sneak Peek** page for exclusive previews!', de: '🔮 CMDR V2 ist in Entwicklung! Schau auf der **Sneak Peek**-Seite für exklusive Vorschauen!' } },
+    // How many commands
+    { q: ['how many','wie viele','commands list','command list','befehlsliste'], a: { en: '📋 CMDR V1 includes a wide range of commands. Join Discord for the full command list: **discord.gg/XaZSGVFvzV**', de: '📋 CMDR V1 enthält eine große Auswahl an Befehlen. Tritt Discord bei für die vollständige Liste: **discord.gg/XaZSGVFvzV**' } },
+    // How fast is support
+    { q: ['how fast','wie schnell','response time','antwortzeit','fast support'], a: { en: '⚡ Our support team on Discord typically responds within a few hours. Join: **discord.gg/XaZSGVFvzV**', de: '⚡ Unser Support-Team auf Discord antwortet in der Regel innerhalb weniger Stunden. Tritt bei: **discord.gg/XaZSGVFvzV**' } },
+    // Already bought
+    { q: ['already bought','already purchased','schon gekauft','bereits gekauft','i bought'], a: { en: '✅ Great! Join our Discord and contact support to get your setup file and video: **discord.gg/XaZSGVFvzV**', de: '✅ Super! Tritt unserem Discord bei und kontaktiere den Support für deine Setup-Datei: **discord.gg/XaZSGVFvzV**' } },
+    // Not working after purchase
+    { q: ['not working','funktioniert nicht','broken','kapott','doesnt work','after buy'], a: { en: '🛠️ Sorry to hear that! Please join our Discord and open a support ticket: **discord.gg/XaZSGVFvzV**', de: '🛠️ Das tut uns leid! Bitte tritt unserem Discord bei und öffne ein Support-Ticket: **discord.gg/XaZSGVFvzV**' } },
+    // Robux
+    { q: ['125','robux','r$','how many robux'], a: { en: '💰 CMDR V1 costs exactly **125 Robux** — a one-time payment, no subscription!', de: '💰 CMDR V1 kostet genau **125 Robux** — eine einmalige Zahlung, kein Abo!' } },
+    // Who is Kyle
+    { q: ['kyle','trial mod','trial moderator'], a: { en: '🆕 Kyle is our **Trial Moderator** — new to the team but already helping the community!', de: '🆕 Kyle ist unser **Trial Moderator** — neu im Team aber schon dabei der Community zu helfen!' } },
+    // Who is Levi
+    { q: ['levi','moderator levi'], a: { en: '🛡️ Levi is a **Moderator** on the CMDR website team — keeping everything running smoothly!', de: '🛡️ Levi ist ein **Moderator** im CMDR Website-Team — hält alles am Laufen!' } },
+    // Who is Batman
+    { q: ['batman','moderator batman'], a: { en: '🦇 Batman is a **Moderator** who keeps the Discord server safe and friendly!', de: '🦇 Batman ist ein **Moderator** der den Discord-Server sicher und freundlich hält!' } },
+    // Collab
+    { q: ['collaborat','kooperat','partner','collab'], a: { en: '🤝 Our collaborators are **Roky** (Event Pack seller) and **Tazz** (Co-Creator). Check the Collaborators page!', de: '🤝 Unsere Kooperationspartner sind **Roky** (Event Pack Verkäufer) und **Tazz** (Co-Creator). Schau auf der Kollaboratoren-Seite!' } },
   ];
 
   var chatWelcomeDone = false;
@@ -2547,86 +2567,108 @@ function closeTeamModal() {
 
 <!-- SNEAK PEEK PAGE -->
 <div id="sneakPeekPage" style="display:none;">
+
+  <!-- Topbar -->
   <div style="display:flex;align-items:center;justify-content:space-between;padding:1rem 2rem;background:#111;border-bottom:1px solid #a855f7;position:sticky;top:0;z-index:100;">
     <div style="font-size:1.2rem;font-weight:700;color:#a855f7;font-family:'Courier New',monospace;letter-spacing:2px;">&gt; CMDR_</div>
-    <button onclick="closeSneakPeekPage()" style="background:none;border:1px solid #444;border-radius:6px;color:#ccc;padding:0.4rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;cursor:pointer;">← Back</button>
+    <button onclick="closeSneakPeekPage()" style="background:none;border:1px solid #444;border-radius:6px;color:#ccc;padding:0.4rem 1rem;font-family:'Courier New',monospace;font-size:0.8rem;cursor:pointer;" onmouseover="this.style.borderColor='#a855f7'" onmouseout="this.style.borderColor='#444'">← Back</button>
   </div>
 
-  <div style="text-align:center;padding:2.5rem 1rem 2rem;background:radial-gradient(ellipse at center,#120a1a 0%,#0a0a0a 70%);">
-    <div style="font-size:1.8rem;font-weight:700;font-family:'Courier New',monospace;letter-spacing:3px;color:#fff;">&gt; <span style="color:#a855f7;">SNEAK PEEK</span>_</div>
-    <div style="color:#444;font-size:0.78rem;letter-spacing:2px;margin-top:0.5rem;font-family:'Courier New',monospace;">COMING SOON — EXCLUSIVE PREVIEW</div>
+  <!-- Hero -->
+  <div style="text-align:center;padding:3rem 1rem 2.5rem;background:radial-gradient(ellipse at center,#180a28 0%,#0a0a0a 70%);border-bottom:1px solid #1a1a2a;">
+    <div style="font-size:0.72rem;font-family:'Courier New',monospace;color:#a855f7;letter-spacing:4px;margin-bottom:0.8rem;opacity:0.7;">👁️ EXCLUSIVE PREVIEW</div>
+    <div style="font-size:2rem;font-weight:700;font-family:'Courier New',monospace;letter-spacing:4px;color:#fff;">&gt; <span style="color:#a855f7;">SNEAK PEEK</span>_</div>
+    <div style="color:#444;font-size:0.75rem;letter-spacing:2px;margin-top:0.6rem;font-family:'Courier New',monospace;">COMING SOON — EXCLUSIVE PREVIEW</div>
   </div>
 
-  <div style="max-width:900px;margin:2rem auto;padding:0 2rem 4rem;">
+  <!-- Grid -->
+  <div style="max-width:960px;margin:2rem auto;padding:0 2rem 4rem;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:1.2rem;">
 
-    <!-- ╔══════════════════════════════════════════════════╗ -->
-    <!-- ║   👁️ SNEAK PEEK BILDER HIER HINZUFÜGEN          ║ -->
-    <!-- ║   Benenne Bilder: sneakpeek1.png, sneakpeek2.png ║ -->
-    <!-- ╚══════════════════════════════════════════════════╝ -->
-
-    <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1.2rem;">
-
-      <!-- Sneakpeek 1 -->
-      <div id="sp1" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek1.png','Sneak Peek #1')">
-        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
-          <img src="sneakpeek1.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek1.png</div>')">
-          <div style="position:absolute;inset:0;background:rgba(168,85,247,0.0);transition:background 0.2s;display:flex;align-items:center;justify-content:center;">
-            <span style="color:#fff;font-size:1.5rem;opacity:0;transition:opacity 0.2s;" class="sp-zoom">🔍</span>
+      <div style="position:relative;background:#0f0f0f;border:1px solid #2a1a3a;border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 30px rgba(168,85,247,0.2)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)';this.style.boxShadow='none'" onclick="openSneakModal('sneakpeek1.png','Sneak Peek #1')">
+        <div style="aspect-ratio:16/9;overflow:hidden;background:#0a0a0a;position:relative;display:flex;align-items:center;justify-content:center;">
+          <img src="sneakpeek1.png" style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none';document.getElementById('sp1ph').style.display='flex'">
+          <div id="sp1ph" style="display:none;width:100%;height:100%;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+            <div style="font-size:2rem;opacity:0.15;">👁️</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.72rem;color:#333;letter-spacing:1px;">sneakpeek1.png</div>
           </div>
         </div>
-        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
-          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #1</div>
+        <div style="padding:0.9rem 1.1rem;background:#0d0d0d;border-top:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-family:'Courier New',monospace;font-size:0.8rem;color:#a855f7;letter-spacing:1.5px;font-weight:700;">SNEAK PEEK #1</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.65rem;color:#333;letter-spacing:1px;margin-top:0.2rem;">Click to view</div>
+          </div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#1a0a2a;border:1px solid #a855f7;display:flex;align-items:center;justify-content:center;font-size:0.75rem;">🔍</div>
         </div>
       </div>
-
-      <!-- Sneakpeek 2 -->
-      <div id="sp2" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek2.png','Sneak Peek #2')">
-        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
-          <img src="sneakpeek2.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek2.png</div>')">
+      <div style="position:relative;background:#0f0f0f;border:1px solid #2a1a3a;border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 30px rgba(168,85,247,0.2)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)';this.style.boxShadow='none'" onclick="openSneakModal('sneakpeek2.png','Sneak Peek #2')">
+        <div style="aspect-ratio:16/9;overflow:hidden;background:#0a0a0a;position:relative;display:flex;align-items:center;justify-content:center;">
+          <img src="sneakpeek2.png" style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none';document.getElementById('sp2ph').style.display='flex'">
+          <div id="sp2ph" style="display:none;width:100%;height:100%;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+            <div style="font-size:2rem;opacity:0.15;">👁️</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.72rem;color:#333;letter-spacing:1px;">sneakpeek2.png</div>
+          </div>
         </div>
-        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
-          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #2</div>
-        </div>
-      </div>
-
-      <!-- Sneakpeek 3 -->
-      <div id="sp3" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek3.png','Sneak Peek #3')">
-        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
-          <img src="sneakpeek3.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek3.png</div>')">
-        </div>
-        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
-          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #3</div>
+        <div style="padding:0.9rem 1.1rem;background:#0d0d0d;border-top:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-family:'Courier New',monospace;font-size:0.8rem;color:#a855f7;letter-spacing:1.5px;font-weight:700;">SNEAK PEEK #2</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.65rem;color:#333;letter-spacing:1px;margin-top:0.2rem;">Click to view</div>
+          </div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#1a0a2a;border:1px solid #a855f7;display:flex;align-items:center;justify-content:center;font-size:0.75rem;">🔍</div>
         </div>
       </div>
-
-      <!-- Sneakpeek 4 -->
-      <div id="sp4" style="background:#111;border:1px solid #2a1a3a;border-radius:12px;overflow:hidden;cursor:pointer;transition:border-color 0.2s,transform 0.2s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-3px)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)'" onclick="openSneakModal('sneakpeek4.png','Sneak Peek #4')">
-        <div style="position:relative;aspect-ratio:16/9;overflow:hidden;background:#0d0d0d;">
-          <img src="sneakpeek4.png" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.insertAdjacentHTML('beforeend','<div style=&quot;display:flex;align-items:center;justify-content:center;height:140px;color:#333;font-family:Courier New,monospace;font-size:0.8rem;&quot;>sneakpeek4.png</div>')">
+      <div style="position:relative;background:#0f0f0f;border:1px solid #2a1a3a;border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 30px rgba(168,85,247,0.2)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)';this.style.boxShadow='none'" onclick="openSneakModal('sneakpeek3.png','Sneak Peek #3')">
+        <div style="aspect-ratio:16/9;overflow:hidden;background:#0a0a0a;position:relative;display:flex;align-items:center;justify-content:center;">
+          <img src="sneakpeek3.png" style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none';document.getElementById('sp3ph').style.display='flex'">
+          <div id="sp3ph" style="display:none;width:100%;height:100%;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+            <div style="font-size:2rem;opacity:0.15;">👁️</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.72rem;color:#333;letter-spacing:1px;">sneakpeek3.png</div>
+          </div>
         </div>
-        <div style="padding:0.8rem 1rem;border-top:1px solid #1a1a1a;">
-          <div style="font-family:'Courier New',monospace;font-size:0.82rem;color:#a855f7;letter-spacing:1px;">SNEAK PEEK #4</div>
+        <div style="padding:0.9rem 1.1rem;background:#0d0d0d;border-top:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-family:'Courier New',monospace;font-size:0.8rem;color:#a855f7;letter-spacing:1.5px;font-weight:700;">SNEAK PEEK #3</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.65rem;color:#333;letter-spacing:1px;margin-top:0.2rem;">Click to view</div>
+          </div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#1a0a2a;border:1px solid #a855f7;display:flex;align-items:center;justify-content:center;font-size:0.75rem;">🔍</div>
         </div>
       </div>
-
-    </div>
+      <div style="position:relative;background:#0f0f0f;border:1px solid #2a1a3a;border-radius:14px;overflow:hidden;cursor:pointer;transition:all 0.25s;" onmouseover="this.style.borderColor='#a855f7';this.style.transform='translateY(-4px)';this.style.boxShadow='0 8px 30px rgba(168,85,247,0.2)'" onmouseout="this.style.borderColor='#2a1a3a';this.style.transform='translateY(0)';this.style.boxShadow='none'" onclick="openSneakModal('sneakpeek4.png','Sneak Peek #4')">
+        <div style="aspect-ratio:16/9;overflow:hidden;background:#0a0a0a;position:relative;display:flex;align-items:center;justify-content:center;">
+          <img src="sneakpeek4.png" style="width:100%;height:100%;object-fit:cover;transition:transform 0.3s;" onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" onerror="this.style.display='none';document.getElementById('sp4ph').style.display='flex'">
+          <div id="sp4ph" style="display:none;width:100%;height:100%;position:absolute;inset:0;align-items:center;justify-content:center;flex-direction:column;gap:0.5rem;">
+            <div style="font-size:2rem;opacity:0.15;">👁️</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.72rem;color:#333;letter-spacing:1px;">sneakpeek4.png</div>
+          </div>
+        </div>
+        <div style="padding:0.9rem 1.1rem;background:#0d0d0d;border-top:1px solid #1a1a1a;display:flex;align-items:center;justify-content:space-between;">
+          <div>
+            <div style="font-family:'Courier New',monospace;font-size:0.8rem;color:#a855f7;letter-spacing:1.5px;font-weight:700;">SNEAK PEEK #4</div>
+            <div style="font-family:'Courier New',monospace;font-size:0.65rem;color:#333;letter-spacing:1px;margin-top:0.2rem;">Click to view</div>
+          </div>
+          <div style="width:28px;height:28px;border-radius:50%;background:#1a0a2a;border:1px solid #a855f7;display:flex;align-items:center;justify-content:center;font-size:0.75rem;">🔍</div>
+        </div>
+      </div>
   </div>
 </div>
 
 <!-- SNEAK PEEK MODAL -->
-<div id="sneakModal" onclick="if(event.target===this)closeSneakModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.92);z-index:9999999;align-items:center;justify-content:center;padding:2rem;">
-  <div style="max-width:900px;width:100%;position:relative;">
-    <button onclick="closeSneakModal()" style="position:absolute;top:-2.5rem;right:0;background:none;border:none;color:#888;font-size:1.5rem;cursor:pointer;">✕</button>
-    <img id="sneakModalImg" src="" style="width:100%;border-radius:12px;border:1px solid #a855f7;">
-    <div id="sneakModalTitle" style="text-align:center;margin-top:0.8rem;font-family:'Courier New',monospace;color:#a855f7;letter-spacing:2px;font-size:0.85rem;"></div>
+<div id="sneakModal" onclick="if(event.target===this)closeSneakModal()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.95);z-index:9999999;align-items:center;justify-content:center;padding:2rem;">
+  <div style="max-width:960px;width:100%;position:relative;">
+    <button onclick="closeSneakModal()" style="position:absolute;top:-2.5rem;right:0;background:none;border:1px solid #444;border-radius:6px;color:#888;font-size:0.82rem;padding:0.3rem 0.7rem;cursor:pointer;font-family:'Courier New',monospace;">✕ ESC</button>
+    <img id="sneakModalImg" src="" style="width:100%;border-radius:14px;border:1px solid #a855f7;box-shadow:0 0 40px rgba(168,85,247,0.2);">
+    <div id="sneakModalTitle" style="text-align:center;margin-top:1rem;font-family:'Courier New',monospace;color:#a855f7;letter-spacing:3px;font-size:0.82rem;"></div>
+    <div style="text-align:center;margin-top:0.4rem;font-family:'Courier New',monospace;font-size:0.65rem;color:#333;letter-spacing:1px;">← → Arrow keys to navigate</div>
   </div>
 </div>
 
 <script>
+  var sneakImages = ['sneakpeek1.png','sneakpeek2.png','sneakpeek3.png','sneakpeek4.png'];
+  var sneakCurrent = 0;
   function openSneakModal(src, title) {
-    var modal = document.getElementById('sneakModal');
+    sneakCurrent = sneakImages.indexOf(src);
     document.getElementById('sneakModalImg').src = src;
     document.getElementById('sneakModalTitle').textContent = title;
+    var modal = document.getElementById('sneakModal');
     modal.style.display = 'flex';
     document.body.style.overflow = 'hidden';
   }
@@ -2635,7 +2677,15 @@ function closeTeamModal() {
     document.body.style.overflow = '';
   }
   document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') closeSneakModal();
+    var modal = document.getElementById('sneakModal');
+    if (modal.style.display !== 'flex') return;
+    if (e.key === 'Escape') { closeSneakModal(); return; }
+    if (e.key === 'ArrowRight') sneakCurrent = (sneakCurrent + 1) % sneakImages.length;
+    if (e.key === 'ArrowLeft') sneakCurrent = (sneakCurrent - 1 + sneakImages.length) % sneakImages.length;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
+      document.getElementById('sneakModalImg').src = sneakImages[sneakCurrent];
+      document.getElementById('sneakModalTitle').textContent = 'Sneak Peek #' + (sneakCurrent + 1);
+    }
   });
 </script>
 
