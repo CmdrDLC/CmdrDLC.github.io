@@ -1468,8 +1468,9 @@ if (BLACK_FRIDAY) {
       </div>
     </div>
     <div class="m-countdown-done" id="mCountdownDone" style="display:none">✓ Maintenance complete – please refresh!</div>
-    <div id="maintenanceAdminBtn" style="display:none;margin-top:1.5rem;">
+    <div id="maintenanceAdminBtn" style="display:none;margin-top:1.5rem;flex-direction:column;align-items:center;gap:0.5rem;">
       <button onclick="adminDisableMaintenance()" style="background:#ff2222;color:#fff;border:none;border-radius:8px;padding:0.7rem 1.5rem;font-family:'Courier New',monospace;font-size:0.85rem;font-weight:700;letter-spacing:1px;cursor:pointer;">⚠ DISABLE MAINTENANCE</button>
+      <div style="font-family:'Courier New',monospace;font-size:0.65rem;color:#444;letter-spacing:1px;">Admin bypass active</div>
     </div>
   </div>
 </div>
@@ -2805,10 +2806,15 @@ window.addEventListener('DOMContentLoaded', function() {
       var screen = document.getElementById('maintenanceScreen');
       if (screen) screen.style.display = 'flex';
     }
-    // Show disable button for bypass users
-    if (urlBypass === 'CmdrDLC' && s.maintenance) {
-      var adminBtn = document.getElementById('maintenanceAdminBtn');
-      if (adminBtn) adminBtn.style.display = 'block';
+    // Show disable button for bypass users even on maintenance screen
+    if (urlBypass === 'CmdrDLC') {
+      var screen = document.getElementById('maintenanceScreen');
+      if (screen && s.maintenance) {
+        // Keep maintenance screen visible but show disable button
+        screen.style.display = 'flex';
+        var adminBtn = document.getElementById('maintenanceAdminBtn');
+        if (adminBtn) adminBtn.style.display = 'flex';
+      }
     }
     if (s.disable_buy_button) {
       document.querySelectorAll('.buy-btn').forEach(function(b) { b.disabled = true; b.style.opacity = '0.4'; });
