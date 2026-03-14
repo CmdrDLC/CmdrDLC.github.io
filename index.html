@@ -96,49 +96,52 @@
     background: rgba(0,0,0,0.85); z-index: 9000;
     align-items: center; justify-content: center;
   }
+  #adminOverlay { overflow-y: auto; }
   #adminPanel {
     background: #0d0d0d; border: 1px solid var(--primary);
-    border-radius: 12px; padding: 2rem; width: 420px; max-width: 95vw;
-    box-shadow: 0 0 40px rgba(0,255,136,0.15); font-family: 'Courier New', monospace;
+    border-radius: 10px; padding: 1.2rem; width: 560px; max-width: 96vw;
+    box-shadow: 0 0 30px rgba(0,255,136,0.1); font-family: 'Courier New', monospace;
+    max-height: 90vh; overflow-y: auto;
   }
-  #adminPanel h3 { color: var(--primary); font-size: 1.1rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
-  #adminPanel .a-sub { color: #444; font-size: 0.75rem; margin-bottom: 1.5rem; }
-  #adminPanel input {
-    width: 100%; padding: 0.7rem 1rem; background: #0a0a0a;
-    border: 1px solid #2a2a2a; border-radius: 6px; color: var(--text);
-    font-family: 'Courier New', monospace; font-size: 0.9rem; outline: none;
-    margin-bottom: 0.8rem; transition: border-color 0.2s; letter-spacing: 1px;
+  #adminPanel h3 { color: var(--primary); font-size: 0.95rem; letter-spacing: 2px; margin-bottom: 0.2rem; }
+  #adminPanel .a-sub { color: #444; font-size: 0.68rem; margin-bottom: 1rem; }
+  #adminPanel input, #adminPanel select {
+    width: 100%; padding: 0.45rem 0.7rem; background: #0a0a0a;
+    border: 1px solid #2a2a2a; border-radius: 5px; color: var(--text);
+    font-family: 'Courier New', monospace; font-size: 0.78rem; outline: none;
+    margin-bottom: 0.5rem; transition: border-color 0.2s; letter-spacing: 1px;
+    box-sizing: border-box;
   }
-  #adminPanel input:focus { border-color: var(--primary); }
+  #adminPanel input:focus, #adminPanel select:focus { border-color: var(--primary); }
   #adminPanel .a-btn {
-    width: 100%; padding: 0.75rem; background: var(--primary); color: #000;
-    border: none; border-radius: 6px; font-weight: 700; font-size: 0.9rem;
+    width: 100%; padding: 0.5rem; background: var(--primary); color: #000;
+    border: none; border-radius: 5px; font-weight: 700; font-size: 0.78rem;
     cursor: pointer; letter-spacing: 1px; font-family: 'Courier New', monospace;
-    transition: opacity 0.2s; margin-bottom: 0.5rem;
+    transition: opacity 0.2s; margin-bottom: 0.4rem;
   }
   #adminPanel .a-btn:hover { opacity: 0.85; }
   #adminPanel .a-btn.danger { background: #ff4444; color: white; }
   #adminPanel .a-close {
-    width: 100%; padding: 0.5rem; background: transparent; border: 1px solid #222;
-    border-radius: 6px; color: #555; cursor: pointer; font-family: 'Courier New', monospace;
-    font-size: 0.8rem; letter-spacing: 1px; transition: border-color 0.2s;
+    width: 100%; padding: 0.4rem; background: transparent; border: 1px solid #222;
+    border-radius: 5px; color: #555; cursor: pointer; font-family: 'Courier New', monospace;
+    font-size: 0.75rem; letter-spacing: 1px; transition: border-color 0.2s;
   }
   #adminPanel .a-close:hover { border-color: #555; color: #aaa; }
-  #adminPanel .a-msg { font-size: 0.8rem; margin-bottom: 0.8rem; min-height: 1rem; letter-spacing: 0.5px; }
+  #adminPanel .a-msg { font-size: 0.72rem; margin-bottom: 0.5rem; min-height: 1rem; letter-spacing: 0.5px; }
   #adminPanel .a-msg.ok { color: #00ff88; }
   #adminPanel .a-msg.err { color: #ff4444; }
-  #adminPanel .a-divider { border: none; border-top: 1px solid #1a1a1a; margin: 1rem 0; }
-  #adminPanel .a-codes-list { margin-bottom: 1rem; max-height: 140px; overflow-y: auto; }
+  #adminPanel .a-divider { border: none; border-top: 1px solid #1a1a1a; margin: 0.6rem 0; }
+  #adminPanel .a-codes-list { margin-bottom: 0.6rem; max-height: 100px; overflow-y: auto; }
   #adminPanel .a-code-row {
     display: flex; justify-content: space-between; align-items: center;
-    padding: 0.4rem 0; border-bottom: 1px solid #1a1a1a; font-size: 0.8rem;
+    padding: 0.3rem 0; border-bottom: 1px solid #1a1a1a; font-size: 0.75rem;
   }
   #adminPanel .a-code-row span { color: #aaa; }
   #adminPanel .a-code-row .a-del {
     background: none; border: none; color: #ff4444; cursor: pointer;
-    font-size: 0.75rem; font-family: 'Courier New', monospace; letter-spacing: 1px;
+    font-size: 0.7rem; font-family: 'Courier New', monospace; letter-spacing: 1px;
   }
-  #adminPanel .a-section-title { color: #555; font-size: 0.72rem; letter-spacing: 2px; margin-bottom: 0.6rem; }
+  #adminPanel .a-section-title { color: #555; font-size: 0.65rem; letter-spacing: 2px; margin-bottom: 0.4rem; }
 
   nav {
     display: flex !important; justify-content: space-between; align-items: center;
@@ -1756,14 +1759,19 @@ function adminDeleteCode(code) {
 /* ── MAINTENANCE MODE ── */
 var maintenanceActive = MAINTENANCE_MODE;
 
-if (MAINTENANCE_MODE) {
+// Check for bypass code in URL
+var urlParams = new URLSearchParams(window.location.search);
+var bypassCode = urlParams.get('bypass');
+var MAINTENANCE_BYPASS_CODE = 'CmdrDLC'; // ← Bypass Code hier ändern!
+
+if (MAINTENANCE_MODE && bypassCode !== MAINTENANCE_BYPASS_CODE) {
   document.getElementById('maintenanceScreen').style.display = 'flex';
 }
 
 function toggleMaintenance() {
   maintenanceActive = !maintenanceActive;
-  const screen = document.getElementById('maintenanceScreen');
-  const btn    = document.getElementById('maintenanceBtn');
+  var screen = document.getElementById('maintenanceScreen');
+  var btn    = document.getElementById('maintenanceBtn');
 
   if (maintenanceActive) {
     screen.style.display = 'flex';
@@ -1775,6 +1783,25 @@ function toggleMaintenance() {
     btn.textContent = '⚠ ENABLE MAINTENANCE';
     btn.style.background = '#ff2222';
     btn.style.color = 'white';
+  }
+
+  // Save to JSONBin globally
+  if (typeof jsonbinGet === 'function') {
+    jsonbinGet().then(function(data) {
+      if (!data) data = { announcements: [], disableBuyButton: false };
+      data.maintenance = maintenanceActive;
+      return jsonbinSet(data);
+    }).then(function() {
+      var msg = document.getElementById('adminDashMsg');
+      if (msg) {
+        msg.textContent = maintenanceActive ? '✓ Maintenance enabled globally!' : '✓ Maintenance disabled globally!';
+        msg.className = 'a-msg ok';
+        setTimeout(function() { msg.textContent = ''; }, 3000);
+      }
+    }).catch(function(e) {
+      var msg = document.getElementById('adminDashMsg');
+      if (msg) { msg.textContent = '✗ Error saving to JSONBin!'; msg.className = 'a-msg err'; }
+    });
   }
 }
 
@@ -2746,8 +2773,9 @@ window.addEventListener('DOMContentLoaded', function() {
   jsonbinGet().then(function(data) {
     if (!data) return;
 
-    // Maintenance
-    if (data.maintenance) {
+    // Maintenance (bypass code skips it)
+    var urlBypass = new URLSearchParams(window.location.search).get('bypass');
+    if (data.maintenance && urlBypass !== 'CmdrDLC') {
       var screen = document.getElementById('maintenanceScreen');
       if (screen) screen.style.display = 'flex';
     }
