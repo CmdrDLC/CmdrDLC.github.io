@@ -867,6 +867,17 @@
 </footer>
 
 <script>
+// ── SUPABASE (must be first) ─────────────────────────
+var SB_URL = "https://feladnkiczghtkyfvzcl.supabase.co";
+var SB_KEY = "sb_publishable_R3ridIeXe8k-vDBdF_G7zA_veKC2GiZ";
+function sbFetch(path, opts) {
+  opts = opts || {};
+  opts.headers = Object.assign({ "apikey": SB_KEY, "Authorization": "Bearer " + SB_KEY, "Content-Type": "application/json" }, opts.headers || {});
+  return fetch(SB_URL + "/rest/v1/" + path, opts).then(function(r) {
+    if (!r.ok) return r.text().then(function(t) { throw new Error(t); });
+    return r.status === 204 ? {} : r.json().catch(function() { return {}; });
+  });
+}
 
 /* ╔══════════════════════════════════════════════════════════════╗
    ║              ⚙️  SITE SETTINGS — EDIT HERE                   ║
