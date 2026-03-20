@@ -1102,8 +1102,27 @@ var THEME_EASTER     = false;   // 🐣 Lila & Pastell
     toast.innerHTML =
       '<span class="toast-icon">' + (icons[type] || "🔔") + '</span>' +
       '<span class="toast-msg">' + message + '</span>' +
-      '<button class="toast-close" onclick="this.parentElement.remove()">✕</button>';
+      '<button class="toast-close" onclick="removeToast(this.parentElement,' + (id || 0) + ')">✕</button>';
     container.appendChild(toast);
+
+    // Auto-remove after 30 seconds (visually + from Supabase)
+    setTimeout(function() {
+      removeToast(toast, id || 0);
+    }, 30000);
+  }
+
+  function removeToast(el, id) {
+    if (!el || !el.parentElement) return;
+    el.style.transition = "opacity 0.4s, transform 0.4s";
+    el.style.opacity = "0";
+    el.style.transform = "translateX(-20px)";
+    setTimeout(function() {
+      if (el.parentElement) el.parentElement.removeChild(el);
+    }, 400);
+    // Delete from Supabase permanently
+    if (id) {
+      sbFetch("toasts?id=eq." + id, { method: "DELETE" }).catch(function() {});
+    }
   }
 
   /* ── MAINTENANCE DISABLE ── */
