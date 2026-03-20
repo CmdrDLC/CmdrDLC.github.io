@@ -232,6 +232,7 @@
       <div class="sidebar-section">TEAM</div>
       <button class="sidebar-item" onclick="showPage('team')">👥 Team</button>
       <div class="sidebar-section">SYSTEM</div>
+      <button class="sidebar-item" onclick="showPage('stats')">📊 Statistics</button>
       <button class="sidebar-item" onclick="showPage('toasts')">🔔 Toasts</button>
       <button class="sidebar-item" onclick="showPage('logs')">📜 Logs</button>
     </div>
@@ -292,6 +293,11 @@
               <option value="info">ℹ️ Info</option>
               <option value="new">✨ New</option>
             </select>
+            <input type="text" id="annExpiry" placeholder="Auto-expire date (optional, e.g. 2026/12/31)">
+            <div style="display:flex;align-items:center;gap:0.5rem;margin-bottom:0.6rem;">
+              <input type="checkbox" id="annPinned" style="width:auto;margin:0;">
+              <label style="font-size:0.78rem;color:#888;font-family:'Courier New',monospace;">📌 Pin this announcement</label>
+            </div>
             <div class="msg" id="annMsg"></div>
             <button class="btn btn-green" onclick="addAnnouncement()">+ ADD</button>
             <button class="btn btn-red" onclick="clearAnnouncements()">🗑 CLEAR ALL</button>
@@ -370,6 +376,23 @@
         </div>
       </div>
 
+      <!-- STATS PAGE -->
+      <div class="page" id="page_stats">
+        <div class="page-title">&gt; STATISTICS</div>
+        <div class="page-sub">Live site analytics from Supabase</div>
+        <div class="status-bar" id="statsBar">
+          <div class="status-item"><div class="status-item-val" id="stat_page_views">...</div><div class="status-item-label">PAGE VIEWS</div></div>
+          <div class="status-item"><div class="status-item-val" id="stat_buy_clicks">...</div><div class="status-item-label">BUY CLICKS</div></div>
+          <div class="status-item"><div class="status-item-val" id="stat_code_uses">...</div><div class="status-item-label">CODES USED</div></div>
+        </div>
+        <div class="card">
+          <div class="card-title">RESET STATS</div>
+          <button class="btn btn-red" onclick="resetStat('page_views')">Reset Page Views</button>
+          <button class="btn btn-red" onclick="resetStat('buy_clicks')">Reset Buy Clicks</button>
+          <button class="btn btn-red" onclick="resetStat('code_uses')">Reset Code Uses</button>
+        </div>
+      </div>
+
       <!-- TOASTS PAGE -->
       <div class="page" id="page_toasts">
         <div class="page-title">&gt; TOAST NOTIFICATIONS</div>
@@ -383,6 +406,7 @@
               <option value="info">ℹ️ Info</option>
               <option value="success">✅ Success</option>
               <option value="error">❌ Error</option>
+              <option value="admin">⚙️ Admin</option>
             </select>
             <div class="msg" id="toastMsg2"></div>
             <button class="btn btn-green" onclick="sendToast()">📤 SEND TO ALL</button>
@@ -440,6 +464,7 @@
       document.getElementById('dashboard').style.display = 'block';
       loadMaintenance();
       loadEvents();
+      loadStats();
       sbLog('LOGIN', 'Admin logged in');
     } else {
       document.getElementById('loginErr').textContent = '✗ Wrong password';
@@ -457,7 +482,7 @@
     document.querySelectorAll('.sidebar-item').forEach(function(s) { s.classList.remove('active'); });
     document.getElementById('page_' + name).classList.add('active');
     event.currentTarget.classList.add('active');
-    var loaders = { announcements: loadAnnouncements, codes: loadCodes, changelog: loadChangelog, team: loadTeam, events: loadEvents, toasts: loadToasts, logs: loadLogs };
+    var loaders = { announcements: loadAnnouncements, codes: loadCodes, changelog: loadChangelog, team: loadTeam, events: loadEvents, toasts: loadToasts, logs: loadLogs, stats: loadStats };
     if (loaders[name]) loaders[name]();
   }
 
@@ -491,6 +516,21 @@
     newyear:"🎆 New Year", valentine:"💖 Valentine", summer:"☀️ Summer",
     winter:"❄️ Winter", easter:"🐣 Easter"
   };
+  // ── STATS ────────────────────────────────────────────
+  function loadStats() {
+    sbFetch("stats?select=*").then(function(stats) {
+      (stats || []).forEach(function(s) {
+        var el = document.getElementById("stat_" + s.key);
+        if (el) el.textContent = s.value.toLocaleString();
+      });
+    }).catch(function(e) { console.log("Stats error:", e); });
+  }
+  function resetStat(key) {
+    if (!confirm("Reset " + key + "?")) return;
+    sbFetch("stats?key=eq." + key, { method: "PATCH", body: JSON.stringify({ value: 0 }) })
+    .then(function() { sbLog("STATS", "Reset: " + key); loadStats(); });
+  }
+
   // ── LOGGING ──────────────────────────────────────────
   function sbLog(action, details) {
     sbFetch("logs", { method: "POST", headers: {"Prefer":"return=minimal"}, body: JSON.stringify({ action: action, details: details || "" }) }).catch(function() {});
@@ -614,33 +654,53 @@
 
   // ── ANNOUNCEMENTS ─────────────────────────────────────
   function loadAnnouncements() {
-    sbFetch('announcements?select=*&order=id.desc').then(function(anns) {
+    sbFetch('announcements?select=*&order=pinned.desc,id.desc').then(function(anns) {
       var list = document.getElementById('annList');
-      if (!anns.length) { list.innerHTML = '<div style="color:#333;font-size:0.78rem;">No announcements</div>'; return; }
+      if (!anns || !anns.length) { list.innerHTML = '<div style="color:#333;font-size:0.78rem;">No announcements</div>'; return; }
       list.innerHTML = '';
+      var now = new Date();
       anns.forEach(function(ann) {
         var colors = { update:'#00ff88', maintenance:'#ffbd2e', info:'#00cfff', new:'#a855f7' };
+        var expired = ann.expires_at && new Date(ann.expires_at) < now;
         var div = document.createElement('div');
-        div.style.cssText = 'display:flex;justify-content:space-between;align-items:center;padding:0.5rem 0;border-bottom:1px solid #1a1a1a;gap:0.5rem;';
+        div.style.cssText = 'display:flex;justify-content:space-between;align-items:flex-start;padding:0.6rem 0;border-bottom:1px solid #1a1a1a;gap:0.5rem;' + (expired ? 'opacity:0.4;' : '');
         div.innerHTML =
-          '<div><div style="font-size:0.8rem;color:' + (colors[ann.type]||'#00ff88') + '">' + ann.title + '</div>' +
-          '<div style="font-size:0.68rem;color:#444;">' + ann.date + ' · ' + ann.text.substring(0,40) + '...</div></div>' +
-          '<button class="del-btn" onclick="deleteAnnouncement(' + ann.id + ')">✕</button>';
+          '<div style="flex:1;">' +
+            '<div style="font-size:0.8rem;color:' + (colors[ann.type]||'#00ff88') + ';display:flex;align-items:center;gap:0.4rem;">' +
+              ann.title +
+              (ann.pinned ? '<span style="color:#ffbd2e;font-size:0.65rem;">📌 PINNED</span>' : '') +
+              (expired ? '<span style="color:#ff4444;font-size:0.65rem;">EXPIRED</span>' : '') +
+            '</div>' +
+            '<div style="font-size:0.68rem;color:#444;">' + ann.date + (ann.expires_at ? ' · expires: ' + ann.expires_at : '') + '</div>' +
+          '</div>' +
+          '<div style="display:flex;gap:0.3rem;">' +
+            '<button class="toggle-btn" onclick="togglePin(' + ann.id + ',' + (ann.pinned ? 'true' : 'false') + ')" title="Toggle pin">📌</button>' +
+            '<button class="del-btn" onclick="deleteAnnouncement(' + ann.id + ')">✕</button>' +
+          '</div>';
         list.appendChild(div);
       });
     });
   }
+  function togglePin(id, pinned) {
+    sbFetch('announcements?id=eq.' + id, { method: 'PATCH', body: JSON.stringify({ pinned: !pinned }) })
+    .then(function() { sbLog('ANNOUNCEMENT', 'Toggled pin: id ' + id); loadAnnouncements(); });
+  }
   function addAnnouncement() {
-    var title = document.getElementById('annTitle').value.trim();
-    var text  = document.getElementById('annText').value.trim();
-    var date  = document.getElementById('annDate').value.trim();
-    var type  = document.getElementById('annType').value;
-    var msg   = document.getElementById('annMsg');
+    var title   = document.getElementById('annTitle').value.trim();
+    var text    = document.getElementById('annText').value.trim();
+    var date    = document.getElementById('annDate').value.trim();
+    var type    = document.getElementById('annType').value;
+    var expiry  = document.getElementById('annExpiry').value.trim();
+    var pinned  = document.getElementById('annPinned').checked;
+    var msg     = document.getElementById('annMsg');
     if (!title || !text || !date) { msg.textContent = 'Fill all fields!'; msg.className = 'msg err'; return; }
-    sbFetch('announcements', { method: 'POST', headers: {'Prefer':'return=minimal'}, body: JSON.stringify({ title, text, date, type }) })
+    var payload = { title: title, text: text, date: date, type: type, pinned: pinned, expires_at: expiry || null };
+    sbFetch('announcements', { method: 'POST', headers: {'Prefer':'return=minimal'}, body: JSON.stringify(payload) })
     .then(function() {
       msg.textContent = '✓ Added!'; msg.className = 'msg ok';
-      sbLog('ANNOUNCEMENT', 'Added: ' + title);
+      document.getElementById('annExpiry').value = '';
+      document.getElementById('annPinned').checked = false;
+      sbLog('ANNOUNCEMENT', 'Added: ' + title + (pinned ? ' [PINNED]' : '') + (expiry ? ' [EXPIRES: ' + expiry + ']' : ''));
       document.getElementById('annTitle').value = '';
       document.getElementById('annText').value = '';
       document.getElementById('annDate').value = '';
