@@ -658,12 +658,41 @@
     h2 { font-size: 1.1rem; }
   }
 
+
+  /* ── TOASTS ── */
+  #toastContainer {
+    position: fixed; bottom: 1.5rem; left: 1.5rem;
+    display: flex; flex-direction: column; gap: 0.5rem;
+    z-index: 999998; max-width: 320px;
+  }
+  .toast {
+    display: flex; align-items: flex-start; gap: 0.7rem;
+    background: #111; border-radius: 10px; padding: 0.9rem 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.5);
+    animation: toastIn 0.3s ease;
+    font-family: 'Courier New', monospace; font-size: 0.8rem;
+    border-left: 3px solid #00ff88;
+  }
+  .toast.warning { border-left-color: #ffbd2e; }
+  .toast.error   { border-left-color: #ff4444; }
+  .toast.success { border-left-color: #00ff88; }
+  .toast.info    { border-left-color: #00cfff; }
+  .toast-icon { font-size: 1rem; flex-shrink: 0; }
+  .toast-msg  { color: #e0e0e0; line-height: 1.4; flex: 1; }
+  .toast-close { background: none; border: none; color: #444; cursor: pointer; font-size: 0.9rem; padding: 0; flex-shrink: 0; }
+  .toast-close:hover { color: #888; }
+  @keyframes toastIn {
+    from { transform: translateX(-20px); opacity: 0; }
+    to   { transform: translateX(0);     opacity: 1; }
+  }
+
 </style>
 </head>
 <body>
 
 <!-- Nav Overlay -->
 <!-- Nav Overlay -->
+<div id="toastContainer"></div>
 <div id="navOverlay" onclick="closeBurger()" style="display:none;position:fixed;inset:0;background:rgba(0,0,0,0.6);z-index:9998;"></div>
 
 <!-- Navbar -->
@@ -1062,6 +1091,20 @@ var THEME_EASTER     = false;   // 🐣 Lila & Pastell
     if (subtitle) subtitle.textContent = currentLang === 'de' ? 'Beantwortet CMDR Fragen' : 'Answers CMDR questions';
   }
 
+
+  /* ── TOASTS ── */
+  function showToast(message, type, id) {
+    var container = document.getElementById("toastContainer");
+    if (!container) return;
+    var icons = { warning: "⚠️", info: "ℹ️", success: "✅", error: "❌" };
+    var toast = document.createElement("div");
+    toast.className = "toast " + (type || "info");
+    toast.innerHTML =
+      '<span class="toast-icon">' + (icons[type] || "🔔") + '</span>' +
+      '<span class="toast-msg">' + message + '</span>' +
+      '<button class="toast-close" onclick="this.parentElement.remove()">✕</button>';
+    container.appendChild(toast);
+  }
 
   /* ── MAINTENANCE DISABLE ── */
   function adminDisableMaintenance() {
@@ -2649,6 +2692,14 @@ window.addEventListener("DOMContentLoaded", function() {
       card.appendChild(img);
       card.appendChild(info);
       grid.appendChild(card);
+    });
+  }).catch(function() {});
+
+  // Toasts
+  sbFetch("toasts?active=eq.true&select=*&order=id.desc").then(function(toasts) {
+    var icons = { warning: "⚠️", info: "ℹ️", success: "✅", error: "❌" };
+    (toasts || []).forEach(function(t) {
+      showToast(t.message, t.type, t.id);
     });
   }).catch(function() {});
 
