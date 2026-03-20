@@ -396,6 +396,7 @@
       document.getElementById('loginScreen').style.display = 'none';
       document.getElementById('dashboard').style.display = 'block';
       loadMaintenance();
+      loadEvents();
     } else {
       document.getElementById('loginErr').textContent = '✗ Wrong password';
     }
@@ -442,25 +443,37 @@
 
   // ── EVENTS ────────────────────────────────────────────
   var eventLabels = {
-    halloween:'🎃 Halloween', christmas:'🎄 Christmas', blackfriday:'🖤 Black Friday',
-    newyear:'🎆 New Year', valentine:'💖 Valentine', summer:'☀️ Summer',
-    winter:'❄️ Winter', easter:'🐣 Easter'
+    halloween:"🎃 Halloween", christmas:"🎄 Christmas", blackfriday:"🖤 Black Friday",
+    newyear:"🎆 New Year", valentine:"💖 Valentine", summer:"☀️ Summer",
+    winter:"❄️ Winter", easter:"🐣 Easter"
   };
   function loadEvents() {
+    var grid = document.getElementById('eventsGrid');
+    grid.innerHTML = '<div style="color:#444;font-size:0.78rem;padding:0.5rem;">Loading...</div>';
     sbFetch('events?select=*&order=id.asc').then(function(events) {
-      var grid = document.getElementById('eventsGrid');
       grid.innerHTML = '';
+      if (!events || !events.length) {
+        grid.innerHTML = '<div style="color:#444;font-size:0.78rem;">No events found</div>';
+        return;
+      }
       events.forEach(function(ev) {
+        var label = eventLabels[ev.name] || ev.name;
+        var parts = label.split(' ');
+        var icon = parts[0];
+        var name = parts.slice(1).join(' ');
         var card = document.createElement('div');
         card.className = 'event-card' + (ev.active ? ' on' : '');
         card.id = 'ev_' + ev.name;
-        card.onclick = function() { toggleEvent(ev.name, ev.active, card); };
+        var isActive = ev.active;
+        card.onclick = function() { toggleEvent(ev.name, isActive, card); };
         card.innerHTML =
-          '<div class="event-card-icon">' + (eventLabels[ev.name] || ev.name).split(' ')[0] + '</div>' +
-          '<div class="event-card-name">' + (eventLabels[ev.name] || ev.name).replace(/./u, '') + '</div>' +
+          '<div class="event-card-icon">' + icon + '</div>' +
+          '<div class="event-card-name">' + name + '</div>' +
           '<div class="event-card-status">' + (ev.active ? '● ACTIVE' : '○ OFF') + '</div>';
         grid.appendChild(card);
       });
+    }).catch(function(e) {
+      grid.innerHTML = '<div style="color:#ff4444;font-size:0.78rem;">Error loading events</div>';
     });
   }
   function toggleEvent(name, active, card) {
