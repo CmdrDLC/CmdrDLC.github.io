@@ -2700,26 +2700,32 @@ window.addEventListener("DOMContentLoaded", function() {
     (toasts || []).forEach(function(t) { showToast(t.message, t.type, t.id); });
   }).catch(function() {});
 
-  // Realtime subscription for new toasts
-  var evtSource = null;
-  function startToastRealtime() {
-    var url = SB_URL + "/realtime/v1/websocket?apikey=" + SB_KEY + "&vsn=1.0.0";
-    var ws = new WebSocket(url.replace("https://", "wss://").replace("http://", "ws://"));
-    var lastId = 0;
-
-    // Poll every 5 seconds for new toasts as fallback
-    var pollInterval = setInterval(function() {
-      sbFetch("toasts?active=eq.true&select=*&order=id.desc&limit=1").then(function(toasts) {
+  // Poll every 3 seconds for new toasts
+  var _lastToastId = 0;
+  // First: get current highest ID so we don't show old toasts
+  sbFetch("toasts?select=id&order=id.desc&limit=1").then(function(d) {
+    _lastToastId = (d && d[0]) ? d[0].id : 0;
+    // Now start polling
+    setInterval(function() {
+      sbFetch("toasts?active=eq.true&id=gt." + _lastToastId + "&select=*&order=id.asc").then(function(toasts) {
         if (!toasts || !toasts.length) return;
-        var latest = toasts[0];
-        if (latest.id > lastId) {
-          if (lastId > 0) showToast(latest.message, latest.type, latest.id);
-          lastId = latest.id;
-        }
+        toasts.forEach(function(t) {
+          showToast(t.message, t.type, t.id);
+          if (t.id > _lastToastId) _lastToastId = t.id;
+        });
       }).catch(function() {});
     }, 3000);
-  }
-  startToastRealtime();
+  }).catch(function() {
+    setInterval(function() {
+      sbFetch("toasts?active=eq.true&id=gt." + _lastToastId + "&select=*&order=id.asc").then(function(toasts) {
+        if (!toasts || !toasts.length) return;
+        toasts.forEach(function(t) {
+          showToast(t.message, t.type, t.id);
+          if (t.id > _lastToastId) _lastToastId = t.id;
+        });
+      }).catch(function() {});
+    }, 3000);
+  });
 
   // Changelog
   sbFetch("changelog?select=*&order=id.desc").then(function(entries) {
