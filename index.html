@@ -91,57 +91,6 @@
   }
 
   /* ADMIN PANEL */
-  #adminOverlay {
-    display: none; position: fixed; inset: 0;
-    background: rgba(0,0,0,0.85); z-index: 9000;
-    align-items: center; justify-content: center;
-  }
-  #adminOverlay { overflow-y: auto; }
-  #adminPanel {
-    background: #0d0d0d; border: 1px solid var(--primary);
-    border-radius: 10px; padding: 1.2rem; width: 560px; max-width: 96vw;
-    box-shadow: 0 0 30px rgba(0,255,136,0.1); font-family: 'Courier New', monospace;
-    max-height: 90vh; overflow-y: auto;
-  }
-  #adminPanel h3 { color: var(--primary); font-size: 0.95rem; letter-spacing: 2px; margin-bottom: 0.2rem; }
-  #adminPanel .a-sub { color: #444; font-size: 0.68rem; margin-bottom: 1rem; }
-  #adminPanel input, #adminPanel select {
-    width: 100%; padding: 0.45rem 0.7rem; background: #0a0a0a;
-    border: 1px solid #2a2a2a; border-radius: 5px; color: var(--text);
-    font-family: 'Courier New', monospace; font-size: 0.78rem; outline: none;
-    margin-bottom: 0.5rem; transition: border-color 0.2s; letter-spacing: 1px;
-    box-sizing: border-box;
-  }
-  #adminPanel input:focus, #adminPanel select:focus { border-color: var(--primary); }
-  #adminPanel .a-btn {
-    width: 100%; padding: 0.5rem; background: var(--primary); color: #000;
-    border: none; border-radius: 5px; font-weight: 700; font-size: 0.78rem;
-    cursor: pointer; letter-spacing: 1px; font-family: 'Courier New', monospace;
-    transition: opacity 0.2s; margin-bottom: 0.4rem;
-  }
-  #adminPanel .a-btn:hover { opacity: 0.85; }
-  #adminPanel .a-btn.danger { background: #ff4444; color: white; }
-  #adminPanel .a-close {
-    width: 100%; padding: 0.4rem; background: transparent; border: 1px solid #222;
-    border-radius: 5px; color: #555; cursor: pointer; font-family: 'Courier New', monospace;
-    font-size: 0.75rem; letter-spacing: 1px; transition: border-color 0.2s;
-  }
-  #adminPanel .a-close:hover { border-color: #555; color: #aaa; }
-  #adminPanel .a-msg { font-size: 0.72rem; margin-bottom: 0.5rem; min-height: 1rem; letter-spacing: 0.5px; }
-  #adminPanel .a-msg.ok { color: #00ff88; }
-  #adminPanel .a-msg.err { color: #ff4444; }
-  #adminPanel .a-divider { border: none; border-top: 1px solid #1a1a1a; margin: 0.6rem 0; }
-  #adminPanel .a-codes-list { margin-bottom: 0.6rem; max-height: 100px; overflow-y: auto; }
-  #adminPanel .a-code-row {
-    display: flex; justify-content: space-between; align-items: center;
-    padding: 0.3rem 0; border-bottom: 1px solid #1a1a1a; font-size: 0.75rem;
-  }
-  #adminPanel .a-code-row span { color: #aaa; }
-  #adminPanel .a-code-row .a-del {
-    background: none; border: none; color: #ff4444; cursor: pointer;
-    font-size: 0.7rem; font-family: 'Courier New', monospace; letter-spacing: 1px;
-  }
-  #adminPanel .a-section-title { color: #555; font-size: 0.65rem; letter-spacing: 2px; margin-bottom: 0.4rem; }
 
   nav {
     display: flex !important; justify-content: space-between; align-items: center;
@@ -740,7 +689,8 @@
   <button onclick="closeBurger();openTeamPage()" style="display:block;width:100%;text-align:center;background:#00ff88;border:none;border-radius:8px;color:#000;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:1rem;" data-lang="navTeam">👥 TeamList</button>
   <button onclick="closeBurger();window.open('https://discord.gg/XaZSGVFvzV','_blank')" style="display:block;width:100%;text-align:center;background:#5865F2;border:none;border-radius:8px;color:#fff;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:0.6rem;">💬 Discord</button>
   <button id="langToggleBtn" onclick="toggleLanguage()" style="display:block;width:100%;text-align:center;background:#1a1a1a;border:1px solid #333;border-radius:8px;color:#e0e0e0;padding:0.9rem;font-family:'Courier New',monospace;font-size:0.9rem;font-weight:700;letter-spacing:1px;cursor:pointer;margin-top:0.6rem;">🌐 DE</button>
-  <button onclick="openAdmin();closeBurger()" style="display:block;width:100%;text-align:center;background:none;border:none;color:#1e1e1e;padding:0.8rem;font-size:0.7rem;cursor:pointer;margin-top:0.5rem;">⚙</button>
+  <a href="admin.html" style="display:block;width:100%;text-align:center;padding:0.5rem;margin-top:0.3rem;border-radius:6px;font-family:'Courier New',monospace;font-size:0.65rem;letter-spacing:1px;cursor:pointer;text-decoration:none;color:transparent;background:transparent;border:1px solid transparent;transition:all 0.3s;" onmouseover="this.style.color='#333';this.style.borderColor='#222';" onmouseout="this.style.color='transparent';this.style.borderColor='transparent';">⚙ ADMIN</a>
+  
 </div>
 
 
@@ -1277,6 +1227,7 @@ var THEME_EASTER     = false;   // 🐣 Lila & Pastell
       document.getElementById('priceDisplay2').innerHTML =
         `🟠 <span class="price-original" style="font-size:1.6rem">${BASE}</span> <span class="price-discounted" style="font-size:2.2rem;font-weight:700">${discounted}</span> <span style="font-size:1.2rem;color:#aaa">Robux</span>`;
       document.getElementById('buyBtn').href = 'https://www.roblox.com/de/game-pass/1735695643/119-Rbx';
+      buyUrl = 'https://www.roblox.com/de/game-pass/1735695643/119-Rbx';
       // Countdown animation 125 -> 119
       const cdEl = document.getElementById('discountCountdown');
       const cdPrice = document.getElementById('countdownPrice');
@@ -1502,56 +1453,6 @@ if (BLACK_FRIDAY) {
   <div class="l-text">V1 DLC</div>
 </div>
 
-<!-- ADMIN PANEL -->
-<div id="adminOverlay">
-  <div id="adminPanel">
-    <h3>&gt; ADMIN_PANEL</h3>
-    <div class="a-sub">Authorized access only · All actions are logged</div>
-    <div id="adminLoginSection">
-      <input type="password" id="adminPwInput" placeholder="ENTER PASSWORD..." onkeydown="if(event.key==='Enter') adminLogin()" />
-      <div class="a-msg" id="adminLoginMsg"></div>
-      <button class="a-btn" onclick="adminLogin()">LOGIN</button>
-      <button class="a-close" onclick="closeAdmin()">CANCEL</button>
-    </div>
-    <div id="adminDashSection" style="display:none">
-
-      <!-- MAINTENANCE -->
-      <div class="a-section-title">&gt; MAINTENANCE MODE</div>
-      <button class="a-btn" id="maintenanceBtn" onclick="toggleMaintenance()" style="background:#ff2222;color:white;margin-bottom:0.5rem">⚠ ENABLE MAINTENANCE</button>
-      <hr class="a-divider">
-
-      <!-- ANNOUNCEMENTS -->
-      <div class="a-section-title">&gt; ADD ANNOUNCEMENT</div>
-      <input type="text" id="annTitleInput" placeholder="Title (e.g. Website Update)" />
-      <input type="text" id="annTextInput" placeholder="Text (e.g. New features added!)" />
-      <input type="text" id="annDateInput" placeholder="Date (e.g. 14.03.2026)" />
-      <select id="annTypeInput" style="width:100%;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:0.5rem;font-family:'Courier New',monospace;font-size:0.82rem;margin-bottom:0.5rem;">
-        <option value="update">🔄 Update</option>
-        <option value="maintenance">🔧 Maintenance</option>
-        <option value="info">ℹ️ Info</option>
-        <option value="new">✨ New</option>
-      </select>
-      <div class="a-msg" id="annMsg"></div>
-      <button class="a-btn" onclick="adminAddAnnouncement()">+ ADD ANNOUNCEMENT</button>
-      <button class="a-btn danger" onclick="adminClearAnnouncements()" style="margin-top:0.3rem;">🗑 CLEAR ALL</button>
-      <hr class="a-divider">
-
-      <!-- CODES -->
-      <div class="a-section-title">&gt; ADD NEW CODE</div>
-      <input type="text" id="newCodeInput" placeholder="CODE NAME (e.g. SUMMER10)" />
-      <input type="text" id="newCodeAction" placeholder='ACTION (e.g. "5% discount" or "discord")' />
-      <div class="a-msg" id="adminDashMsg"></div>
-      <button class="a-btn" onclick="adminAddCode()">+ ADD CODE</button>
-      <hr class="a-divider">
-      <div class="a-section-title">&gt; ACTIVE CODES</div>
-      <div class="a-codes-list" id="adminCodesList"></div>
-
-      <button class="a-btn danger" onclick="adminLogout()">LOGOUT</button>
-      <button class="a-close" onclick="closeAdmin()">CLOSE</button>
-    </div>
-  </div>
-</div>
-
 <canvas id="fireworkCanvas"></canvas>
 <canvas id="particles" style="position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:0;opacity:0.4"></canvas>
 
@@ -1692,149 +1593,7 @@ const _0x4a2f=['63','6d','64','72','5f','61','64','6d','69','6e','5f','32','30',
 const _0x8c3d=_0x4a2f.map(h=>String.fromCharCode(parseInt(h,16))).join('');
 let adminLoggedIn = false;
 
-function openAdmin() {
-  document.getElementById('adminOverlay').style.display = 'flex';
-  if (!adminLoggedIn) {
-    document.getElementById('adminLoginSection').style.display = 'block';
-    document.getElementById('adminDashSection').style.display = 'none';
-  } else {
-    showAdminDash();
-  }
-  setTimeout(() => document.getElementById('adminPwInput').focus(), 100);
-}
 
-function closeAdmin() {
-  document.getElementById('adminOverlay').style.display = 'none';
-}
-
-function adminLogin() {
-  const pw  = document.getElementById('adminPwInput').value;
-  const msg = document.getElementById('adminLoginMsg');
-  if (pw === _0x8c3d) {
-    adminLoggedIn = true;
-    document.getElementById('adminPwInput').value = '';
-    msg.textContent = '';
-    showAdminDash();
-  } else {
-    msg.textContent = '✗ Wrong password.';
-    msg.className = 'a-msg err';
-  }
-}
-
-function adminLogout() {
-  adminLoggedIn = false;
-  document.getElementById('adminLoginSection').style.display = 'block';
-  document.getElementById('adminDashSection').style.display = 'none';
-}
-
-function showAdminDash() {
-  document.getElementById('adminLoginSection').style.display = 'none';
-  document.getElementById('adminDashSection').style.display  = 'block';
-  renderAdminCodes();
-}
-
-function renderAdminCodes() {
-  const list = document.getElementById('adminCodesList');
-  const allCodes = Object.keys(window.CODES);
-  if (allCodes.length === 0) {
-    list.innerHTML = '<div style="color:#444;font-size:0.8rem;padding:0.5rem 0">No active codes.</div>';
-    return;
-  }
-  list.innerHTML = allCodes.map(c => `
-    <div class="a-code-row">
-      <span style="color:#00ff88">${c}</span>
-      <button class="a-del" onclick="adminDeleteCode('${c}')">✗ REMOVE</button>
-    </div>`).join('');
-}
-
-function adminAddCode() {
-  const codeInput   = document.getElementById('newCodeInput');
-  const actionInput = document.getElementById('newCodeAction');
-  const msg         = document.getElementById('adminDashMsg');
-  const code        = codeInput.value.trim().toUpperCase();
-  const action      = actionInput.value.trim();
-
-  if (!code || !action) {
-    msg.textContent = '⚠ Fill in both fields.'; msg.className = 'a-msg err'; return;
-  }
-  if (window.CODES[code]) {
-    msg.textContent = '⚠ Code already exists.'; msg.className = 'a-msg err'; return;
-  }
-
-  window.CODES[code] = function() {
-    return '✓ Code accepted! ' + action;
-  };
-
-  codeInput.value = ''; actionInput.value = '';
-  msg.textContent = '✓ Code "' + code + '" added!';
-  msg.className = 'a-msg ok';
-  renderAdminCodes();
-}
-
-function adminDeleteCode(code) {
-  delete window.CODES[code];
-  const msg = document.getElementById('adminDashMsg');
-  msg.textContent = '✓ Code "' + code + '" removed.';
-  msg.className = 'a-msg ok';
-  renderAdminCodes();
-}
-
-/* ── MAINTENANCE MODE ── */
-var maintenanceActive = MAINTENANCE_MODE;
-
-// Check for bypass code in URL
-var urlParams = new URLSearchParams(window.location.search);
-var bypassCode = urlParams.get('bypass');
-var MAINTENANCE_BYPASS_CODE = 'CmdrDLC'; // ← Bypass Code hier ändern!
-
-if (MAINTENANCE_MODE && bypassCode !== MAINTENANCE_BYPASS_CODE) {
-  document.getElementById('maintenanceScreen').style.display = 'flex';
-}
-
-// Show disable button if bypass is active
-if (bypassCode === MAINTENANCE_BYPASS_CODE) {
-  window.addEventListener('DOMContentLoaded', function() {
-    var btn = document.getElementById('maintenanceAdminBtn');
-    if (btn) btn.style.display = 'block';
-  });
-}
-
-function toggleMaintenance() {
-  maintenanceActive = !maintenanceActive;
-  var screen = document.getElementById('maintenanceScreen');
-  var btn    = document.getElementById('maintenanceBtn');
-
-  if (maintenanceActive) {
-    screen.style.display = 'flex';
-    btn.textContent = '✓ DISABLE MAINTENANCE';
-    btn.style.background = '#00ff88';
-    btn.style.color = '#000';
-  } else {
-    screen.style.display = 'none';
-    btn.textContent = '⚠ ENABLE MAINTENANCE';
-    btn.style.background = '#ff2222';
-    btn.style.color = 'white';
-  }
-
-  // Save to JSONBin globally
-  if (typeof jsonbinGet === 'function') {
-    jsonbinGet().then(function(data) {
-      if (!data) data = { announcements: [], disableBuyButton: false };
-      data.maintenance = maintenanceActive;
-      return jsonbinSet(data);
-    }).then(function() {
-      var msg = document.getElementById('adminDashMsg');
-      if (msg) {
-        msg.textContent = maintenanceActive ? '✓ Maintenance enabled globally!' : '✓ Maintenance disabled globally!';
-        msg.className = 'a-msg ok';
-        setTimeout(function() { msg.textContent = ''; }, 3000);
-      }
-    }).catch(function(e) {
-      var msg = document.getElementById('adminDashMsg');
-      if (msg) { msg.textContent = '✗ Error saving to JSONBin!'; msg.className = 'a-msg err'; }
-    });
-  }
-}
 
 
 
@@ -2082,9 +1841,7 @@ if (NEWYEAR_FIREWORKS) {
   for (let i = 0; i < 5; i++) setTimeout(launchFirework, i * 200);
 }
 
-document.getElementById('adminOverlay').addEventListener('click', function(e) {
-  if (e.target === this) closeAdmin();
-});
+
 </script>
 
 
@@ -2769,99 +2526,158 @@ function closeTeamModal() {
 </script>
 
 <script>
-// ── SUPABASE CONFIG ──────────────────────────────────
-var SB_URL = 'https://feladnkiczghtkyfvzcl.supabase.co';
-var SB_KEY = 'sb_publishable_R3ridIeXe8k-vDBdF_G7zA_veKC2GiZ';
+var SB_URL = "https://feladnkiczghtkyfvzcl.supabase.co";
+var SB_KEY = "sb_publishable_R3ridIeXe8k-vDBdF_G7zA_veKC2GiZ";
 
 function sbFetch(path, opts) {
   opts = opts || {};
   opts.headers = Object.assign({
-    'apikey': SB_KEY,
-    'Authorization': 'Bearer ' + SB_KEY,
-    'Content-Type': 'application/json'
+    "apikey": SB_KEY,
+    "Authorization": "Bearer " + SB_KEY,
+    "Content-Type": "application/json"
   }, opts.headers || {});
-  return fetch(SB_URL + '/rest/v1/' + path, opts).then(function(r) {
+  return fetch(SB_URL + "/rest/v1/" + path, opts).then(function(r) {
     if (!r.ok) return r.text().then(function(t) { throw new Error(t); });
     return r.status === 204 ? {} : r.json().catch(function() { return {}; });
   });
 }
 
-function sbGetSettings() {
-  return sbFetch('settings?id=eq.1&select=*').then(function(d) { return d[0] || null; });
-}
-function sbSetSettings(data) {
-  data.id = 1;
-  return sbFetch('settings?id=eq.1', { method: 'PATCH', body: JSON.stringify(data) })
-    .catch(function() {
-      return sbFetch('settings', { method: 'POST', headers: {'Prefer':'return=minimal'}, body: JSON.stringify(data) });
-    });
-}
-function sbGetAnnouncements() {
-  return sbFetch('announcements?select=*&order=id.desc');
-}
-function sbAddAnnouncement(ann) {
-  return sbFetch('announcements', { method: 'POST', headers: {'Prefer':'return=minimal'}, body: JSON.stringify(ann) });
-}
-function sbClearAnnouncements() {
-  return sbFetch('announcements?id=gt.0', { method: 'DELETE' });
-}
-
-// Backwards compat
 function jsonbinGet() {
-  return sbGetSettings().then(function(s) {
-    return { maintenance: s ? s.maintenance : false, disableBuyButton: s ? s.disable_buy_button : false };
+  return sbFetch("settings?id=eq.1&select=*").then(function(d) {
+    var s = d[0] || {};
+    return { maintenance: s.maintenance || false, disableBuyButton: s.disable_buy_button || false };
   });
 }
 function jsonbinSet(data) {
-  return sbSetSettings({ maintenance: data.maintenance || false, disable_buy_button: data.disableBuyButton || false });
+  return sbFetch("settings?id=eq.1", { method: "PATCH", body: JSON.stringify({ maintenance: data.maintenance || false, disable_buy_button: data.disableBuyButton || false }) });
+}
+function adminDisableMaintenance() {
+  if (!confirm("Disable maintenance for everyone?")) return;
+  maintenanceActive = false;
+  sbFetch("settings?id=eq.1", { method: "PATCH", body: JSON.stringify({ maintenance: false }) }).then(function() {
+    document.getElementById("maintenanceScreen").style.display = "none";
+    var btn = document.getElementById("maintenanceAdminBtn");
+    if (btn) btn.style.display = "none";
+    alert("Maintenance disabled!");
+  }).catch(function(e) { alert("Error: " + e.message); });
 }
 
-// ── LOAD ON PAGE START ────────────────────────────────
-window.addEventListener('DOMContentLoaded', function() {
-  sbGetSettings().then(function(s) {
+window.addEventListener("DOMContentLoaded", function() {
+  // Settings
+  sbFetch("settings?id=eq.1&select=*").then(function(d) {
+    var s = d[0];
     if (!s) return;
-    var urlBypass = new URLSearchParams(window.location.search).get('bypass');
-    if (s.maintenance && urlBypass !== 'CmdrDLC') {
-      var screen = document.getElementById('maintenanceScreen');
-      if (screen) screen.style.display = 'flex';
+    var bypass = new URLSearchParams(window.location.search).get("bypass");
+    if (s.maintenance && bypass !== "CmdrDLC") {
+      var ms = document.getElementById("maintenanceScreen");
+      if (ms) ms.style.display = "flex";
     }
-    // Show disable button for bypass users even on maintenance screen
-    if (urlBypass === 'CmdrDLC') {
-      var screen = document.getElementById('maintenanceScreen');
-      if (screen && s.maintenance) {
-        // Keep maintenance screen visible but show disable button
-        screen.style.display = 'flex';
-        var adminBtn = document.getElementById('maintenanceAdminBtn');
-        if (adminBtn) adminBtn.style.display = 'flex';
-      }
+    if (s.maintenance && bypass === "CmdrDLC") {
+      var ab = document.getElementById("maintenanceAdminBtn");
+      if (ab) ab.style.display = "flex";
     }
     if (s.disable_buy_button) {
-      document.querySelectorAll('.buy-btn').forEach(function(b) { b.disabled = true; b.style.opacity = '0.4'; });
+      document.querySelectorAll(".buy-btn").forEach(function(b) { b.disabled = true; b.style.opacity = "0.4"; });
     }
-  }).catch(function(e) { console.log('Supabase settings error:', e); });
+  }).catch(function() {});
 
-  sbGetAnnouncements().then(function(anns) {
+  // Events / Themes
+  sbFetch("events?select=*").then(function(events) {
+    var map = { halloween: "theme-halloween", christmas: "theme-christmas", winter: "theme-winter", summer: "theme-summer", valentine: "theme-valentine", easter: "theme-easter" };
+    (events || []).forEach(function(ev) {
+      if (!ev.active) return;
+      if (map[ev.name]) document.body.classList.add(map[ev.name]);
+      if (ev.name === "blackfriday") { var b = document.getElementById("blackFridayBanner"); if (b) b.style.display = "block"; }
+      if (ev.name === "newyear") { var n = document.getElementById("newyearBanner"); if (n) n.style.display = "block"; }
+    });
+  }).catch(function() {});
+
+  // Announcements
+  sbFetch("announcements?select=*&order=id.desc").then(function(anns) {
     if (!anns || !anns.length) return;
-    var list = document.getElementById('annPageList');
-    var noMsg = document.getElementById('noAnnMsg');
-    if (noMsg) noMsg.style.display = 'none';
-    var colors = { update:'#00ff88', maintenance:'#ffbd2e', info:'#00cfff', new:'#a855f7' };
-    var icons  = { update:'🔄', maintenance:'🔧', info:'ℹ️', new:'✨' };
-    anns.forEach(function(ann) {
-      var color = colors[ann.type] || '#00ff88';
-      var icon  = icons[ann.type] || '📢';
-      var div = document.createElement('div');
-      div.style.cssText = 'background:#111;border-left:3px solid ' + color + ';border-radius:0 10px 10px 0;padding:1.2rem 1.4rem;margin-bottom:0.8rem;';
-      div.innerHTML =
-        '<div style="display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem;">' +
-          '<span>' + icon + '</span>' +
-          '<span style="font-family:monospace;font-weight:700;color:#fff;font-size:0.92rem;">' + ann.title + '</span>' +
-          '<span style="margin-left:auto;font-size:0.7rem;color:#444;font-family:monospace;">' + ann.date + '</span>' +
-        '</div>' +
-        '<div style="font-size:0.85rem;color:#888;line-height:1.6;">' + ann.text + '</div>';
+    var list = document.getElementById("annPageList");
+    var noMsg = document.getElementById("noAnnMsg");
+    if (noMsg) noMsg.style.display = "none";
+    var colors = { update: "#00ff88", maintenance: "#ffbd2e", info: "#00cfff", new: "#a855f7" };
+    var icons  = { update: "🔄", maintenance: "🔧", info: "ℹ️", new: "✨" };
+    (anns || []).forEach(function(ann) {
+      var color = colors[ann.type] || "#00ff88";
+      var icon  = icons[ann.type]  || "📢";
+      var div = document.createElement("div");
+      div.style.cssText = "background:#111;border-left:3px solid " + color + ";border-radius:0 10px 10px 0;padding:1.2rem 1.4rem;margin-bottom:0.8rem;";
+      var h = document.createElement("div");
+      h.style.cssText = "display:flex;align-items:center;gap:0.6rem;margin-bottom:0.5rem;";
+      h.innerHTML = "<span>" + icon + "</span><span style='font-family:monospace;font-weight:700;color:#fff;'>" + ann.title + "</span><span style='margin-left:auto;font-size:0.7rem;color:#444;'>" + ann.date + "</span>";
+      var t = document.createElement("div");
+      t.style.cssText = "font-size:0.85rem;color:#888;line-height:1.6;";
+      t.textContent = ann.text;
+      div.appendChild(h);
+      div.appendChild(t);
       if (list) list.appendChild(div);
     });
-  }).catch(function(e) { console.log('Supabase announcements error:', e); });
+  }).catch(function() {});
+
+  // Team
+  sbFetch("team?select=*&order=sort_order.asc").then(function(members) {
+    var grid = document.getElementById("teamGrid");
+    if (!grid || !members || !members.length) return;
+    grid.innerHTML = "";
+    (members || []).forEach(function(m) {
+      var c = m.color || "#00ff88";
+      var card = document.createElement("div");
+      card.style.cssText = "background:#111;border:1px solid #1e1e1e;border-radius:14px;padding:1.2rem 1.4rem;display:flex;align-items:center;gap:1rem;cursor:pointer;transition:border-color 0.2s;";
+      card.onmouseover = function() { this.style.borderColor = c; };
+      card.onmouseout  = function() { this.style.borderColor = "#1e1e1e"; };
+      card.onclick = function() { openTeamModal(m.name, "✦ " + m.role, "role", m.image || "", m.name, m.bio || ""); };
+      var img = document.createElement("img");
+      img.src = m.image || "";
+      img.style.cssText = "width:56px;height:56px;border-radius:50%;object-fit:cover;flex-shrink:0;border:2px solid #2a2a2a;";
+      img.onerror = function() { this.style.display = "none"; };
+      var info = document.createElement("div");
+      var name = document.createElement("div");
+      name.style.cssText = "font-weight:700;color:#e0e0e0;font-size:0.95rem;margin-bottom:0.2rem;";
+      name.textContent = m.name;
+      var role = document.createElement("div");
+      role.style.cssText = "font-size:0.7rem;letter-spacing:1.5px;margin-bottom:0.5rem;color:" + c + ";";
+      role.textContent = "✦ " + (m.role || "").toUpperCase();
+      var bio = document.createElement("div");
+      bio.style.cssText = "font-size:0.8rem;color:#666;";
+      bio.textContent = m.bio || "";
+      info.appendChild(name);
+      info.appendChild(role);
+      info.appendChild(bio);
+      card.appendChild(img);
+      card.appendChild(info);
+      grid.appendChild(card);
+    });
+  }).catch(function() {});
+
+  // Changelog
+  sbFetch("changelog?select=*&order=id.desc").then(function(entries) {
+    var container = document.querySelector("#changelogPage .cl-list");
+    if (!container || !entries || !entries.length) return;
+    container.innerHTML = "";
+    (entries || []).forEach(function(e) {
+      var items = e.items ? e.items.split("\n") : [];
+      var div = document.createElement("div");
+      div.style.cssText = "background:#111;border:1px solid #1a2a1a;border-radius:12px;padding:1.4rem;margin-bottom:0.8rem;";
+      var header = document.createElement("div");
+      header.style.cssText = "display:flex;align-items:center;gap:0.8rem;margin-bottom:1rem;padding-bottom:0.8rem;border-bottom:1px solid #1a1a1a;";
+      header.innerHTML = "<span style='background:#00ff88;color:#000;font-size:0.72rem;font-weight:700;padding:0.2rem 0.6rem;border-radius:4px;'>" + e.version + "</span><span style='color:#fff;font-weight:700;'>" + e.title + "</span><span style='margin-left:auto;color:#444;font-size:0.72rem;'>" + e.date + "</span>";
+      var ul = document.createElement("ul");
+      ul.style.cssText = "list-style:none;display:flex;flex-direction:column;gap:0.5rem;";
+      items.forEach(function(item) {
+        if (!item.trim()) return;
+        var li = document.createElement("li");
+        li.style.cssText = "font-size:0.85rem;color:#888;display:flex;gap:0.6rem;";
+        li.innerHTML = "<span style='color:#00ff88;flex-shrink:0;'>+</span>" + item.trim();
+        ul.appendChild(li);
+      });
+      div.appendChild(header);
+      div.appendChild(ul);
+      container.appendChild(div);
+    });
+  }).catch(function() {});
 });
 </script>
 
