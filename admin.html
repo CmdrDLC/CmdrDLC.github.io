@@ -642,20 +642,14 @@
 
   // ── DISCORD WEBHOOK ─────────────────────────────────
   function sendDiscordWebhook(title, description, color) {
-    var edgeFn = SB_URL + '/functions/v1/discord-webhook';
-    console.log('Sending webhook to:', edgeFn);
-    fetch(edgeFn, {
+    fetch(SB_URL + '/functions/v1/discord-webhook', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
         'Authorization': 'Bearer ' + SB_KEY
       },
       body: JSON.stringify({ title: title, description: description, color: color || 65408 })
-    }).then(function(r) {
-      console.log('Webhook response:', r.status);
-    }).catch(function(e) {
-      console.log('Webhook error:', e);
-    });
+    }).catch(function() {});
   }
 
   // ── VISITORS ─────────────────────────────────────────
