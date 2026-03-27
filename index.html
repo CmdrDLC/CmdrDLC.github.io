@@ -2712,7 +2712,7 @@ window.addEventListener("DOMContentLoaded", function() {
       if (ann.expires_at && new Date(ann.expires_at) < now) return;
       shown++;
       if (noMsg) noMsg.style.display = "none";
-      var color = colors[ann.type] || "#00ff88";
+      var color = (ann.type === 'custom' && ann.custom_color) ? ann.custom_color : (colors[ann.type] || "#00ff88");
       var icon  = icons[ann.type]  || "📢";
       var div = document.createElement("div");
       div.style.cssText = "background:#111;border-left:3px solid " + color + ";border-radius:0 10px 10px 0;padding:1.2rem 1.4rem;margin-bottom:0.8rem;" + (ann.pinned ? "border:1px solid " + color + ";border-left:4px solid " + color + ";" : "");
@@ -2784,7 +2784,7 @@ window.addEventListener("DOMContentLoaded", function() {
           if (ann.expires_at && ann.expires_at !== '' && new Date(ann.expires_at) < now) return;
           if (_lastAnnId < ann.id) _lastAnnId = ann.id;
           if (noMsg) noMsg.style.display = "none";
-          var color = colors[ann.type] || "#00ff88";
+          var color = (ann.type === 'custom' && ann.custom_color) ? ann.custom_color : (colors[ann.type] || "#00ff88");
           var icon  = icons[ann.type]  || "📢";
           var div = document.createElement("div");
           div.style.cssText = "background:#111;border-left:3px solid " + color + ";border-radius:0 10px 10px 0;padding:1.2rem 1.4rem;margin-bottom:0.8rem;" + (ann.pinned ? "border:1px solid " + color + ";border-left:4px solid " + color + ";" : "");
