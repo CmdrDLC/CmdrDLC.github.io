@@ -692,6 +692,268 @@
     to   { transform: translateX(0);     opacity: 1; }
   }
 
+
+  /* ── TEAM ROLE ANIMATIONS ── */
+  @keyframes borderCreatorBorder {
+    0%   { border-color: #ff9900; }
+    50%  { border-color: #ffdd00; }
+    100% { border-color: #ff9900; }
+  }
+  @keyframes borderDeveloperBorder {
+    0%   { border-color: #a855f7; }
+    50%  { border-color: #d8b4fe; }
+    100% { border-color: #a855f7; }
+  }
+  @keyframes borderModeratorBorder {
+    0%   { border-color: #00cfff; }
+    50%  { border-color: #00ffdd; }
+    100% { border-color: #00cfff; }
+  }
+  @keyframes borderTrialBorder {
+    0%   { border-color: #008080; }
+    50%  { border-color: #00b3a4; }
+    100% { border-color: #008080; }
+  }
+  @keyframes gradientCreator {
+    0%   { color: #ff9900; }
+    50%  { color: #ffdd00; }
+    100% { color: #ff9900; }
+  }
+  @keyframes gradientDeveloper {
+    0%   { color: #a855f7; }
+    50%  { color: #d8b4fe; }
+    100% { color: #a855f7; }
+  }
+  @keyframes gradientModerator {
+    0%   { color: #00cfff; }
+    50%  { color: #00ffdd; }
+    100% { color: #00cfff; }
+  }
+  @keyframes gradientTrial {
+    0%   { color: #008080; }
+    50%  { color: #00b3a4; }
+    100% { color: #008080; }
+  }
+  .tp-card.card-creator, .tp-card.card-cocreator {
+    animation: borderCreatorBorder 2s ease-in-out infinite !important;
+    border: 1px solid #ff9900 !important;
+    box-shadow: none !important;
+  }
+  .tp-card.card-developer {
+    animation: borderDeveloperBorder 2s ease-in-out infinite !important;
+    border: 1px solid #a855f7 !important;
+    box-shadow: none !important;
+  }
+  .tp-card.card-moderator {
+    animation: borderModeratorBorder 2s ease-in-out infinite !important;
+    border: 1px solid #00cfff !important;
+    box-shadow: none !important;
+  }
+  .tp-card.card-collaborator {
+    animation: borderCollaborator 2s ease-in-out infinite !important;
+    border: 1px solid #ff69b4 !important;
+    box-shadow: none !important;
+  }
+  .tp-card.card-collaborator {
+    animation: borderCollaborator 2s ease-in-out infinite !important;
+    border: 1px solid #ff69b4 !important;
+    box-shadow: none !important;
+  }
+  .tp-card.card-collaborator {
+    animation: borderCollaborator 2s ease-in-out infinite !important;
+    border: 1px solid #ff69b4 !important;
+    box-shadow: none !important;
+  }
+  .tp-card.card-trial {
+    animation: borderTrialBorder 2s ease-in-out infinite !important;
+    border: 1px solid #008080 !important;
+    box-shadow: none !important;
+  }
+  .name-creator, .name-cocreator {
+    background: linear-gradient(90deg, #ff9900, #ffdd00, #ff9900);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .name-developer {
+    background: linear-gradient(90deg, #a855f7, #d8b4fe, #a855f7);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .name-moderator {
+    background: linear-gradient(90deg, #00cfff, #00ffdd, #00cfff);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .name-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .name-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .name-trial {
+    background: linear-gradient(90deg, #008080, #00b3a4, #008080);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  @keyframes shimmerName {
+    0%   { background-position: 0% 50%; }
+    100% { background-position: 200% 50%; }
+  }
+
+
+  .role-creator, .role-cocreator {
+    background: linear-gradient(90deg, #ff9900, #ffdd00, #ff9900);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-developer {
+    background: linear-gradient(90deg, #a855f7, #d8b4fe, #a855f7);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-moderator {
+    background: linear-gradient(90deg, #00cfff, #00ffdd, #00cfff);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-trial {
+    background: linear-gradient(90deg, #008080, #00b3a4, #008080);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .name-collab, .role-collab {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+
+
+  .role-creator, .role-cocreator {
+    background: linear-gradient(90deg, #ff9900, #ffdd00, #ff9900);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-developer {
+    background: linear-gradient(90deg, #a855f7, #d8b4fe, #a855f7);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-moderator {
+    background: linear-gradient(90deg, #00cfff, #00ffdd, #00cfff);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-collaborator {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .role-trial {
+    background: linear-gradient(90deg, #008080, #00b3a4, #008080);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+  .name-collab, .role-collab {
+    background: linear-gradient(90deg, #ff69b4, #ffb3d9, #ff69b4);
+    background-size: 200%;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: shimmerName 2s linear infinite;
+  }
+
 </style>
 </head>
 <body>
@@ -2039,9 +2301,33 @@ if (NEWYEAR_FIREWORKS) {
     .tp-card { background:#111;border:1px solid #1e1e1e;border-radius:14px;padding:1.4rem;display:flex;flex-direction:column;align-items:flex-start;gap:0.8rem;cursor:pointer;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s; }
     .tp-card:hover { transform:translateY(-3px); }
     .tp-card img { width:64px;height:64px;border-radius:50%;object-fit:cover;border:2px solid #2a2a2a; }
-    .tp-card .tp-name { font-family:'Courier New',monospace;font-weight:700;color:#fff;font-size:1rem;letter-spacing:1px; }
+    .tp-card .tp-name { font-family:'Courier New',monospace;font-weight:700;font-size:1rem;letter-spacing:1px;background-size:200% auto;-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;animation:nameGlow 2s linear infinite; }
     .tp-card .tp-role { font-family:'Courier New',monospace;font-size:0.68rem;letter-spacing:2px;margin-top:-0.4rem; }
     .tp-card .tp-bio { font-family:'Segoe UI',sans-serif;font-size:0.8rem;color:#666;line-height:1.5; }
+
+    /* Name gradient animations */
+    .name-creator   { background-image:linear-gradient(90deg,#ff8c00,#ffd700,#ff8c00); }
+    .name-cocreator { background-image:linear-gradient(90deg,#ff8c00,#ffd700,#ff8c00); }
+    .name-developer { background-image:linear-gradient(90deg,#a855f7,#d8b4fe,#a855f7); }
+    .name-moderator { background-image:linear-gradient(90deg,#00cfff,#00e5cc,#00cfff); }
+    .name-trial     { background-image:linear-gradient(90deg,#0d9488,#2dd4bf,#0d9488); }
+    .name-collab    { background-image:linear-gradient(90deg,#ff69b4,#ffb3d9,#ff69b4); }
+
+    /* Border glow animations */
+    .tp-card.card-creator   { animation:borderCreator 2s linear infinite; }
+    .tp-card.card-cocreator { animation:borderCreator 2s linear infinite; }
+    .tp-card.card-developer { animation:borderDev 2s linear infinite; }
+    .tp-card.card-moderator { animation:borderMod 2s linear infinite; }
+    .tp-card.card-trial     { animation:borderTrial 2s linear infinite; }
+    .tp-card.card-collab    { animation:borderCollab 2s linear infinite; }
+
+    @keyframes nameGlow { 0%{background-position:0% center} 100%{background-position:200% center} }
+    @keyframes borderCreator  { 0%,100%{border-color:#ff8c00;box-shadow:0 0 12px #ff8c0044} 50%{border-color:#ffd700;box-shadow:0 0 20px #ffd70066} }
+    @keyframes borderDev      { 0%,100%{border-color:#a855f7;box-shadow:0 0 12px #a855f744} 50%{border-color:#d8b4fe;box-shadow:0 0 20px #d8b4fe66} }
+    @keyframes borderMod      { 0%,100%{border-color:#00cfff;box-shadow:0 0 12px #00cfff44} 50%{border-color:#00e5cc;box-shadow:0 0 20px #00e5cc66} }
+    @keyframes borderTrial    { 0%,100%{border-color:#0d9488;box-shadow:0 0 12px #0d948844} 50%{border-color:#2dd4bf;box-shadow:0 0 20px #2dd4bf66} }
+    @keyframes borderCollab   { 0%,100%{border-color:#ff69b4;box-shadow:0 0 12px #ff69b444} 50%{border-color:#ffb3d9;box-shadow:0 0 20px #ffb3d966} }
+
     @media(max-width:900px){ .tp-grid{ grid-template-columns:repeat(2,1fr); } } @media(max-width:600px){ .tp-grid{ grid-template-columns:1fr;padding:1rem; } }
   </style>
 
@@ -2057,56 +2343,48 @@ if (NEWYEAR_FIREWORKS) {
 
   <div class="tp-grid">
 
-    <div class="tp-card" onclick="openTeamModal('Max','✦ Creator','role-creator','max.png','Max','Creator of this Website and of Cmdr')" onmouseover="this.style.borderColor='#00ff88';this.style.boxShadow='0 4px 20px #00ff8822'" onmouseout="this.style.borderColor='#1e1e1e';this.style.boxShadow='none'">
+    <div class="tp-card card-creator" onclick="openTeamModal('Max','✦ Creator','role-creator','max.png','Max','Creator of this Website and of Cmdr')">
       <img src="max.png" onerror="this.src='https://ui-avatars.com/api/?name=Max&background=00ff88&color=000&size=64&bold=true'" alt="Max">
-      <div class="tp-name">Max</div>
-      <div class="tp-role" style="color:#00ff88;">✦ CREATOR</div>
+      <div class="tp-name name-creator">Max</div>
+      <div class="tp-role role-creator">✦ CREATOR</div>
       <div class="tp-bio">Creator of this Website and of Cmdr</div>
     </div>
 
-    <div class="tp-card" onclick="openTeamModal('Tazz','✦ Co-Creator','role-cocreator','tazz.png','Tazz','Co Creator for the Discord')" onmouseover="this.style.borderColor='#00cfff';this.style.boxShadow='0 4px 20px #00cfff22'" onmouseout="this.style.borderColor='#1e1e1e';this.style.boxShadow='none'">
-      <img src="tazz.png" onerror="this.src='https://ui-avatars.com/api/?name=Tazz&background=00cfff&color=000&size=64&bold=true'" alt="Tazz">
-      <div class="tp-name">Tazz</div>
-      <div class="tp-role" style="color:#00cfff;">✦ CO-CREATOR</div>
-      <div class="tp-bio">Co Creator for the Discord</div>
+    <div class="tp-card card-cocreator" onclick="openTeamModal('Batman','✦ Co-Creator','role-cocreator','batman.png','Batman','Co-Creator of CMDR System')">
+      <img src="batman.png" onerror="this.src='https://ui-avatars.com/api/?name=Batman&background=ff9900&color=000&size=64&bold=true'" alt="Batman">
+      <div class="tp-name name-cocreator">Batman</div>
+      <div class="tp-role role-cocreator">✦ CO-CREATOR</div>
+      <div class="tp-bio">Co-Creator of CMDR System</div>
     </div>
 
-    <div class="tp-card" onclick="openTeamModal('Bobasimi','✦ Developer','role-developer','bobasimi.png','Bobasimi','Hi im the Developer for the Server')" onmouseover="this.style.borderColor='#ffbd2e';this.style.boxShadow='0 4px 20px #ffbd2e22'" onmouseout="this.style.borderColor='#1e1e1e';this.style.boxShadow='none'">
+    <div class="tp-card card-developer" onclick="openTeamModal('Bobasimi','✦ Developer','role-developer','bobasimi.png','Bobasimi','Hi im the Developer for the Server')">
       <img src="bobasimi.png" onerror="this.src='https://ui-avatars.com/api/?name=Bobasimi&background=ffbd2e&color=000&size=64&bold=true'" alt="Bobasimi">
-      <div class="tp-name">Bobasimi</div>
-      <div class="tp-role" style="color:#ffbd2e;">✦ DEVELOPER</div>
+      <div class="tp-name name-developer">Bobasimi</div>
+      <div class="tp-role role-developer">✦ DEVELOPER</div>
       <div class="tp-bio">Hi im the Developer for the Server</div>
     </div>
 
-    <div class="tp-card" onclick="openTeamModal('Batman','✦ Moderator','role-moderator','batman.png','Batman','Hello im an Moderator to keep the Server Safe')" onmouseover="this.style.borderColor='#5865F2';this.style.boxShadow='0 4px 20px #5865F222'" onmouseout="this.style.borderColor='#1e1e1e';this.style.boxShadow='none'">
-      <img src="batman.png" onerror="this.src='https://ui-avatars.com/api/?name=Batman&background=5865F2&color=fff&size=64&bold=true'" alt="Batman">
-      <div class="tp-name">Batman</div>
-      <div class="tp-role" style="color:#5865F2;">✦ MODERATOR</div>
-      <div class="tp-bio">Hello im an Moderator to keep the Server Safe</div>
-    </div>
-
-    <div class="tp-card" onclick="openTeamModal('Levi','✦ Moderator','role-moderator','levi.png','Levi','Im here for the Cmdr Website')" onmouseover="this.style.borderColor='#5865F2';this.style.boxShadow='0 4px 20px #5865F222'" onmouseout="this.style.borderColor='#1e1e1e';this.style.boxShadow='none'">
-      <img src="levi.png" onerror="this.src='https://ui-avatars.com/api/?name=Levi&background=5865F2&color=fff&size=64&bold=true'" alt="Levi">
-      <div class="tp-name">Levi</div>
-      <div class="tp-role" style="color:#5865F2;">✦ MODERATOR</div>
+    <div class="tp-card card-moderator" onclick="openTeamModal('Levi','✦ Moderator','role-moderator','levi.png','Levi','Im here for the Cmdr Website')">
+      <img src="levi.png" onerror="this.src='https://ui-avatars.com/api/?name=Levi&background=00cfff&color=000&size=64&bold=true'" alt="Levi">
+      <div class="tp-name name-moderator">Levi</div>
+      <div class="tp-role role-moderator">✦ MODERATOR</div>
       <div class="tp-bio">Im here for the Cmdr Website</div>
     </div>
 
-    <div class="tp-card" onclick="openTeamModal('Kyle','✦ Trial Moderator','role-trial','kyle.png','Kyle','New Trial Moderator nice to meet you')" onmouseover="this.style.borderColor='#888';this.style.boxShadow='0 4px 20px #88888822'" onmouseout="this.style.borderColor='#1e1e1e';this.style.boxShadow='none'">
-      <img src="kyle.png" onerror="this.src='https://ui-avatars.com/api/?name=Kyle&background=555&color=fff&size=64&bold=true'" alt="Kyle">
-      <div class="tp-name">Kyle</div>
-      <div class="tp-role" style="color:#888;">✦ TRIAL MODERATOR</div>
-      <div class="tp-bio">New Trial Moderator nice to meet you</div>
+    <div class="tp-card card-moderator" onclick="openTeamModal('Kyle','✦ Moderator','role-moderator','kyle.png','Kyle','Moderator of CMDR System')">
+      <img src="kyle.png" onerror="this.src='https://ui-avatars.com/api/?name=Kyle&background=008080&color=fff&size=64&bold=true'" alt="Kyle">
+      <div class="tp-name name-moderator">Kyle</div>
+      <div class="tp-role role-moderator">✦ MODERATOR</div>
+      <div class="tp-bio">Moderator of CMDR System</div>
     </div>
 
-    <div class="tp-card" onclick="openTeamModal('Roky','✦ Collaborator','role-collaborator','roky.png','Roky','Buy from me the Events! Gold, Silver and Bronze')" onmouseover="this.style.borderColor='#ff69b4';this.style.boxShadow='0 4px 20px #ff69b422'" onmouseout="this.style.borderColor='#1e1e1e';this.style.boxShadow='none'">
+    <div class="tp-card card-collab" onclick="openTeamModal('Roky','✦ Collaborator','role-collaborator','roky.png','Roky','Buy from me the Events! Gold, Silver and Bronze')">
       <img src="roky.png" onerror="this.src='https://ui-avatars.com/api/?name=Roky&background=ff69b4&color=fff&size=64&bold=true'" alt="Roky">
-      <div class="tp-name">Roky</div>
-      <div class="tp-role" style="color:#ff69b4;">✦ COLLABORATOR</div>
+      <div class="tp-name name-collab">Roky</div>
+      <div class="tp-role role-collab">✦ COLLABORATOR</div>
       <div class="tp-bio">Buy from me the Events! Gold, Silver and Bronze</div>
     </div>
 
-  </div>
 </div>
 
 <!-- TEAM MODAL -->
@@ -2176,14 +2454,7 @@ function closeTeamModal() {
         <a href="https://rokyshop.github.io/index.html" target="_blank" style="display:inline-block;margin-top:0.7rem;padding:0.4rem 1rem;background:#ff69b4;color:#000;border-radius:6px;font-family:'Courier New',monospace;font-size:0.78rem;font-weight:700;text-decoration:none;letter-spacing:1px;">Visit Shop →</a>
       </div>
     </div>
-    <div style="background:#111;border:1px solid #2a1a2a;border-radius:12px;padding:1.5rem;display:flex;align-items:center;gap:1.2rem;" onmouseover="this.style.borderColor='#00cfff'" onmouseout="this.style.borderColor='#2a1a2a'">
-      <img src="tazz.png" style="width:72px;height:72px;border-radius:50%;object-fit:cover;border:2px solid #00cfff;" onerror="this.src='https://ui-avatars.com/api/?name=Tazz&background=00cfff&color=000&size=72&bold=true'" alt="Tazz">
-      <div>
-        <div style="font-size:1.1rem;font-weight:700;color:#fff;font-family:'Courier New',monospace;letter-spacing:1px;">Tazz</div>
-        <div style="font-size:0.7rem;color:#00cfff;letter-spacing:2px;font-family:'Courier New',monospace;margin:0.3rem 0;">✦ CO-CREATOR</div>
-        <div style="font-size:0.85rem;color:#666;font-family:'Segoe UI',sans-serif;line-height:1.5;">Co-Creator of the CMDR Discord server. Manages the community and keeps things running smoothly.</div>
-      </div>
-    </div>
+
   </div>
 </div>
 
@@ -2274,130 +2545,93 @@ function closeTeamModal() {
   </div>
 </div>
 
-<!-- AI CHATBOT -->
-<div id="chatbotWidget" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:99990;font-family:'Courier New',monospace;max-width:calc(100vw - 3rem);">
-  <!-- Toggle Button -->
-  <button id="chatbotToggle" onclick="toggleChatbot()" style="width:54px;height:54px;border-radius:50%;background:#00ff88;border:none;cursor:pointer;font-size:1.4rem;box-shadow:0 4px 20px rgba(0,255,136,0.4);transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</button>
-
-  <!-- Chat Window -->
-  <div id="chatbotWindow" style="display:none;position:fixed;bottom:80px;right:1.5rem;width:min(380px,calc(100vw - 3rem));background:#111;border:1px solid #00ff88;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,255,136,0.15);">
-    <!-- Header -->
-    <div style="background:#0d1a0d;padding:0.8rem 1rem;border-bottom:1px solid #1a2a1a;display:flex;align-items:center;gap:0.6rem;">
-      <span style="color:#00ff88;font-size:1rem;">🤖</span>
-      <div>
-        <div style="color:#00ff88;font-size:0.82rem;font-weight:700;letter-spacing:1px;">CMDR Assistant</div>
-        <div id="chatSubtitle" style="color:#444;font-size:0.65rem;letter-spacing:1px;">Answers CMDR questions</div>
-      </div>
-      <button onclick="toggleChatbot()" style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:1rem;padding:0.2rem;">✕</button>
-    </div>
-
-    <!-- Messages -->
-    <div id="chatMessages" style="height:280px;overflow-y:auto;overflow-x:hidden;padding:0.8rem;display:flex;flex-direction:column;gap:0.6rem;box-sizing:border-box;">
-      <div id="chatWelcome" style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.6;word-break:break-word;overflow-wrap:anywhere;white-space:normal;max-width:100%;box-sizing:border-box;"></div>
-    </div>
-
-    <!-- Input -->
-    <div style="padding:0.8rem;border-top:1px solid #1a1a1a;display:flex;gap:0.5rem;">
-      <input id="chatInput" type="text" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendChatMessage()" style="flex:1;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:0.5rem 0.7rem;font-family:'Courier New',monospace;font-size:0.78rem;outline:none;">
-      <button onclick="sendChatMessage()" style="background:#00ff88;border:none;border-radius:6px;color:#000;padding:0.5rem 0.8rem;cursor:pointer;font-weight:700;font-size:0.8rem;">→</button>
-    </div>
-  </div>
-</div>
-
-<script>
-  // ── CHATBOT (FAQ-based, no API needed) ───────────────
+ (FAQ-based, no API needed) ───────────────
   var FAQ = [
     // Price
-    { q: ['price','cost','how much','robux','preis','kosten','wie viel','was kostet','how expensive'], a: { en: '💰 The CMDR System V1 DLC costs **125 Robux**. One-time purchase — own it forever!', de: '💰 Das CMDR System V1 DLC kostet **125 Robux**. Einmalige Zahlung — für immer dein!' } },
+    { q: ['price','cost','how much','robux','preis','kosten','wie viel','was kostet','how expensive'], a: { en: '💰 CMDR System V1 DLC costs **125 Robux** — one-time purchase, own it forever!', de: '💰 CMDR System V1 DLC kostet **125 Robux** — einmalige Zahlung, für immer dein!' } },
     // Buy
-    { q: ['buy','purchase','kaufen','kaufe','get it','erwerben','where to buy','wo kaufen','link'], a: { en: '🛒 Click the **Buy Now** button on the main page — you will be sent to the Roblox gamepass page directly!', de: '🛒 Klicke auf den **Jetzt kaufen** Button auf der Hauptseite — du wirst direkt zur Roblox Gamepass-Seite weitergeleitet!' } },
+    { q: ['buy','purchase','kaufen','kaufe','get it','erwerben','where to buy','wo kaufen','link','gamepass link'], a: { en: '🛒 Hit the **Buy Now** button on the main page — it takes you straight to the Roblox gamepass!', de: '🛒 Klicke auf **Jetzt kaufen** auf der Hauptseite — du wirst direkt zum Roblox Gamepass weitergeleitet!' } },
     // Refund
-    { q: ['refund','rückerstattung','money back','geld zurück','zurückgeben','return'], a: { en: '❌ All sales are final. Due to the digital nature of the product, **no refunds** are possible.', de: '❌ Alle Verkäufe sind endgültig. Aufgrund der digitalen Natur des Produkts sind **keine Rückerstattungen** möglich.' } },
+    { q: ['refund','rückerstattung','money back','geld zurück','zurückgeben','return'], a: { en: '❌ All sales are final — **no refunds** due to the digital nature of the product.', de: '❌ Alle Verkäufe sind endgültig — **keine Rückerstattungen** aufgrund der digitalen Natur des Produkts.' } },
     // Setup
-    { q: ['setup','install','installier','einrichten','how to use','wie benutze','configure','konfigurieren','anfangen','start','begin'], a: { en: '⚙️ Join our Discord and contact support — you will receive a full **setup video**! discord.gg/XaZSGVFvzV', de: '⚙️ Tritt unserem Discord bei und kontaktiere den Support — du erhältst ein vollständiges **Setup-Video**! discord.gg/XaZSGVFvzV' } },
+    { q: ['setup','install','installier','einrichten','how to use','wie benutze','configure','anfangen','start','begin','tutorial'], a: { en: '⚙️ Join our Discord and message support — you will get a full **setup video**! discord.gg/XaZSGVFvzV', de: '⚙️ Tritt unserem Discord bei und schreibe dem Support — du bekommst ein vollständiges **Setup-Video**! discord.gg/XaZSGVFvzV' } },
     // Discord
-    { q: ['discord','server','community','join'], a: { en: '💬 Join our Discord: **discord.gg/XaZSGVFvzV** — get support, updates and connect with the community!', de: '💬 Tritt unserem Discord bei: **discord.gg/XaZSGVFvzV** — erhalte Support, Updates und verbinde dich mit der Community!' } },
+    { q: ['discord','server','community','join','beitreten'], a: { en: '💬 Join our Discord: **discord.gg/XaZSGVFvzV** — support, updates & community await!', de: '💬 Tritt unserem Discord bei: **discord.gg/XaZSGVFvzV** — Support, Updates & Community warten auf dich!' } },
     // Features
-    { q: ['feature','what does','was kann','function','funktion','command','befehl','include','beinhaltet','what is'], a: { en: '✨ CMDR V1 includes: Full command system, Event hooks, Automation tools, Discord support & all future updates free!', de: '✨ CMDR V1 beinhaltet: Vollständiges Befehlssystem, Event-Hooks, Automatisierungstools, Discord-Support & alle zukünftigen Updates kostenlos!' } },
+    { q: ['feature','what does','was kann','function','funktion','command','befehl','include','beinhaltet','what is in it'], a: { en: '✨ CMDR V1 includes: Full command system, Event hooks, Automation, Discord support & all future updates — free!', de: '✨ CMDR V1 beinhaltet: Vollständiges Befehlssystem, Event-Hooks, Automatisierung, Discord-Support & alle künftigen Updates kostenlos!' } },
     // Updates
-    { q: ['update','updates','zukunft','future','new version','neue version'], a: { en: '🔄 All future CMDR V1 updates are **completely free** for existing owners!', de: '🔄 Alle zukünftigen CMDR V1 Updates sind für bestehende Käufer **komplett kostenlos**!' } },
+    { q: ['update','updates','zukunft','future','new version','neue version'], a: { en: '🔄 All future CMDR V1 updates are **completely free** for existing owners — forever!', de: '🔄 Alle künftigen CMDR V1 Updates sind für Käufer **komplett kostenlos** — für immer!' } },
     // Codes
-    { q: ['code','discount','rabatt','coupon','promo'], a: { en: '🎟️ Enter discount codes in the product section on the main page using the **+ ADD CODE** button!', de: '🎟️ Gib Rabattcodes im Produktbereich auf der Hauptseite mit dem **+ CODE HINZUFÜGEN** Button ein!' } },
+    { q: ['code','discount','rabatt','coupon','promo','rabattcode'], a: { en: '🎟️ Got a code? Enter it in the product section using the **+ ADD CODE** button on the main page!', de: '🎟️ Hast du einen Code? Gib ihn im Produktbereich mit dem **+ CODE HINZUFÜGEN** Button ein!' } },
     // Support
-    { q: ['support','help','hilfe','problem','issue','bug','error','fehler'], a: { en: '🛠️ Need help? Join our Discord: **discord.gg/XaZSGVFvzV** — our team responds fast!', de: '🛠️ Brauchst du Hilfe? Tritt unserem Discord bei: **discord.gg/XaZSGVFvzV** — unser Team antwortet schnell!' } },
+    { q: ['support','help','hilfe','problem','issue','bug','error','fehler','stuck'], a: { en: '🛠️ Need help? Join our Discord and open a ticket: **discord.gg/XaZSGVFvzV** — we respond fast!', de: '🛠️ Brauchst du Hilfe? Tritt unserem Discord bei und öffne ein Ticket: **discord.gg/XaZSGVFvzV** — wir antworten schnell!' } },
     // Roblox
     { q: ['roblox','gamepass','game pass'], a: { en: '🎮 CMDR V1 is a **Roblox Gamepass**. You need the base Event System to use it.', de: '🎮 CMDR V1 ist ein **Roblox Gamepass**. Du benötigst das Basis-Event-System zur Nutzung.' } },
     // What is CMDR
-    { q: ['what is cmdr','was ist cmdr','cmdr system','about cmdr','über cmdr'], a: { en: '🤖 CMDR System V1 is a powerful **command extension DLC** for the Roblox Event System. It adds advanced controls and automation!', de: '🤖 CMDR System V1 ist eine leistungsstarke **Befehlserweiterungs-DLC** für das Roblox Event System. Es fügt erweiterte Steuerung und Automatisierung hinzu!' } },
+    { q: ['what is cmdr','was ist cmdr','cmdr system','about cmdr','über cmdr','explain'], a: { en: '🤖 CMDR System V1 is a powerful **command extension DLC** for the Roblox Event System — advanced controls, automation & more!', de: '🤖 CMDR System V1 ist eine leistungsstarke **Befehlserweiterungs-DLC** für das Roblox Event System — erweiterte Steuerung, Automatisierung & mehr!' } },
     // Team
-    { q: ['team','who made','wer hat','creator','ersteller','developer','entwickler'], a: { en: '👥 CMDR was created by **Max** (Creator) and **Tazz** (Co-Creator), with help from Bobasimi (Developer) and the moderation team!', de: '👥 CMDR wurde von **Max** (Creator) und **Tazz** (Co-Creator) erstellt, mit Hilfe von Bobasimi (Entwickler) und dem Moderationsteam!' } },
-    // Safe / Trustworthy
-    { q: ['safe','legit','trust','sicher','seriös','scam','betrug'], a: { en: '✅ CMDR V1 is a **100% legitimate Roblox Gamepass**. You buy directly through Roblox — completely safe!', de: '✅ CMDR V1 ist ein **100% legitimer Roblox Gamepass**. Du kaufst direkt über Roblox — völlig sicher!' } },
+    { q: ['team','who made','wer hat','who built','wer gebaut'], a: { en: '👥 CMDR was built by **Max** (Creator) & **Batman** (Co-Creator), with Bobasimi (Developer) and our moderation team!', de: '👥 CMDR wurde von **Max** (Creator) & **Batman** (Co-Creator) gebaut, mit Bobasimi (Entwickler) und unserem Moderationsteam!' } },
+    // Safe
+    { q: ['safe','legit','trust','sicher','seriös','scam','betrug','real'], a: { en: '✅ CMDR V1 is **100% legitimate** — you buy directly through Roblox, completely safe!', de: '✅ CMDR V1 ist **100% legitim** — du kaufst direkt über Roblox, völlig sicher!' } },
     // Free
-    { q: ['free','kostenlos','gratis','for free'], a: { en: '💸 CMDR V1 is not free — it costs **125 Robux**. However all future updates are free for buyers!', de: '💸 CMDR V1 ist nicht kostenlos — es kostet **125 Robux**. Allerdings sind alle zukünftigen Updates für Käufer kostenlos!' } },
-    // Transfer / Share
-    { q: ['transfer','share','teilen','weitergeben','friend','freund'], a: { en: '🔒 The gamepass is tied to your **personal Roblox account** and cannot be transferred or shared.', de: '🔒 Der Gamepass ist an dein **persönliches Roblox-Konto** gebunden und kann nicht übertragen oder geteilt werden.' } },
+    { q: ['free','kostenlos','gratis','for free','ist es kostenlos'], a: { en: '💸 CMDR V1 costs **125 Robux** — but all future updates are free for buyers!', de: '💸 CMDR V1 kostet **125 Robux** — aber alle künftigen Updates sind für Käufer kostenlos!' } },
+    // Transfer
+    { q: ['transfer','share','teilen','weitergeben','friend','freund','give'], a: { en: '🔒 The gamepass is tied to your **Roblox account** — it cannot be transferred or shared.', de: '🔒 Der Gamepass ist an dein **Roblox-Konto** gebunden — er kann nicht übertragen oder geteilt werden.' } },
     // Event Packs
-    { q: ['event pack','eventpack','gold','silver','bronze','roky'], a: { en: '🎁 Event Packs (Gold, Silver, Bronze) are sold by our collaborator **Roky**. Check the Collaborators page for more info!', de: '🎁 Event Packs (Gold, Silber, Bronze) werden von unserem Kooperationspartner **Roky** verkauft. Schau auf der Kollaboratoren-Seite nach!' } },
-    // Hello / Hi
-    { q: ['hello','hi','hey','hallo','guten tag','sup','yo'], a: { en: '👋 Hey! Ask me anything about the **CMDR System V1 DLC** — I am here to help!', de: '👋 Hey! Frag mich alles über das **CMDR System V1 DLC** — ich bin hier um zu helfen!' } },
+    { q: ['event pack','eventpack','gold','silver','bronze','roky','pack'], a: { en: '🎁 Event Packs (Gold, Silver, Bronze) are sold by our collaborator **Roky**. Visit the Collaborators page!', de: '🎁 Event Packs (Gold, Silber, Bronze) werden von unserem Partner **Roky** verkauft. Schau auf der Kollaboratoren-Seite!' } },
+    // Hello
+    { q: ['hello','hi','hey','hallo','guten tag','sup','yo','whats up'], a: { en: '👋 Hey! Ask me anything about **CMDR System V1 DLC** — I am here to help!', de: '👋 Hey! Frag mich alles über das **CMDR System V1 DLC** — ich bin hier zum Helfen!' } },
     // Thanks
-    { q: ['thank','thanks','danke','thx','ty'], a: { en: '😊 You are welcome! Let me know if you have more questions about CMDR!', de: '😊 Gern geschehen! Lass mich wissen wenn du weitere Fragen zu CMDR hast!' } },
-    // Works / Compatible
+    { q: ['thank','thanks','danke','thx','ty','appreciate'], a: { en: '😊 You are welcome! Feel free to ask more questions anytime!', de: '😊 Gern geschehen! Frag jederzeit weitere Fragen!' } },
+    // Compatible
     { q: ['works','work','compatible','funktioniert','kompatibel','which game','welches spiel'], a: { en: '🎮 CMDR V1 works with the **Roblox Event System**. Make sure you own the base system first!', de: '🎮 CMDR V1 funktioniert mit dem **Roblox Event System**. Stelle sicher, dass du zuerst das Basissystem besitzt!' } },
-    // How long
-    { q: ['how long','wie lange','lifetime','lebensdauer','expire','ablaufen'], a: { en: '♾️ CMDR V1 is a **lifetime purchase** — it never expires and never needs renewal!', de: '♾️ CMDR V1 ist ein **lebenslanger Kauf** — es läuft nie ab und muss nie erneuert werden!' } },
-    // Multiplayer
-    { q: ['multiplayer','multi','andere spieler','other players','friends','freunde'], a: { en: '👥 CMDR V1 is tied to your account. Ask in Discord for details on multiplayer usage!', de: '👥 CMDR V1 ist an dein Konto gebunden. Frag im Discord nach Details zur Multiplayer-Nutzung!' } },
+    // Lifetime
+    { q: ['how long','wie lange','lifetime','lebensdauer','expire','ablaufen','forever'], a: { en: '♾️ CMDR V1 is a **lifetime purchase** — never expires, never needs renewal!', de: '♾️ CMDR V1 ist ein **lebenslanger Kauf** — läuft nie ab, muss nie erneuert werden!' } },
     // Version
-    { q: ['version','v1','v2','newest','neueste','latest'], a: { en: '📦 The current version is **CMDR System V1**. Future versions and updates are free for all buyers!', de: '📦 Die aktuelle Version ist **CMDR System V1**. Zukünftige Versionen und Updates sind für alle Käufer kostenlos!' } },
-    // How to get file
-    { q: ['file','datei','download','get the file','wie bekomme','how do i get'], a: { en: '📁 After purchase, join the Discord and contact support to receive your setup file and video!', de: '📁 Nach dem Kauf tritt dem Discord bei und kontaktiere den Support um deine Setup-Datei und das Video zu erhalten!' } },
+    { q: ['version','v1','newest','neueste','latest','current'], a: { en: '📦 Current version: **CMDR System V1**. All future versions & updates are free for buyers!', de: '📦 Aktuelle Version: **CMDR System V1**. Alle künftigen Versionen & Updates sind für Käufer kostenlos!' } },
+    // Get file
+    { q: ['file','datei','download','get the file','wie bekomme','how do i get'], a: { en: '📁 After purchase, join Discord and contact support — you will receive your setup file & video!', de: '📁 Nach dem Kauf tritt dem Discord bei und kontaktiere den Support — du erhältst deine Setup-Datei & das Video!' } },
     // Payment
-    { q: ['pay','payment','zahlung','bezahlen','how to pay','wie zahle'], a: { en: '💳 Payment is done through **Roblox** directly using Robux — safe and secure!', de: '💳 Die Zahlung erfolgt direkt über **Roblox** mit Robux — sicher und zuverlässig!' } },
+    { q: ['pay','payment','zahlung','bezahlen','how to pay','wie zahle'], a: { en: '💳 Payment via **Roblox** using Robux — fully safe & secure!', de: '💳 Zahlung über **Roblox** mit Robux — vollständig sicher!' } },
     // Max
-    { q: ['max','creator','wer ist max','who is max'], a: { en: '👑 Max is the **Creator** of CMDR System and this website. He leads the whole project!', de: '👑 Max ist der **Creator** des CMDR Systems und dieser Website. Er leitet das gesamte Projekt!' } },
-    // Tazz
-    { q: ['tazz','co-creator','cocreator'], a: { en: '🤝 Tazz is the **Co-Creator** of CMDR — he manages the Discord community!', de: '🤝 Tazz ist der **Co-Creator** von CMDR — er verwaltet die Discord-Community!' } },
+    { q: ['max','wer ist max','who is max'], a: { en: '👑 Max is the **Creator** of CMDR System and this website — he leads the entire project!', de: '👑 Max ist der **Creator** des CMDR Systems und dieser Website — er leitet das gesamte Projekt!' } },
+    // Batman
+    { q: ['batman','co creator','co-creator'], a: { en: '🦇 Batman is the **Co-Creator** of CMDR — he helps lead and manage the project!', de: '🦇 Batman ist der **Co-Creator** von CMDR — er hilft das Projekt zu leiten und zu verwalten!' } },
     // Bobasimi
-    { q: ['bobasimi','developer','entwickler'], a: { en: '💻 Bobasimi is the **Developer** of the CMDR server system!', de: '💻 Bobasimi ist der **Entwickler** des CMDR-Server-Systems!' } },
+    { q: ['bobasimi'], a: { en: '💻 Bobasimi is the **Developer** of the CMDR server system!', de: '💻 Bobasimi ist der **Entwickler** des CMDR-Server-Systems!' } },
+    // Levi
+    { q: ['levi'], a: { en: '🛡️ Levi is a **Moderator** on the CMDR team — keeping things running smoothly!', de: '🛡️ Levi ist ein **Moderator** im CMDR-Team — hält alles am Laufen!' } },
+    // Kyle
+    { q: ['kyle'], a: { en: '🛡️ Kyle is a **Moderator** on the CMDR team — helping keep the community safe!', de: '🛡️ Kyle ist ein **Moderator** im CMDR-Team — hilft die Community sicher zu halten!' } },
     // Worth it
-    { q: ['worth','lohnt','lohnt es','is it worth','gut','good'], a: { en: '⭐ CMDR V1 is absolutely worth it! 125 Robux for a lifetime command system with free updates and Discord support!', de: '⭐ CMDR V1 lohnt sich auf jeden Fall! 125 Robux für ein lebenslanges Befehlssystem mit kostenlosen Updates und Discord-Support!' } },
+    { q: ['worth','lohnt','is it worth','gut','good','recommend'], a: { en: '⭐ Absolutely worth it! **125 Robux** for a lifetime command system with free updates & full Discord support!', de: '⭐ Absolut lohnenswert! **125 Robux** für ein lebenslanges Befehlssystem mit kostenlosen Updates & vollem Discord-Support!' } },
     // Maintenance
-    { q: ['maintenance','wartung','offline','down','not working','funktioniert nicht'], a: { en: '🔧 If the site is in maintenance, check our Discord for updates: **discord.gg/XaZSGVFvzV**', de: '🔧 Wenn die Seite in Wartung ist, schau in unserem Discord nach Updates: **discord.gg/XaZSGVFvzV**' } },
-    // Announcement
-    { q: ['announcement','ankündigung','news','update news','neuigkeiten'], a: { en: '📢 Check the **Announcements** page for the latest news and updates about CMDR!', de: '📢 Schau auf der **Ankündigungen**-Seite nach den neuesten Nachrichten und Updates zu CMDR!' } },
-    // Sneak peek
-    { q: ['sneak peek','preview','vorschau','upcoming','kommend','sneak'], a: { en: '👁️ Check out the **Sneak Peek** page in the menu for exclusive previews of upcoming content!', de: '👁️ Schau auf der **Sneak Peek**-Seite im Menü für exklusive Vorschauen auf kommende Inhalte!' } },
+    { q: ['maintenance','wartung','offline','down','site down'], a: { en: '🔧 Site in maintenance? Check our Discord for updates: **discord.gg/XaZSGVFvzV**', de: '🔧 Seite in Wartung? Schau in unserem Discord nach Updates: **discord.gg/XaZSGVFvzV**' } },
+    // Announcements
+    { q: ['announcement','ankündigung','news','neuigkeiten'], a: { en: '📢 Check the **Announcements** page for the latest CMDR news & updates!', de: '📢 Schau auf der **Ankündigungen**-Seite nach den neuesten CMDR-Nachrichten!' } },
     // Changelog
-    { q: ['changelog','patch','patch notes','changes','änderungen','was ist neu','whats new'], a: { en: '📋 Check the **Changelog** page in the menu for all patch notes and version history!', de: '📋 Schau auf der **Changelog**-Seite im Menü für alle Patch Notes und die Versionshistorie!' } },
+    { q: ['changelog','patch','patch notes','changes','änderungen','whats new'], a: { en: '📋 See all patch notes on the **Changelog** page in the menu!', de: '📋 Alle Patch Notes findest du auf der **Changelog**-Seite im Menü!' } },
     // License
-    { q: ['license','lizenz','terms','bedingungen','rules','regeln'], a: { en: '📄 Check the **License** page for full terms of purchase. Key points: no refunds, personal use only, no redistribution.', de: '📄 Schau auf der **Lizenz**-Seite für die vollständigen Kaufbedingungen. Wichtig: Keine Rückerstattungen, nur persönliche Nutzung, keine Weitergabe.' } },
-    // Bye
-    { q: ['bye','goodbye','tschüss','ciao','auf wiedersehen','see you'], a: { en: '👋 Goodbye! Feel free to come back if you have more questions about CMDR!', de: '👋 Auf Wiedersehen! Komm gerne wieder wenn du weitere Fragen zu CMDR hast!' } },
+    { q: ['license','lizenz','terms','bedingungen','rules'], a: { en: '📄 See the **License** page for full terms. Key: no refunds, personal use only, no redistribution.', de: '📄 Schau auf der **Lizenz**-Seite für alle Bedingungen. Wichtig: Keine Rückerstattungen, nur persönliche Nutzung.' } },
     // V2
-    { q: ['v2','version 2','next version','nächste version','upcoming version'], a: { en: '🔮 CMDR V2 is in development! Check the **Sneak Peek** page for exclusive previews!', de: '🔮 CMDR V2 ist in Entwicklung! Schau auf der **Sneak Peek**-Seite für exklusive Vorschauen!' } },
-    // How many commands
-    { q: ['how many','wie viele','commands list','command list','befehlsliste'], a: { en: '📋 CMDR V1 includes a wide range of commands. Join Discord for the full command list: **discord.gg/XaZSGVFvzV**', de: '📋 CMDR V1 enthält eine große Auswahl an Befehlen. Tritt Discord bei für die vollständige Liste: **discord.gg/XaZSGVFvzV**' } },
-    // How fast is support
-    { q: ['how fast','wie schnell','response time','antwortzeit','fast support'], a: { en: '⚡ Our support team on Discord typically responds within a few hours. Join: **discord.gg/XaZSGVFvzV**', de: '⚡ Unser Support-Team auf Discord antwortet in der Regel innerhalb weniger Stunden. Tritt bei: **discord.gg/XaZSGVFvzV**' } },
+    { q: ['v2','version 2','next version','upcoming'], a: { en: '🔮 CMDR V2 is in development! Check the **Sneak Peek** page for exclusive previews!', de: '🔮 CMDR V2 ist in Entwicklung! Schau auf der **Sneak Peek**-Seite für exklusive Vorschauen!' } },
     // Already bought
-    { q: ['already bought','already purchased','schon gekauft','bereits gekauft','i bought'], a: { en: '✅ Great! Join our Discord and contact support to get your setup file and video: **discord.gg/XaZSGVFvzV**', de: '✅ Super! Tritt unserem Discord bei und kontaktiere den Support für deine Setup-Datei: **discord.gg/XaZSGVFvzV**' } },
-    // Not working after purchase
-    { q: ['not working','funktioniert nicht','broken','kapott','doesnt work','after buy'], a: { en: '🛠️ Sorry to hear that! Please join our Discord and open a support ticket: **discord.gg/XaZSGVFvzV**', de: '🛠️ Das tut uns leid! Bitte tritt unserem Discord bei und öffne ein Support-Ticket: **discord.gg/XaZSGVFvzV**' } },
-    // Robux
-    { q: ['125','robux','r$','how many robux'], a: { en: '💰 CMDR V1 costs exactly **125 Robux** — a one-time payment, no subscription!', de: '💰 CMDR V1 kostet genau **125 Robux** — eine einmalige Zahlung, kein Abo!' } },
-    // Who is Kyle
-    { q: ['kyle','trial mod','trial moderator'], a: { en: '🆕 Kyle is our **Trial Moderator** — new to the team but already helping the community!', de: '🆕 Kyle ist unser **Trial Moderator** — neu im Team aber schon dabei der Community zu helfen!' } },
-    // Who is Levi
-    { q: ['levi','moderator levi'], a: { en: '🛡️ Levi is a **Moderator** on the CMDR website team — keeping everything running smoothly!', de: '🛡️ Levi ist ein **Moderator** im CMDR Website-Team — hält alles am Laufen!' } },
-    // Who is Batman
-    { q: ['batman','moderator batman'], a: { en: '🦇 Batman is a **Moderator** who keeps the Discord server safe and friendly!', de: '🦇 Batman ist ein **Moderator** der den Discord-Server sicher und freundlich hält!' } },
-    // Collab
-    { q: ['collaborat','kooperat','partner','collab'], a: { en: '🤝 Our collaborators are **Roky** (Event Pack seller) and **Tazz** (Co-Creator). Check the Collaborators page!', de: '🤝 Unsere Kooperationspartner sind **Roky** (Event Pack Verkäufer) und **Tazz** (Co-Creator). Schau auf der Kollaboratoren-Seite!' } },
+    { q: ['already bought','already purchased','schon gekauft','i bought','i have it'], a: { en: '✅ Awesome! Join Discord and contact support to get your setup: **discord.gg/XaZSGVFvzV**', de: '✅ Super! Tritt dem Discord bei und kontaktiere den Support: **discord.gg/XaZSGVFvzV**' } },
+    // Not working
+    { q: ['not working','broken','doesnt work','after buy','funktioniert nicht nach kauf'], a: { en: '🛠️ Sorry! Join our Discord and open a support ticket: **discord.gg/XaZSGVFvzV**', de: '🛠️ Das tut uns leid! Tritt dem Discord bei und öffne ein Ticket: **discord.gg/XaZSGVFvzV**' } },
+    // Collaborators
+    { q: ['collaborat','kooperat','partner','collab','roky'], a: { en: '🤝 Our collaborator is **Roky** — he sells Event Packs (Gold, Silver, Bronze). Check the Collaborators page!', de: '🤝 Unser Partner ist **Roky** — er verkauft Event Packs (Gold, Silber, Bronze). Schau auf der Kollaboratoren-Seite!' } },
+    // Bye
+    { q: ['bye','goodbye','tschüss','ciao','see you','bis dann'], a: { en: '👋 Goodbye! Come back anytime if you have more questions about CMDR!', de: '👋 Auf Wiedersehen! Komm jederzeit wieder wenn du weitere Fragen zu CMDR hast!' } },
+    // How to contact
+    { q: ['contact','kontakt','reach','erreichen','talk to'], a: { en: '📩 Best way to reach us is via Discord: **discord.gg/XaZSGVFvzV** — our team is active daily!', de: '📩 Der beste Weg uns zu erreichen ist über Discord: **discord.gg/XaZSGVFvzV** — unser Team ist täglich aktiv!' } },
+    // Price change
+    { q: ['price change','cheaper','sale','rabatt aktion','sale price'], a: { en: '💰 Keep an eye on the **Announcements** page for any special deals or discount codes!', de: '💰 Schau auf der **Ankündigungen**-Seite nach Sonderangeboten oder Rabattcodes!' } },
+    // How many members
+    { q: ['how many members','wie viele mitglieder','discord members','server size'], a: { en: '👥 Check our Discord server to see the current member count: **discord.gg/XaZSGVFvzV**', de: '👥 Schau auf unserem Discord-Server die aktuelle Mitgliederanzahl an: **discord.gg/XaZSGVFvzV**' } },
   ];
 
-  var chatWelcomeDone = false;
+    var chatWelcomeDone = false;
   function toggleChatbot() {
     var w = document.getElementById('chatbotWindow');
     w.style.display = w.style.display === 'none' ? 'block' : 'none';
@@ -2864,5 +3098,37 @@ window.addEventListener("DOMContentLoaded", function() {
 });
 </script>
 
+<!-- AI CHATBOT -->
+<div id="chatbotWidget" style="position:fixed;bottom:1.5rem;right:1.5rem;z-index:2147483647;font-family:'Courier New',monospace;max-width:calc(100vw - 3rem);">
+  <!-- Toggle Button -->
+  <button id="chatbotToggle" onclick="toggleChatbot()" style="width:54px;height:54px;border-radius:50%;background:#00ff88;border:none;cursor:pointer;font-size:1.4rem;box-shadow:0 4px 20px rgba(0,255,136,0.4);transition:transform 0.2s;" onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">💬</button>
+
+  <!-- Chat Window -->
+  <div id="chatbotWindow" style="display:none;position:fixed;bottom:80px;right:1.5rem;width:min(380px,calc(100vw - 3rem));background:#111;border:1px solid #00ff88;border-radius:12px;overflow:hidden;box-shadow:0 8px 40px rgba(0,255,136,0.15);z-index:2147483647;">
+    <!-- Header -->
+    <div style="background:#0d1a0d;padding:0.8rem 1rem;border-bottom:1px solid #1a2a1a;display:flex;align-items:center;gap:0.6rem;">
+      <span style="color:#00ff88;font-size:1rem;">🤖</span>
+      <div>
+        <div style="color:#00ff88;font-size:0.82rem;font-weight:700;letter-spacing:1px;">CMDR Assistant</div>
+        <div id="chatSubtitle" style="color:#444;font-size:0.65rem;letter-spacing:1px;">Answers CMDR questions</div>
+      </div>
+      <button onclick="toggleChatbot()" style="margin-left:auto;background:none;border:none;color:#444;cursor:pointer;font-size:1rem;padding:0.2rem;">✕</button>
+    </div>
+
+    <!-- Messages -->
+    <div id="chatMessages" style="height:280px;overflow-y:auto;overflow-x:hidden;padding:0.8rem;display:flex;flex-direction:column;gap:0.6rem;box-sizing:border-box;">
+      <div id="chatWelcome" style="background:#0d1a0d;border:1px solid #1a2a1a;border-radius:8px;padding:0.7rem 0.9rem;font-size:0.8rem;color:#aaa;line-height:1.6;word-break:break-word;overflow-wrap:anywhere;white-space:normal;max-width:100%;box-sizing:border-box;"></div>
+    </div>
+
+    <!-- Input -->
+    <div style="padding:0.8rem;border-top:1px solid #1a1a1a;display:flex;gap:0.5rem;">
+      <input id="chatInput" type="text" placeholder="Ask a question..." onkeydown="if(event.key==='Enter')sendChatMessage()" style="flex:1;background:#0a0a0a;border:1px solid #333;border-radius:6px;color:#e0e0e0;padding:0.5rem 0.7rem;font-family:'Courier New',monospace;font-size:0.78rem;outline:none;">
+      <button onclick="sendChatMessage()" style="background:#00ff88;border:none;border-radius:6px;color:#000;padding:0.5rem 0.8rem;cursor:pointer;font-weight:700;font-size:0.8rem;">→</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  // ── CHATBOT
 </body>
 </html>
