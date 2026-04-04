@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Terms of Service — Cmdr DLC</title>
+  <link href="https://fonts.googleapis.com/css2?family=Share+Tech+Mono&family=Rajdhani:wght@400;600;700&display=swap" rel="stylesheet"/>
+  <style>
+    :root {
+      --green:     #00ff88;
+      --bg:        #060c08;
+      --card-bg:   #0b1a13;
+      --border:    rgba(0,255,136,0.20);
+      --text:      #d4ffe8;
+      --muted:     #3d7a5e;
+    }
+    *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+    html, body { height:100%; }
+    body { background:var(--bg); color:var(--text); font-family:'Rajdhani',sans-serif; min-height:100vh; display:flex; flex-direction:column; overflow-x:hidden; }
+    body::before { content:''; position:fixed; inset:0; background:repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(0,255,136,.015) 2px,rgba(0,255,136,.015) 4px); pointer-events:none; z-index:9997; }
+    #particles { position:fixed; inset:0; pointer-events:none; z-index:0; }
+
+    nav { display:flex; align-items:center; justify-content:space-between; padding:1rem 2rem; border-bottom:1px solid var(--border); background:rgba(6,12,8,.95); backdrop-filter:blur(10px); position:sticky; top:0; z-index:100; }
+    .logo { font-family:'Share Tech Mono',monospace; font-size:1.2rem; color:var(--green); text-shadow:0 0 14px var(--green); letter-spacing:.12em; text-decoration:none; display:flex; align-items:center; gap:.55rem; }
+    .logo span { color:var(--muted); }
+    .v-badge { font-family:'Share Tech Mono',monospace; font-size:.58rem; background:var(--green); color:#060c08; padding:.15rem .42rem; letter-spacing:.06em; font-weight:700; border-radius:2px; line-height:1.4; }
+    nav ul { list-style:none; display:flex; gap:1.6rem; align-items:center; }
+    nav a { color:var(--muted); text-decoration:none; font-size:.9rem; letter-spacing:.08em; text-transform:uppercase; font-weight:600; transition:color .2s; }
+    nav a:hover, nav a.active { color:var(--green); }
+    .nav-icon { font-size:1.05rem; transition:transform .2s,filter .2s; }
+    .nav-icon:hover { transform:scale(1.2); filter:drop-shadow(0 0 5px var(--green)); }
+
+    .page-header { position:relative; padding:4rem 2rem 2.5rem; text-align:center; overflow:hidden; z-index:1; }
+    .page-header-bg { position:absolute; inset:0; background:radial-gradient(ellipse 60% 60% at 50% 0%,rgba(0,255,136,.08) 0%,transparent 70%); }
+    .page-header > * { position:relative; z-index:1; }
+    .badge { display:inline-block; font-family:'Share Tech Mono',monospace; font-size:.75rem; color:var(--green); border:1px solid var(--border); padding:.3rem .9rem; letter-spacing:.2em; text-transform:uppercase; background:rgba(0,255,136,.05); margin-bottom:1rem; animation:fade-up .5s ease both; }
+    .page-header h1 { font-family:'Share Tech Mono',monospace; font-size:clamp(1.8rem,5vw,3.5rem); color:var(--green); text-shadow:0 0 24px rgba(0,255,136,.4); letter-spacing:.1em; animation:fade-up .6s .1s ease both; }
+    .page-header p { margin-top:.8rem; color:var(--muted); font-size:.9rem; font-family:'Share Tech Mono',monospace; letter-spacing:.08em; animation:fade-up .6s .2s ease both; }
+
+    .tos-wrap { max-width:760px; margin:0 auto; padding:2.5rem 2rem 6rem; position:relative; z-index:1; flex:1; animation:fade-up .6s .15s ease both; }
+    .tos-meta { font-family:'Share Tech Mono',monospace; font-size:.7rem; color:var(--muted); letter-spacing:.1em; margin-bottom:2.5rem; padding:.5rem .8rem; border:1px solid var(--border); background:var(--card-bg); display:inline-block; }
+
+    .tos-section { margin-bottom:2.5rem; }
+    .tos-section h2 { font-family:'Share Tech Mono',monospace; font-size:1rem; color:var(--green); letter-spacing:.18em; text-transform:uppercase; margin-bottom:.8rem; padding-bottom:.5rem; border-bottom:1px solid var(--border); display:flex; align-items:center; gap:.7rem; }
+    .tos-section h2 .num { font-size:.75rem; color:var(--muted); flex-shrink:0; }
+    .tos-section p { font-size:1.05rem; color:var(--text); line-height:1.75; margin-bottom:.5rem; }
+    .tos-section ul { list-style:none; padding:0; display:flex; flex-direction:column; gap:.4rem; }
+    .tos-section ul li { display:flex; align-items:flex-start; gap:.7rem; font-size:1.05rem; line-height:1.65; }
+    .tos-section ul li::before { content:'[–]'; font-family:'Share Tech Mono',monospace; font-size:.75rem; color:var(--green); flex-shrink:0; margin-top:.22rem; }
+    .tos-section .highlight { background:rgba(0,255,136,.06); border:1px solid var(--border); border-left:3px solid var(--green); padding:.8rem 1rem; margin-top:.8rem; font-family:'Share Tech Mono',monospace; font-size:.82rem; color:var(--muted); line-height:1.7; letter-spacing:.04em; }
+    .tos-section .warn-box { background:rgba(255,204,0,.05); border:1px solid rgba(255,204,0,.3); border-left:3px solid #ffcc00; padding:.8rem 1rem; margin-top:.8rem; font-size:.95rem; color:#ffe9a0; line-height:1.7; }
+
+    footer { border-top:1px solid var(--border); padding:1.2rem 2rem; text-align:center; font-family:'Share Tech Mono',monospace; font-size:.7rem; color:var(--muted); letter-spacing:.08em; position:relative; z-index:1; display:flex; align-items:center; justify-content:center; flex-wrap:wrap; gap:.5rem; }
+    footer a { color:var(--green); text-decoration:none; }
+    footer a:hover { text-decoration:underline; }
+    .footer-sep { color:var(--border); }
+
+    @keyframes fade-up  { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+    @keyframes mload { 0%{width:0;opacity:1} 80%{width:100%;opacity:1} 100%{width:100%;opacity:0} }
+  </style>
+</head>
+<body>
+
+  <canvas id="particles"></canvas>
+
+  <div id="main-content">
+    <nav>
+      <a class="logo" href="index.html">
+        Cmdr <span>DLC</span>
+        <span class="v-badge">v1</span>
+      </a>
+      <ul>
+        <li><a href="index.html">Home</a></li>
+        <li><a href="sneakpeek.html">Sneak Peek</a></li>
+        <li><a href="tos.html" class="active">ToS</a></li>
+        <li><a class="nav-icon" href="https://discord.gg/XaZSGVFvzV" target="_blank" rel="noopener" title="Discord">💬</a></li>
+        <li><a class="nav-icon" href="https://www.roblox.com/de/users/8377268005/profile" target="_blank" rel="noopener" title="Roblox">🎮</a></li>
+      </ul>
+    </nav>
+
+    <div class="page-header">
+      <div class="page-header-bg"></div>
+      <div class="badge">// Legal</div>
+      <h1>Terms of Service</h1>
+      <p>[ Please read carefully before purchasing ]</p>
+    </div>
+
+    <div class="tos-wrap">
+      <div class="tos-meta">// Last updated: April 2026 &nbsp;·&nbsp; Cmdr DLC v1</div>
+
+      <div class="tos-section">
+        <h2><span class="num">[01]</span> Agreement</h2>
+        <p>By purchasing or using the Cmdr DLC Gamepass, you agree to be bound by these Terms of Service. If you do not agree with any of these terms, do not purchase the gamepass.</p>
+      </div>
+
+      <div class="tos-section">
+        <h2><span class="num">[02]</span> What You Receive</h2>
+        <ul>
+          <li>Access to exclusive DLC commands within the Cmdr admin system.</li>
+          <li>Permanent access to all features included at the time of purchase.</li>
+          <li>Future updates to existing features, where applicable.</li>
+        </ul>
+        <div class="highlight">
+          // The DLC is a Roblox Gamepass. All purchases are processed and managed
+          by Roblox Corporation. We are not responsible for any issues arising
+          from the Roblox platform itself.
+        </div>
+      </div>
+
+      <div class="tos-section">
+        <h2><span class="num">[03]</span> No Refund Policy</h2>
+        <div class="warn-box">
+          ⚠ All purchases are final and non-refundable. Once the Gamepass has been purchased, no refunds will be issued under any circumstances. Roblox does not process refunds for Gamepass purchases.
+        </div>
+      </div>
+
+      <div class="tos-section">
+        <h2><span class="num">[04]</span> Usage Restrictions</h2>
+        <ul>
+          <li>The DLC may only be used in games that have officially integrated Cmdr DLC support.</li>
+          <li>You may not resell, share, or transfer access to your Gamepass.</li>
+          <li>Attempting to exploit, abuse, or misuse DLC commands is strictly prohibited.</li>
+          <li>The DLC is for personal use only and may not be used for commercial purposes.</li>
+        </ul>
+      </div>
+
+      <div class="tos-section">
+        <h2><span class="num">[05]</span> Modifications & Updates</h2>
+        <p>We reserve the right to update, modify, or remove features of the DLC at any time without prior notice. We also reserve the right to update these Terms of Service. Continued use of the DLC after changes constitutes acceptance of the new terms.</p>
+      </div>
+
+      <div class="tos-section">
+        <h2><span class="num">[06]</span> Termination</h2>
+        <p>We reserve the right to revoke access to the DLC if a user is found to be in violation of these terms, the Roblox Terms of Service, or engaging in any abusive or harmful behavior within the community.</p>
+      </div>
+
+      <div class="tos-section">
+        <h2><span class="num">[07]</span> Disclaimer</h2>
+        <p>Cmdr DLC is an independent product and is not affiliated with, endorsed by, or connected to Roblox Corporation in any way. "Roblox" is a registered trademark of Roblox Corporation.</p>
+        <div class="highlight">
+          // For support or questions, join our Discord:
+          discord.gg/XaZSGVFvzV
+        </div>
+      </div>
+
+      <div class="tos-section">
+        <h2><span class="num">[08]</span> Contact</h2>
+        <p>If you have questions regarding these terms, please reach out via our <a href="https://discord.gg/XaZSGVFvzV" target="_blank" rel="noopener" style="color:var(--green)">Discord server</a> or visit the <a href="https://www.roblox.com/de/users/8377268005/profile" target="_blank" rel="noopener" style="color:var(--green)">Roblox profile</a>.</p>
+      </div>
+
+    </div>
+
+    <footer>
+      <span>© 2026 Cmdr DLC — Not affiliated with Roblox Corporation</span>
+      <span class="footer-sep">|</span>
+      <a href="index.html">← Home</a>
+      <span class="footer-sep">|</span>
+      <a href="https://discord.gg/XaZSGVFvzV" target="_blank" rel="noopener">Discord</a>
+    </footer>
+  </div>
+
+  <script>
+    const canvas = document.getElementById('particles');
+    const ctx    = canvas.getContext('2d');
+    let W, H, pts = [];
+    function resize(){ W = canvas.width = window.innerWidth; H = canvas.height = window.innerHeight; }
+    resize(); window.addEventListener('resize', resize);
+    function rnd(a,b){ return a+Math.random()*(b-a); }
+    function mkP(){ return { x:rnd(0,W), y:rnd(0,H), r:rnd(0.5,2), vx:rnd(-0.12,0.12), vy:rnd(-0.3,-0.06), a:rnd(0.15,0.6), fade:rnd(0.002,0.005) }; }
+    for(let i=0;i<130;i++) pts.push(mkP());
+    function draw(){
+      ctx.clearRect(0,0,W,H);
+      ctx.shadowColor='#00ff88'; ctx.shadowBlur=5;
+      for(let p of pts){
+        ctx.beginPath(); ctx.arc(p.x,p.y,p.r,0,Math.PI*2);
+        ctx.fillStyle=`rgba(0,255,136,${p.a})`; ctx.fill();
+        p.x+=p.vx; p.y+=p.vy; p.a-=p.fade;
+        if(p.a<=0||p.y<-8){ Object.assign(p,mkP()); p.y=H+5; p.a=rnd(0.15,0.6); }
+      }
+      requestAnimationFrame(draw);
+    }
+    draw();
+  </script>
+</body>
+</html>
