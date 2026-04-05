@@ -145,8 +145,8 @@
   </footer>
 </div>
 <script>
-const SUPABASE_URL="https://supabase.com/dashboard/project/zwdqajeziyvquagocctd";
-const SUPABASE_ANON="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3ZHFhamV6aXl2cXVhZ29jY3RkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMzk0MDQsImV4cCI6MjA5MDkxNTQwNH0.qh2A3GefG3BrQkuzlEgJWozpIZho2MwKKOoXqnTIUU8";
+const SUPABASE_URL="https://zwdqajeziyvquagocctd.supabase.co";
+const SUPABASE_ANON="sb_publishable_uVQY0x9KdutfLIdzCOHd-A_eB6MAJNM";
 const THEMES={
   default:{vars:{"--green":"#00ff88","--green-dim":"#00cc66","--bg":"#060c08","--card-bg":"#0b1a13","--border":"rgba(0,255,136,0.20)","--text":"#d4ffe8","--muted":"#3d7a5e"},particle:"0,255,136"},
   winter:{vars:{"--green":"#88ddff","--green-dim":"#55bbee","--bg":"#060d14","--card-bg":"#0a1520","--border":"rgba(136,221,255,0.22)","--text":"#d0eeff","--muted":"#3a6a88"},particle:"136,221,255"},
@@ -158,7 +158,8 @@ const THEMES={
 function applyTheme(k){const t=THEMES[k]||THEMES.default;for(const[p,v]of Object.entries(t.vars))document.documentElement.style.setProperty(p,v);window.__pc=t.particle;}
 async function loadSettings(){
   try{
-    const res=await fetch(`${SUPABASE_URL}/rest/v1/settings?select=key,value`,{headers:{apikey:SUPABASE_ANON,Authorization:`Bearer ${SUPABASE_ANON}`}});
+    const res=await fetch(`${SUPABASE_URL}/rest/v1/settings?select=key,value`,{method:'GET',mode:'cors',headers:{'apikey':SUPABASE_ANON,'Authorization':`Bearer ${SUPABASE_ANON}`,'Content-Type':'application/json'}});
+    if(!res.ok)throw new Error('HTTP '+res.status);
     const rows=await res.json();
     const map=Object.fromEntries(rows.map(r=>[r.key,r.value]));
     if(map.maintenance==="true"){document.getElementById("maintenance").style.display="flex";document.getElementById("main-content").style.display="none";}
