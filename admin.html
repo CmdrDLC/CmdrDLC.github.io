@@ -104,6 +104,18 @@
   </div>
 
   <div class="status-bar" id="status-bar"></div>
+
+  <!-- CORS FIX HINT — shown automatically if CORS is blocked -->
+  <div id="cors-hint" style="display:none;margin-top:1rem;background:#0d1a10;border:1px solid #ffcc00;border-left:3px solid #ffcc00;padding:1.2rem 1.4rem;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:#ffe9a0;line-height:2;letter-spacing:.05em;">
+    <div style="color:#ffcc00;margin-bottom:.6rem;font-size:.78rem;">⚠ CORS ERROR — ONE-TIME FIX REQUIRED</div>
+    1. Go to <strong style="color:#fff">supabase.com</strong> → Your Project<br/>
+    2. Click <strong style="color:#fff">Project Settings</strong> → <strong style="color:#fff">API</strong><br/>
+    3. Scroll to <strong style="color:#fff">"Allowed Origins / CORS"</strong><br/>
+    4. Add: <strong style="color:#00ff88">https://cmdrdlc.github.io</strong><br/>
+    5. Click <strong style="color:#fff">Save</strong> → Reload this page<br/>
+    <div style="margin-top:.8rem;color:var(--muted)">Also make sure SUPABASE_URL and SUPABASE_ANON are set correctly in admin.html, index.html, sneakpeek.html and tos.html</div>
+  </div>
+
   <div class="panel-footer"><a href="index.html">&larr; Back to Site</a> &nbsp;&middot;&nbsp; Connected to Supabase</div>
 </div>
 
@@ -111,8 +123,8 @@
 // ================================================================
 //  SUPABASE CONFIG
 // ================================================================
-const SUPABASE_URL  = "https://supabase.com/dashboard/project/zwdqajeziyvquagocctd";
-const SUPABASE_ANON = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Inp3ZHFhamV6aXl2cXVhZ29jY3RkIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzUzMzk0MDQsImV4cCI6MjA5MDkxNTQwNH0.qh2A3GefG3BrQkuzlEgJWozpIZho2MwKKOoXqnTIUU8";
+const SUPABASE_URL  = "https://zwdqajeziyvquagocctd.supabase.co";
+const SUPABASE_ANON = "sb_publishable_uVQY0x9KdutfLIdzCOHd-A_eB6MAJNM";
 
 // ================================================================
 //  THEMES
@@ -209,8 +221,15 @@ function buildThemeGrid(){
 async function loadAdminSettings(){
   setStatus('Loading settings…');
   try{
-    const res=await fetch(`${SUPABASE_URL}/rest/v1/settings?select=key,value`,
-      {headers:{apikey:SUPABASE_ANON,Authorization:`Bearer ${SUPABASE_ANON}`}});
+    const res=await fetch(
+      `${SUPABASE_URL}/rest/v1/settings?select=key,value`,
+      {method:'GET',mode:'cors',headers:{
+        'apikey':SUPABASE_ANON,
+        'Authorization':`Bearer ${SUPABASE_ANON}`,
+        'Content-Type':'application/json',
+        'X-Client-Info':'cmdrdlc-admin'
+      }}
+    );
     if(!res.ok)throw new Error('HTTP '+res.status);
     const rows=await res.json();
     const map=Object.fromEntries(rows.map(r=>[r.key,r.value]));
@@ -219,21 +238,41 @@ async function loadAdminSettings(){
     applyTheme(map.theme||'default');
     setStatus('Settings loaded.','ok');
   }catch(e){
-    setStatus('Could not connect to Supabase. Check your URL/key in the file.','err');
+    if(e.message.includes('Failed to fetch')||e.message.includes('CORS')){
+      setStatus('⚠ CORS blocked — see fix instructions below','err');
+      document.getElementById('cors-hint').style.display='block';
+    } else {
+      setStatus('Error: '+e.message,'err');
+    }
   }
 }
 
 async function saveSetting(key,value){
   setStatus(`Saving ${key}…`);
   try{
-    const res=await fetch(`${SUPABASE_URL}/rest/v1/settings?on_conflict=key`,{
-      method:'POST',
-      headers:{apikey:SUPABASE_ANON,Authorization:`Bearer ${SUPABASE_ANON}`,'Content-Type':'application/json',Prefer:'resolution=merge-duplicates'},
-      body:JSON.stringify({key,value})
-    });
+    const res=await fetch(
+      `${SUPABASE_URL}/rest/v1/settings?on_conflict=key`,
+      {method:'POST',mode:'cors',
+        headers:{
+          'apikey':SUPABASE_ANON,
+          'Authorization':`Bearer ${SUPABASE_ANON}`,
+          'Content-Type':'application/json',
+          'Prefer':'resolution=merge-duplicates',
+          'X-Client-Info':'cmdrdlc-admin'
+        },
+        body:JSON.stringify({key,value})
+      }
+    );
     if(!res.ok)throw new Error('HTTP '+res.status);
-    setStatus(`Saved: ${key} = ${value}`,'ok');
-  }catch(e){setStatus('Error saving: '+e.message,'err');}
+    setStatus(`✓ Saved: ${key} = ${value}`,'ok');
+  }catch(e){
+    if(e.message.includes('Failed to fetch')||e.message.includes('CORS')){
+      setStatus('⚠ CORS blocked — see fix instructions below','err');
+      document.getElementById('cors-hint').style.display='block';
+    } else {
+      setStatus('Error saving: '+e.message,'err');
+    }
+  }
 }
 
 function setTheme(key){
