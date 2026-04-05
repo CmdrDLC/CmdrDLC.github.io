@@ -53,8 +53,14 @@
     .status-bar{font-family:'Share Tech Mono',monospace;font-size:.68rem;color:var(--muted);letter-spacing:.08em;text-align:center;margin-top:1rem;min-height:1.2rem;padding:.3rem}
     .status-bar.ok{color:var(--green)}
     .status-bar.err{color:var(--red)}
-    .panel-footer{text-align:center;font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--muted);margin-top:1.5rem;letter-spacing:.08em}
-    .panel-footer a{color:var(--green);text-decoration:none}
+    .buyers-table{width:100%;border-collapse:collapse;font-family:'Share Tech Mono',monospace;font-size:.72rem}
+    .buyers-table th{color:var(--green);letter-spacing:.12em;text-transform:uppercase;padding:.5rem .7rem;border-bottom:1px solid var(--border);text-align:left;font-size:.65rem}
+    .buyers-table td{color:var(--text);padding:.55rem .7rem;border-bottom:1px solid rgba(0,255,136,.07);vertical-align:middle}
+    .buyers-table tr:hover td{background:rgba(0,255,136,.04)}
+    .status-pill{display:inline-block;padding:.15rem .5rem;font-size:.6rem;letter-spacing:.1em;border-radius:2px}
+    .status-pill.pending{color:#ffcc00;border:1px solid rgba(255,204,0,.4)}
+    .status-pill.confirmed{color:var(--green);border:1px solid rgba(0,255,136,.4)}
+    .buyers-empty{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--muted);text-align:center;padding:1.5rem;letter-spacing:.1em}
     @keyframes fade-up{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
     @keyframes shake{0%,100%{transform:translateX(0)}20%,60%{transform:translateX(-6px)}40%,80%{transform:translateX(6px)}}
   </style>
@@ -103,7 +109,16 @@
     <div class="theme-grid" id="theme-grid"></div>
   </div>
 
-  <div class="status-bar" id="status-bar"></div>
+  <div class="p-card">
+    <div class="p-card-title">// Purchase Registrations</div>
+    <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.08em" id="buyers-count">Loading...</div>
+      <button onclick="loadBuyers()" style="font-family:'Share Tech Mono',monospace;font-size:.65rem;color:var(--green);background:none;border:1px solid var(--border);padding:.25rem .7rem;cursor:pointer;letter-spacing:.1em;transition:border-color .2s">↻ Refresh</button>
+    </div>
+    <div id="buyers-table" style="overflow-x:auto">
+      <div style="font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.08em">Loading buyers...</div>
+    </div>
+  </div>
 
   <!-- CORS FIX HINT — shown automatically if CORS is blocked -->
   <div id="cors-hint" style="display:none;margin-top:1rem;background:#0d1a10;border:1px solid #ffcc00;border-left:3px solid #ffcc00;padding:1.2rem 1.4rem;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:#ffe9a0;line-height:2;letter-spacing:.05em;">
@@ -203,6 +218,53 @@ async function showPanel(){
   document.getElementById('panel').style.display='block';
   buildThemeGrid();
   await loadAdminSettings();
+  await loadBuyers();
+}
+
+// ── LOAD BUYERS ────────────────────────────────────
+async function loadBuyers(){
+  const tableEl = document.getElementById('buyers-table');
+  const countEl = document.getElementById('buyers-count');
+  tableEl.innerHTML = '<div style="font-family:\'Share Tech Mono\',monospace;font-size:.72rem;color:var(--muted);letter-spacing:.08em">Loading...</div>';
+  try{
+    const res = await fetch(
+      `${SUPABASE_URL}/rest/v1/purchases?select=id,roblox_username,roblox_id,timestamp,status&order=timestamp.desc`,
+      {method:'GET',mode:'cors',headers:{
+        'apikey': SUPABASE_ANON,
+        'Authorization': `Bearer ${SUPABASE_ANON}`,
+        'Content-Type': 'application/json'
+      }}
+    );
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    const rows = await res.json();
+
+    countEl.textContent = `// ${rows.length} registration${rows.length===1?'':'s'} total`;
+
+    if(rows.length === 0){
+      tableEl.innerHTML = '<div class="buyers-empty">[ No registrations yet ]</div>';
+      return;
+    }
+
+    let html = '<table class="buyers-table"><thead><tr><th>#</th><th>Username</th><th>Roblox ID</th><th>Date</th><th>Status</th></tr></thead><tbody>';
+    for(const r of rows){
+      const date = new Date(r.timestamp).toLocaleDateString('en-GB',{day:'2-digit',month:'short',year:'numeric',hour:'2-digit',minute:'2-digit'});
+      const pill = r.status==='confirmed'
+        ? `<span class="status-pill confirmed">● confirmed</span>`
+        : `<span class="status-pill pending">○ pending</span>`;
+      html += `<tr>
+        <td style="color:var(--muted)">${r.id}</td>
+        <td><a href="https://www.roblox.com/users/${r.roblox_id}/profile" target="_blank" style="color:var(--green);text-decoration:none">${r.roblox_username}</a></td>
+        <td style="color:var(--muted)">${r.roblox_id}</td>
+        <td style="color:var(--muted);font-size:.65rem">${date}</td>
+        <td>${pill}</td>
+      </tr>`;
+    }
+    html += '</tbody></table>';
+    tableEl.innerHTML = html;
+  }catch(e){
+    countEl.textContent = '// Error loading';
+    tableEl.innerHTML = `<div class="buyers-empty">[ Error: ${e.message} ]</div>`;
+  }
 }
 
 function buildThemeGrid(){
