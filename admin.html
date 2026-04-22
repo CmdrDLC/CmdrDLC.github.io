@@ -206,6 +206,23 @@
     <div class="ann-preview" id="ann-preview"></div>
   </div>
 
+  <!-- COUNTDOWN EDITOR -->
+  <div class="p-card">
+    <div class="p-card-title">// Countdown Target Date</div>
+    <div class="ann-row" style="align-items:flex-end">
+      <div style="flex:1">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.35rem">Target Date &amp; Time</div>
+        <input class="ann-input" id="cd-target" type="datetime-local" style="width:100%"/>
+      </div>
+      <div style="flex:1">
+        <div style="font-family:'Share Tech Mono',monospace;font-size:.62rem;color:var(--green);letter-spacing:.14em;text-transform:uppercase;margin-bottom:.35rem">Label (shown above timer)</div>
+        <input class="ann-input" id="cd-label" type="text" placeholder="e.g. Next DLC Drop"/>
+      </div>
+      <button class="ann-btn" onclick="saveCountdown()">Save</button>
+    </div>
+    <div id="cd-preview" style="display:none;margin-top:.6rem;font-family:'Share Tech Mono',monospace;font-size:.72rem;color:var(--muted);padding:.5rem .8rem;background:var(--bg);border:1px solid var(--border)"></div>
+  </div>
+
   <!-- DATA TABLE -->
   <div class="p-card">
     <div class="p-card-title">// Data</div>
@@ -335,13 +352,18 @@ document.addEventListener('DOMContentLoaded',()=>{
 function logout(){sessionStorage.removeItem('_a');document.getElementById('panel').style.display='none';document.getElementById('gate').style.display='block';document.getElementById('pw-input').value='';document.getElementById('gate-err').textContent='';_att=0;_locked=false;}
 
 // ── API HELPER ────────────────────────────────────────────────
-async function api(path,method='GET',body=null){
-  const opts={method,mode:'cors',headers:{'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json','Prefer':method==='PATCH'||method==='POST'?'return=representation':''}};
+async function api(path,method='GET',body=null,prefer=null){
+  const headers={'apikey':KEY,'Authorization':'Bearer '+KEY,'Content-Type':'application/json'};
+  // Only add Prefer header when explicitly needed
+  if(prefer)headers['Prefer']=prefer;
+  else if(method==='PATCH')headers['Prefer']='return=representation';
+  const opts={method,mode:'cors',headers};
   if(body)opts.body=JSON.stringify(body);
   const res=await fetch(SB+'/rest/v1/'+path,opts);
-  if(!res.ok){const t=await res.text();throw new Error('HTTP '+res.status+': '+t);}
+  if(!res.ok){const t=await res.text();throw new Error('HTTP '+res.status+': '+t.substring(0,120));}
   const ct=res.headers.get('content-type')||'';
-  return ct.includes('json')&&res.status!==204?res.json():null;
+  if(res.status===204||!ct.includes('json'))return null;
+  return res.json();
 }
 
 // ── SHOW PANEL ────────────────────────────────────────────────
@@ -367,9 +389,23 @@ async function loadSettings(){
     const map=Object.fromEntries(rows.map(r=>[r.key,r.value]));
     document.getElementById('tog-maintenance').checked=map.maintenance==='true';
     highlightTheme(map.theme||'default');applyTheme(map.theme||'default');
-    // Load announcement
+    // Announcement
     if(map.announcement){
       try{const a=JSON.parse(map.announcement);showAnnPreview(a.text,a.type);}catch(e){}
+    }
+    // Countdown
+    if(map.countdown){
+      try{
+        const cd=JSON.parse(map.countdown);
+        if(cd.target){
+          // Convert ISO to datetime-local format (YYYY-MM-DDTHH:MM)
+          const dt=new Date(cd.target);
+          const local=new Date(dt.getTime()-dt.getTimezoneOffset()*60000).toISOString().slice(0,16);
+          document.getElementById('cd-target').value=local;
+        }
+        if(cd.label)document.getElementById('cd-label').value=cd.label;
+        showCdPreview(cd.target,cd.label);
+      }catch(e){}
     }
     setStatus('Settings loaded.','ok');
   }catch(e){
@@ -379,8 +415,11 @@ async function loadSettings(){
 }
 async function saveSetting(key,value){
   setStatus('Saving…');
-  try{await api('settings?on_conflict=key','POST',{key,value});setStatus('✓ Saved '+key,'ok');}
-  catch(e){setStatus('Error: '+e.message,'err');}
+  try{
+    // Upsert: POST with on_conflict=key and merge-duplicates
+    await api('settings?on_conflict=key','POST',{key,value},'resolution=merge-duplicates,return=minimal');
+    setStatus('✓ Saved: '+key,'ok');
+  }catch(e){setStatus('Error saving: '+e.message,'err');}
 }
 function setTheme(k){applyTheme(k);highlightTheme(k);saveSetting('theme',k);}
 function highlightTheme(k){
@@ -406,6 +445,30 @@ async function clearAnnouncement(){
   document.getElementById('ann-preview').style.display='none';
   document.getElementById('ann-text').value='';
   setStatus('✓ Announcement cleared','ok');
+}
+function showAnnPreview(text,type){
+  const el=document.getElementById('ann-preview');
+  el.style.display='block';
+  el.style.borderLeftColor=ANN_COLORS[type]||'var(--green)';
+  el.style.color=ANN_COLORS[type]||'var(--text)';
+  el.textContent='Preview: '+text;
+}
+
+// ── COUNTDOWN ─────────────────────────────────────────────────
+async function saveCountdown(){
+  const target=document.getElementById('cd-target').value;
+  const label=document.getElementById('cd-label').value.trim()||'Next DLC Drop';
+  if(!target){setStatus('Pick a date first','err');return;}
+  const iso=new Date(target).toISOString();
+  await saveSetting('countdown',JSON.stringify({target:iso,label}));
+  showCdPreview(iso,label);
+}
+function showCdPreview(iso,label){
+  const el=document.getElementById('cd-preview');
+  if(!iso){el.style.display='none';return;}
+  const d=new Date(iso);
+  el.style.display='block';
+  el.textContent='Label: "'+label+'" → Target: '+d.toLocaleString('en-GB',{dateStyle:'long',timeStyle:'short'})+' ('+Math.ceil((d-Date.now())/86400000)+' days away)';
 }
 function showAnnPreview(text,type){
   const el=document.getElementById('ann-preview');
