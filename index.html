@@ -157,7 +157,7 @@
   <main>
     <div class="eyebrow">// Roblox · Cmdr Admin Panel</div>
     <div class="countdown-wrap">
-      <div class="cd-label">// Next DLC Drop</div>
+      <div class="cd-label" id="cd-label-text">// Next DLC Drop</div>
       <div class="countdown" id="countdown">
         <div class="cd-block"><div class="cd-num" id="cd-d">--</div><div class="cd-unit">Days</div></div>
         <div class="cd-block"><div class="cd-num" id="cd-h">--</div><div class="cd-unit">Hours</div></div>
@@ -214,7 +214,7 @@ const THEMES={default:{vars:{"--green":"#00ff88","--green-dim":"#00cc66","--bg":
 function applyTheme(k){const t=THEMES[k]||THEMES.default;for(const[p,v]of Object.entries(t.vars))document.documentElement.style.setProperty(p,v);window.__pc=t.particle;}
 const BANNER_COLORS={info:'#88ddff',warn:'#ffcc00',success:'#00ff88',event:'#ff88cc'};
 function showBanner(text,type){const old=document.getElementById('ann-b');if(old)old.remove();const b=document.createElement('div');b.id='ann-b';const col=BANNER_COLORS[type]||'#88ddff';b.style.cssText="position:sticky;top:64px;z-index:90;padding:.5rem 2rem;background:rgba(6,12,8,.95);border-bottom:1px solid "+col+";font-family:'Share Tech Mono',monospace;font-size:.75rem;color:"+col+";letter-spacing:.08em;text-align:center;backdrop-filter:blur(8px)";b.textContent=text;const nav=document.querySelector('nav');if(nav&&nav.nextSibling)nav.parentNode.insertBefore(b,nav.nextSibling);}
-async function loadSettings(){try{const res=await fetch(SUPABASE_URL+"/rest/v1/settings?select=key,value",{method:"GET",mode:"cors",headers:{"apikey":SUPABASE_ANON,"Authorization":"Bearer "+SUPABASE_ANON,"Content-Type":"application/json"}});if(!res.ok)throw new Error();const rows=await res.json();const map=Object.fromEntries(rows.map(r=>[r.key,r.value]));if(map.maintenance==="true"){document.getElementById("maintenance").style.display="flex";document.getElementById("main-content").style.display="none";}applyTheme(map.theme||"default");if(map.announcement){try{const a=JSON.parse(map.announcement);if(a.text)showBanner(a.text,a.type);}catch(e){}}}catch(e){applyTheme("default");}}
+async function loadSettings(){try{const res=await fetch(SUPABASE_URL+"/rest/v1/settings?select=key,value",{method:"GET",mode:"cors",headers:{"apikey":SUPABASE_ANON,"Authorization":"Bearer "+SUPABASE_ANON,"Content-Type":"application/json"}});if(!res.ok)throw new Error();const rows=await res.json();const map=Object.fromEntries(rows.map(r=>[r.key,r.value]));if(map.maintenance==="true"){document.getElementById("maintenance").style.display="flex";document.getElementById("main-content").style.display="none";}applyTheme(map.theme||"default");if(map.announcement){try{const a=JSON.parse(map.announcement);if(a.text)showBanner(a.text,a.type);}catch(e){}}if(map.countdown){try{const cd=JSON.parse(map.countdown);if(cd.target)startCountdown(cd.target,cd.label);}catch(e){}}}catch(e){applyTheme("default");}}
 function getDeviceInfo(){const ua=navigator.userAgent;const browser=(()=>{if(ua.includes("Firefox"))return"Firefox";if(ua.includes("Edg"))return"Edge";if(ua.includes("OPR"))return"Opera";if(ua.includes("Chrome"))return"Chrome";if(ua.includes("Safari"))return"Safari";return"Unknown";})();const os=(()=>{if(ua.includes("Windows"))return"Windows";if(ua.includes("Mac"))return"macOS";if(ua.includes("Android"))return"Android";if(ua.includes("iPhone")||ua.includes("iPad"))return"iOS";if(ua.includes("Linux"))return"Linux";return"Unknown";})();return{browser,os,platform:navigator.platform||"unknown",screen_res:window.screen.width+"x"+window.screen.height,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||"unknown",lang:navigator.language||"unknown",user_agent:ua.substring(0,200)};}
 
 function openPurchaseModal(){
@@ -289,9 +289,40 @@ async function submitAndBuy(){
   }
 }
 
-const TARGET=new Date('2026-04-25T00:00:00');
-function tick(){const diff=TARGET-Date.now();if(diff<=0){document.getElementById('countdown').innerHTML='<div class="cd-live">[ DLC IS LIVE ]</div>';return;}const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);document.getElementById('cd-d').textContent=String(d).padStart(2,'0');document.getElementById('cd-h').textContent=String(h).padStart(2,'0');document.getElementById('cd-m').textContent=String(m).padStart(2,'0');document.getElementById('cd-s').textContent=String(s).padStart(2,'0');}
-tick();setInterval(tick,1000);
+// COUNTDOWN — reads target + label from Supabase settings
+let _cdTarget = new Date('2026-04-25T00:00:00'); // fallback default
+let _cdInterval = null;
+
+function startCountdown(target, label){
+  _cdTarget = new Date(target);
+  if(label){
+    const lbl = document.getElementById('cd-label-text');
+    if(lbl) lbl.textContent = '// '+label;
+  }
+  if(_cdInterval) clearInterval(_cdInterval);
+  tick();
+  _cdInterval = setInterval(tick, 1000);
+}
+
+function tick(){
+  const diff = _cdTarget - Date.now();
+  if(diff <= 0){
+    document.getElementById('countdown').innerHTML='<div class="cd-live">[ DLC IS LIVE ]</div>';
+    if(_cdInterval) clearInterval(_cdInterval);
+    return;
+  }
+  const d=Math.floor(diff/86400000),h=Math.floor((diff%86400000)/3600000),m=Math.floor((diff%3600000)/60000),s=Math.floor((diff%60000)/1000);
+  const cd=document.getElementById('countdown');
+  if(!cd)return;
+  const dd=document.getElementById('cd-d'),dh=document.getElementById('cd-h'),dm=document.getElementById('cd-m'),ds=document.getElementById('cd-s');
+  if(dd)dd.textContent=String(d).padStart(2,'0');
+  if(dh)dh.textContent=String(h).padStart(2,'0');
+  if(dm)dm.textContent=String(m).padStart(2,'0');
+  if(ds)ds.textContent=String(s).padStart(2,'0');
+}
+// Start with fallback immediately so it's never blank
+tick();
+_cdInterval = setInterval(tick, 1000);
 function initParticles(){const c=document.getElementById('particles'),x=c.getContext('2d');let W,H,pts=[];function resize(){W=c.width=window.innerWidth;H=c.height=window.innerHeight;}resize();window.addEventListener('resize',resize);const col=()=>window.__pc||'0,255,136';function rnd(a,b){return a+Math.random()*(b-a);}function mkP(){return{x:rnd(0,W),y:rnd(0,H),r:rnd(.5,2),vx:rnd(-.12,.12),vy:rnd(-.3,-.06),a:rnd(.15,.6),fade:rnd(.002,.005)};}for(let i=0;i<130;i++)pts.push(mkP());function draw(){x.clearRect(0,0,W,H);x.shadowColor='rgb('+col()+')';x.shadowBlur=5;for(let p of pts){x.beginPath();x.arc(p.x,p.y,p.r,0,Math.PI*2);x.fillStyle='rgba('+col()+','+p.a+')';x.fill();p.x+=p.vx;p.y+=p.vy;p.a-=p.fade;if(p.a<=0||p.y<-8){Object.assign(p,mkP());p.y=H+5;p.a=rnd(.15,.6);}}requestAnimationFrame(draw);}draw();}
 loadSettings().then(()=>initParticles());
 </script>
