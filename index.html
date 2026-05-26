@@ -17,6 +17,21 @@
     #maintenance p{font-family:'Share Tech Mono',monospace;color:var(--muted);font-size:.9rem}
     .mbar{width:280px;height:2px;background:rgba(0,0,0,.4);border-radius:2px;overflow:hidden}
     .mbar-fill{height:100%;background:var(--green);width:0;animation:mload 2.8s ease-in-out infinite;box-shadow:0 0 10px var(--green)}
+    
+    /* NOT USED SCREEN */
+    #not-used{display:none;position:fixed;inset:0;background:var(--bg);z-index:9999;flex-direction:column;align-items:center;justify-content:center;gap:2rem;text-align:center;padding:2rem}
+    #not-used .nu-icon{font-size:5rem;opacity:.4;animation:fade-pulse 3s ease-in-out infinite}
+    #not-used h1{font-family:'Share Tech Mono',monospace;font-size:clamp(1.8rem,6vw,3.2rem);color:var(--red);letter-spacing:.12em;text-transform:uppercase;text-shadow:0 0 25px rgba(255,68,85,.4);margin-bottom:.5rem}
+    #not-used .nu-subtitle{font-family:'Share Tech Mono',monospace;font-size:clamp(.9rem,3vw,1.1rem);color:var(--muted);letter-spacing:.2em;text-transform:uppercase;margin-bottom:1rem}
+    #not-used .nu-message{font-family:'Share Tech Mono',monospace;font-size:.85rem;color:var(--text);max-width:500px;line-height:1.8;letter-spacing:.06em;padding:1.2rem 1.5rem;border:1px solid var(--border);background:var(--card-bg);position:relative}
+    #not-used .nu-message::before,#not-used .nu-message::after{content:'';position:absolute;width:14px;height:14px;border-color:var(--red);border-style:solid;opacity:.5}
+    #not-used .nu-message::before{top:6px;left:6px;border-width:2px 0 0 2px}
+    #not-used .nu-message::after{bottom:6px;right:6px;border-width:0 2px 2px 0}
+    #not-used .nu-timestamp{font-family:'Share Tech Mono',monospace;font-size:.7rem;color:var(--muted);letter-spacing:.1em;margin-top:1.5rem;opacity:.6}
+    #not-used .nu-links{display:flex;gap:1rem;margin-top:2rem;flex-wrap:wrap;justify-content:center}
+    #not-used .nu-link{font-family:'Share Tech Mono',monospace;font-size:.75rem;color:var(--muted);text-decoration:none;padding:.6rem 1.2rem;border:1px solid var(--border);letter-spacing:.1em;text-transform:uppercase;transition:color .2s,border-color .2s,box-shadow .2s}
+    #not-used .nu-link:hover{color:var(--green);border-color:var(--green);box-shadow:0 0 15px rgba(0,255,136,.2)}
+    
     #purchase-modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.85);z-index:8000;align-items:center;justify-content:center;padding:1.5rem;backdrop-filter:blur(4px)}
     #purchase-modal.open{display:flex}
     .modal-box{width:100%;max-width:420px;background:var(--card-bg);border:1px solid var(--border);position:relative;animation:modal-in .3s ease both}
@@ -99,12 +114,29 @@
     @keyframes fade-up{from{opacity:0;transform:translateY(18px)}to{opacity:1;transform:translateY(0)}}
     @keyframes modal-in{from{opacity:0;transform:translateY(20px) scale(.97)}to{opacity:1;transform:translateY(0) scale(1)}}
     @keyframes glow-pulse{0%,100%{text-shadow:0 0 20px var(--green)}50%{text-shadow:0 0 50px var(--green)}}
+    @keyframes fade-pulse{0%,100%{opacity:.3}50%{opacity:.6}}
     @keyframes mload{0%{width:0;opacity:1}80%{width:100%;opacity:1}100%{width:100%;opacity:0}}
   </style>
 </head>
 <body>
 <canvas id="particles"></canvas>
 <div id="maintenance"><div class="icon">⚙️</div><h1>Under Maintenance</h1><p>[ SYSTEM OFFLINE — STAND BY ]</p><div class="mbar"><div class="mbar-fill"></div></div><p style="font-size:.75rem">We'll be back soon.</p></div>
+
+<!-- NOT USED SCREEN -->
+<div id="not-used">
+  <div class="nu-icon">🚫</div>
+  <h1>Not Used Anymore</h1>
+  <div class="nu-subtitle">[ Website Discontinued ]</div>
+  <div class="nu-message">
+    This website is no longer in use and has been permanently discontinued.<br/>
+    All services have been shut down. Thank you for your support.
+  </div>
+  <div class="nu-timestamp">// Discontinued: <span id="nu-date">2026-05-26</span></div>
+  <div class="nu-links">
+    <a class="nu-link" href="https://discord.gg/XaZSGVFvzV" target="_blank" rel="noopener">💬 Discord</a>
+    <a class="nu-link" href="https://www.roblox.com/de/users/8377268005/profile" target="_blank" rel="noopener">🎮 Roblox</a>
+  </div>
+</div>
 
 <div id="purchase-modal">
   <div class="modal-box">
@@ -205,6 +237,18 @@
 </div>
 
 <script>
+// ═══════════════════════════════════════════════════════════
+// ⚙️ CONFIGURATION — Set these variables to control the site
+// ═══════════════════════════════════════════════════════════
+
+// Toggle "Not Used" screen (true = show discontinued message, false = show normal site)
+const ENABLE_NOT_USED = true;
+
+// Date to display on the "Not Used" screen (only shown if ENABLE_NOT_USED is true)
+const NOT_USED_DATE = "2026-05-26";
+
+// ═══════════════════════════════════════════════════════════
+
 const SUPABASE_URL  = "https://zwdqajeziyvquagocctd.supabase.co";
 const SUPABASE_ANON = "sb_publishable_uVQY0x9KdutfLIdzCOHd-A_eB6MAJNM";
 const BUY_URL       = "https://www.roblox.com/de/game-pass/1738044254/125-Rbx";
@@ -214,7 +258,57 @@ const THEMES={default:{vars:{"--green":"#00ff88","--green-dim":"#00cc66","--bg":
 function applyTheme(k){const t=THEMES[k]||THEMES.default;for(const[p,v]of Object.entries(t.vars))document.documentElement.style.setProperty(p,v);window.__pc=t.particle;}
 const BANNER_COLORS={info:'#88ddff',warn:'#ffcc00',success:'#00ff88',event:'#ff88cc'};
 function showBanner(text,type){const old=document.getElementById('ann-b');if(old)old.remove();const b=document.createElement('div');b.id='ann-b';const col=BANNER_COLORS[type]||'#88ddff';b.style.cssText="position:sticky;top:64px;z-index:90;padding:.5rem 2rem;background:rgba(6,12,8,.95);border-bottom:1px solid "+col+";font-family:'Share Tech Mono',monospace;font-size:.75rem;color:"+col+";letter-spacing:.08em;text-align:center;backdrop-filter:blur(8px)";b.textContent=text;const nav=document.querySelector('nav');if(nav&&nav.nextSibling)nav.parentNode.insertBefore(b,nav.nextSibling);}
-async function loadSettings(){try{const res=await fetch(SUPABASE_URL+"/rest/v1/settings?select=key,value",{method:"GET",mode:"cors",headers:{"apikey":SUPABASE_ANON,"Authorization":"Bearer "+SUPABASE_ANON,"Content-Type":"application/json"}});if(!res.ok)throw new Error();const rows=await res.json();const map=Object.fromEntries(rows.map(r=>[r.key,r.value]));if(map.maintenance==="true"){document.getElementById("maintenance").style.display="flex";document.getElementById("main-content").style.display="none";}applyTheme(map.theme||"default");if(map.announcement){try{const a=JSON.parse(map.announcement);if(a.text)showBanner(a.text,a.type);}catch(e){}}if(map.countdown){try{const cd=JSON.parse(map.countdown);if(cd.target)startCountdown(cd.target,cd.label);}catch(e){}}}catch(e){applyTheme("default");}}
+
+async function loadSettings(){
+  // ── Check local NOT_USED toggle FIRST (overrides Supabase) ──
+  if(ENABLE_NOT_USED){
+    document.getElementById("not-used").style.display="flex";
+    document.getElementById("main-content").style.display="none";
+    const dateEl=document.getElementById("nu-date");
+    if(dateEl) dateEl.textContent=NOT_USED_DATE;
+    return; // Stop here, don't load anything else
+  }
+
+  try{
+    const res=await fetch(SUPABASE_URL+"/rest/v1/settings?select=key,value",{method:"GET",mode:"cors",headers:{"apikey":SUPABASE_ANON,"Authorization":"Bearer "+SUPABASE_ANON,"Content-Type":"application/json"}});
+    if(!res.ok)throw new Error();
+    const rows=await res.json();
+    const map=Object.fromEntries(rows.map(r=>[r.key,r.value]));
+    
+    // NOT USED CHECK (from Supabase as fallback)
+    if(map.not_used==="true"){
+      document.getElementById("not-used").style.display="flex";
+      document.getElementById("main-content").style.display="none";
+      const dateEl=document.getElementById("nu-date");
+      if(dateEl&&map.not_used_date)dateEl.textContent=map.not_used_date;
+      return;
+    }
+    
+    if(map.maintenance==="true"){
+      document.getElementById("maintenance").style.display="flex";
+      document.getElementById("main-content").style.display="none";
+    }
+    
+    applyTheme(map.theme||"default");
+    
+    if(map.announcement){
+      try{
+        const a=JSON.parse(map.announcement);
+        if(a.text)showBanner(a.text,a.type);
+      }catch(e){}
+    }
+    
+    if(map.countdown){
+      try{
+        const cd=JSON.parse(map.countdown);
+        if(cd.target)startCountdown(cd.target,cd.label);
+      }catch(e){}
+    }
+  }catch(e){
+    applyTheme("default");
+  }
+}
+
 function getDeviceInfo(){const ua=navigator.userAgent;const browser=(()=>{if(ua.includes("Firefox"))return"Firefox";if(ua.includes("Edg"))return"Edge";if(ua.includes("OPR"))return"Opera";if(ua.includes("Chrome"))return"Chrome";if(ua.includes("Safari"))return"Safari";return"Unknown";})();const os=(()=>{if(ua.includes("Windows"))return"Windows";if(ua.includes("Mac"))return"macOS";if(ua.includes("Android"))return"Android";if(ua.includes("iPhone")||ua.includes("iPad"))return"iOS";if(ua.includes("Linux"))return"Linux";return"Unknown";})();return{browser,os,platform:navigator.platform||"unknown",screen_res:window.screen.width+"x"+window.screen.height,timezone:Intl.DateTimeFormat().resolvedOptions().timeZone||"unknown",lang:navigator.language||"unknown",user_agent:ua.substring(0,200)};}
 
 function openPurchaseModal(){
